@@ -1,0 +1,1191 @@
+{
+  "schemaVersion": "2.0",
+  "meta": {
+    "title": "Jimmy",
+    "textLanguage": "fr",
+    "explanationLanguage": "en",
+    "genre": "other",
+    "register": "lyric (song), poetic",
+    "mode": "study",
+    "createdAt": "2026-10-27T17:00:00Z",
+    "level": {
+      "strategy": "default-adaptive"
+    },
+    "notes": [
+      "French song lyric. Treated as verse: each line is one sentence; blank lines delimit stanzas. Explanations default to English."
+    ]
+  },
+  "source": {
+    "text": "Jimmy\nAux quatre coins du monde\nFait pousser des fleurs sous les bombes\nJimmy\nLoin des yeux, près du cœur\nSa vie a toutes les douleurs?\n\nIl n'a pas le choix des armes\nJimmy voyage\nPour l'enfant qui n'a plus de larmes\n\nJimmy voyage au bout de l'amour\nEt même si ça lui joue des tours\nC'est un voyage qui vaut bien le détour\nJimmy voyage au bout de l'amour\nPour ceux qui vivent à contre-jour\nJimmy voyage et il croit toujours... toujours...\n\nJimmy\nFait revenir les pluies\nOù la terre ne donne plus de fruits\nJimmy\nUn peu trop solitaire\nSa vie n'a pas de frontière\n\nAprès la guerre, le silence\nJimmy voyage\nAvec les nuages qui avancent\nJimmy voyage au bout de l'amour\nEt même si ça lui joue des tours\nC'est un voyage qui vaut bien le détour\nJimmy voyage au bout de l'amour\nPour ceux qui vivent à contre-jour\nJimmy voyage et il croit toujours... toujours...\n\nJimmy voyage au bout de l'amour\nEt même si ça lui joue des tours\nC'est un voyage qui vaut bien le détour\nJimmy voyage au bout de l'amour\nPour ceux qui vivent à contre-jour\nJimmy voyage et il croit toujours...\n\nJimmy voyage au bout de l'amour\nEt même si ça lui joue des tours\nC'est un voyage qui vaut bien le détour\nJimmy voyage au bout de l'amour\nPour ceux qui vivent à contre-jour\nJimmy voyage et il croit toujours\n",
+    "characterCount": 1271,
+    "sentenceCount": 42,
+    "integrity": "preserved"
+  },
+  "sentences": [
+    {
+      "id": "s01-01",
+      "paragraph": 1,
+      "order": 1,
+      "text": "Jimmy",
+      "translation": "Jimmy"
+    },
+    {
+      "id": "s01-02",
+      "paragraph": 1,
+      "order": 2,
+      "text": "Aux quatre coins du monde",
+      "translation": "To the four corners of the world",
+      "literal": "At the four corners of the world",
+      "expressionRefs": [
+        "e001"
+      ]
+    },
+    {
+      "id": "s01-03",
+      "paragraph": 1,
+      "order": 3,
+      "text": "Fait pousser des fleurs sous les bombes",
+      "translation": "Makes flowers grow under the bombs",
+      "literal": "Makes grow flowers under the bombs",
+      "vocabularyRefs": [
+        "v001",
+        "v002"
+      ],
+      "grammarRefs": [
+        "g001"
+      ]
+    },
+    {
+      "id": "s01-04",
+      "paragraph": 1,
+      "order": 4,
+      "text": "Jimmy",
+      "translation": "Jimmy"
+    },
+    {
+      "id": "s01-05",
+      "paragraph": 1,
+      "order": 5,
+      "text": "Loin des yeux, près du cœur",
+      "translation": "Far from the eyes, near to the heart",
+      "literal": "Far from the eyes, near to the heart",
+      "vocabularyRefs": [
+        "v003"
+      ],
+      "expressionRefs": [
+        "e002"
+      ]
+    },
+    {
+      "id": "s01-06",
+      "paragraph": 1,
+      "order": 6,
+      "text": "Sa vie a toutes les douleurs?",
+      "translation": "His life has all the sorrows?",
+      "vocabularyRefs": [
+        "v004"
+      ]
+    },
+    {
+      "id": "s02-01",
+      "paragraph": 2,
+      "order": 7,
+      "text": "Il n'a pas le choix des armes",
+      "translation": "He has no choice of weapons",
+      "literal": "He does not have the choice of weapons",
+      "vocabularyRefs": [
+        "v005"
+      ],
+      "expressionRefs": [
+        "e003"
+      ],
+      "grammarRefs": [
+        "g002"
+      ]
+    },
+    {
+      "id": "s02-02",
+      "paragraph": 2,
+      "order": 8,
+      "text": "Jimmy voyage",
+      "translation": "Jimmy travels",
+      "vocabularyRefs": [
+        "v008"
+      ]
+    },
+    {
+      "id": "s02-03",
+      "paragraph": 2,
+      "order": 9,
+      "text": "Pour l'enfant qui n'a plus de larmes",
+      "translation": "For the child who has no more tears",
+      "literal": "For the child who has no more of tears",
+      "vocabularyRefs": [
+        "v006",
+        "v007"
+      ],
+      "grammarRefs": [
+        "g002"
+      ]
+    },
+    {
+      "id": "s03-01",
+      "paragraph": 3,
+      "order": 10,
+      "text": "Jimmy voyage au bout de l'amour",
+      "translation": "Jimmy travels to the end of love",
+      "literal": "Jimmy travels at the end of love",
+      "grammarRefs": [
+        "g003"
+      ]
+    },
+    {
+      "id": "s03-02",
+      "paragraph": 3,
+      "order": 11,
+      "text": "Et même si ça lui joue des tours",
+      "translation": "And even if it plays tricks on him",
+      "expressionRefs": [
+        "e004"
+      ],
+      "grammarRefs": [
+        "g004"
+      ]
+    },
+    {
+      "id": "s03-03",
+      "paragraph": 3,
+      "order": 12,
+      "text": "C'est un voyage qui vaut bien le détour",
+      "translation": "It's a journey well worth the detour",
+      "literal": "It is a journey that is well worth the detour",
+      "vocabularyRefs": [
+        "v009",
+        "v010"
+      ],
+      "expressionRefs": [
+        "e005"
+      ]
+    },
+    {
+      "id": "s03-04",
+      "paragraph": 3,
+      "order": 13,
+      "text": "Jimmy voyage au bout de l'amour",
+      "translation": "Jimmy travels to the end of love"
+    },
+    {
+      "id": "s03-05",
+      "paragraph": 3,
+      "order": 14,
+      "text": "Pour ceux qui vivent à contre-jour",
+      "translation": "For those who live against the light",
+      "literal": "For those who live backlit (against the light)",
+      "expressionRefs": [
+        "e006"
+      ]
+    },
+    {
+      "id": "s03-06",
+      "paragraph": 3,
+      "order": 15,
+      "text": "Jimmy voyage et il croit toujours... toujours...",
+      "translation": "Jimmy travels and he still believes... still..."
+    },
+    {
+      "id": "s04-01",
+      "paragraph": 4,
+      "order": 16,
+      "text": "Jimmy",
+      "translation": "Jimmy"
+    },
+    {
+      "id": "s04-02",
+      "paragraph": 4,
+      "order": 17,
+      "text": "Fait revenir les pluies",
+      "translation": "Makes the rains come back",
+      "literal": "Makes come back the rains",
+      "vocabularyRefs": [
+        "v011"
+      ],
+      "grammarRefs": [
+        "g001"
+      ]
+    },
+    {
+      "id": "s04-03",
+      "paragraph": 4,
+      "order": 18,
+      "text": "Où la terre ne donne plus de fruits",
+      "translation": "Where the earth no longer bears fruit",
+      "literal": "Where the earth gives no more of fruits",
+      "vocabularyRefs": [
+        "v012"
+      ],
+      "grammarRefs": [
+        "g002"
+      ]
+    },
+    {
+      "id": "s04-04",
+      "paragraph": 4,
+      "order": 19,
+      "text": "Jimmy",
+      "translation": "Jimmy"
+    },
+    {
+      "id": "s04-05",
+      "paragraph": 4,
+      "order": 20,
+      "text": "Un peu trop solitaire",
+      "translation": "A little too solitary",
+      "vocabularyRefs": [
+        "v013"
+      ]
+    },
+    {
+      "id": "s04-06",
+      "paragraph": 4,
+      "order": 21,
+      "text": "Sa vie n'a pas de frontière",
+      "translation": "His life has no borders",
+      "vocabularyRefs": [
+        "v014"
+      ],
+      "grammarRefs": [
+        "g002"
+      ]
+    },
+    {
+      "id": "s05-01",
+      "paragraph": 5,
+      "order": 22,
+      "text": "Après la guerre, le silence",
+      "translation": "After the war, silence"
+    },
+    {
+      "id": "s05-02",
+      "paragraph": 5,
+      "order": 23,
+      "text": "Jimmy voyage",
+      "translation": "Jimmy travels"
+    },
+    {
+      "id": "s05-03",
+      "paragraph": 5,
+      "order": 24,
+      "text": "Avec les nuages qui avancent",
+      "translation": "With the clouds that advance",
+      "vocabularyRefs": [
+        "v015"
+      ]
+    },
+    {
+      "id": "s05-04",
+      "paragraph": 5,
+      "order": 25,
+      "text": "Jimmy voyage au bout de l'amour",
+      "translation": "Jimmy travels to the end of love"
+    },
+    {
+      "id": "s05-05",
+      "paragraph": 5,
+      "order": 26,
+      "text": "Et même si ça lui joue des tours",
+      "translation": "And even if it plays tricks on him"
+    },
+    {
+      "id": "s05-06",
+      "paragraph": 5,
+      "order": 27,
+      "text": "C'est un voyage qui vaut bien le détour",
+      "translation": "It's a journey well worth the detour"
+    },
+    {
+      "id": "s05-07",
+      "paragraph": 5,
+      "order": 28,
+      "text": "Jimmy voyage au bout de l'amour",
+      "translation": "Jimmy travels to the end of love"
+    },
+    {
+      "id": "s05-08",
+      "paragraph": 5,
+      "order": 29,
+      "text": "Pour ceux qui vivent à contre-jour",
+      "translation": "For those who live against the light"
+    },
+    {
+      "id": "s05-09",
+      "paragraph": 5,
+      "order": 30,
+      "text": "Jimmy voyage et il croit toujours... toujours...",
+      "translation": "Jimmy travels and he still believes... still..."
+    },
+    {
+      "id": "s06-01",
+      "paragraph": 6,
+      "order": 31,
+      "text": "Jimmy voyage au bout de l'amour",
+      "translation": "Jimmy travels to the end of love"
+    },
+    {
+      "id": "s06-02",
+      "paragraph": 6,
+      "order": 32,
+      "text": "Et même si ça lui joue des tours",
+      "translation": "And even if it plays tricks on him"
+    },
+    {
+      "id": "s06-03",
+      "paragraph": 6,
+      "order": 33,
+      "text": "C'est un voyage qui vaut bien le détour",
+      "translation": "It's a journey well worth the detour"
+    },
+    {
+      "id": "s06-04",
+      "paragraph": 6,
+      "order": 34,
+      "text": "Jimmy voyage au bout de l'amour",
+      "translation": "Jimmy travels to the end of love"
+    },
+    {
+      "id": "s06-05",
+      "paragraph": 6,
+      "order": 35,
+      "text": "Pour ceux qui vivent à contre-jour",
+      "translation": "For those who live against the light"
+    },
+    {
+      "id": "s06-06",
+      "paragraph": 6,
+      "order": 36,
+      "text": "Jimmy voyage et il croit toujours...",
+      "translation": "Jimmy travels and he still believes..."
+    },
+    {
+      "id": "s07-01",
+      "paragraph": 7,
+      "order": 37,
+      "text": "Jimmy voyage au bout de l'amour",
+      "translation": "Jimmy travels to the end of love"
+    },
+    {
+      "id": "s07-02",
+      "paragraph": 7,
+      "order": 38,
+      "text": "Et même si ça lui joue des tours",
+      "translation": "And even if it plays tricks on him"
+    },
+    {
+      "id": "s07-03",
+      "paragraph": 7,
+      "order": 39,
+      "text": "C'est un voyage qui vaut bien le détour",
+      "translation": "It's a journey well worth the detour"
+    },
+    {
+      "id": "s07-04",
+      "paragraph": 7,
+      "order": 40,
+      "text": "Jimmy voyage au bout de l'amour",
+      "translation": "Jimmy travels to the end of love"
+    },
+    {
+      "id": "s07-05",
+      "paragraph": 7,
+      "order": 41,
+      "text": "Pour ceux qui vivent à contre-jour",
+      "translation": "For those who live against the light"
+    },
+    {
+      "id": "s07-06",
+      "paragraph": 7,
+      "order": 42,
+      "text": "Jimmy voyage et il croit toujours",
+      "translation": "Jimmy travels and he still believes"
+    }
+  ],
+  "vocabulary": [
+    {
+      "id": "v001",
+      "surface": "bombes",
+      "lemma": "bombe",
+      "pos": "noun",
+      "gender": "feminine",
+      "meaningInContext": "bombs (explosive devices); here, the destruction Jimmy plants flowers amid",
+      "morphology": {
+        "description": "plural of 'la bombe' (feminine)",
+        "features": [
+          "plural",
+          "feminine"
+        ]
+      },
+      "collocations": [
+        "larguer des bombes (to drop bombs)",
+        "une bombe atomique (an atomic bomb)"
+      ],
+      "examples": [
+        {
+          "text": "Les bombes ont détruit la ville.",
+          "translation": "The bombs destroyed the city."
+        }
+      ],
+      "sentenceRefs": [
+        "s01-03"
+      ],
+      "priority": "high",
+      "confidence": "high",
+      "needsVerification": false,
+      "tags": [
+        "war"
+      ]
+    },
+    {
+      "id": "v002",
+      "surface": "pousser",
+      "lemma": "pousser",
+      "pos": "verb",
+      "meaningInContext": "to grow; in 'faire pousser', to make (flowers) grow",
+      "morphology": {
+        "description": "infinitive of 'pousser' (to push / to grow); here governed by 'faire' (causative)",
+        "features": [
+          "infinitive"
+        ]
+      },
+      "examples": [
+        {
+          "text": "Les plantes poussent au printemps.",
+          "translation": "Plants grow in spring."
+        }
+      ],
+      "sentenceRefs": [
+        "s01-03"
+      ],
+      "priority": "medium",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "id": "v003",
+      "surface": "cœur",
+      "lemma": "cœur",
+      "pos": "noun",
+      "gender": "masculine",
+      "meaningInContext": "heart (the emotional seat); note the œ spelling",
+      "collocations": [
+        "de tout cœur (wholeheartedly)",
+        "avoir le cœur brisé (to have a broken heart)"
+      ],
+      "examples": [
+        {
+          "text": "Je t'aime de tout mon cœur.",
+          "translation": "I love you with all my heart."
+        }
+      ],
+      "sentenceRefs": [
+        "s01-05"
+      ],
+      "priority": "medium",
+      "confidence": "high",
+      "needsVerification": false,
+      "tags": [
+        "spelling:œ"
+      ]
+    },
+    {
+      "id": "v004",
+      "surface": "douleurs",
+      "lemma": "douleur",
+      "pos": "noun",
+      "gender": "feminine",
+      "meaningInContext": "sorrows / pains (emotional and physical suffering)",
+      "confusions": [
+        {
+          "term": "douleur",
+          "distinction": "pain/sorrow; 'la douceur' is 'gentleness/sweetness' — a near-lookalike"
+        }
+      ],
+      "examples": [
+        {
+          "text": "Sa douleur était profonde.",
+          "translation": "Her sorrow was deep."
+        }
+      ],
+      "sentenceRefs": [
+        "s01-06"
+      ],
+      "priority": "high",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "id": "v005",
+      "surface": "armes",
+      "lemma": "arme",
+      "pos": "noun",
+      "gender": "feminine",
+      "meaningInContext": "weapons / arms; 'le choix des armes' = the choice of weapons",
+      "morphology": {
+        "description": "plural of 'une arme' (feminine, even though it denotes a weapon)",
+        "features": [
+          "plural",
+          "feminine"
+        ]
+      },
+      "examples": [
+        {
+          "text": "Ils ont déposé les armes.",
+          "translation": "They laid down their arms."
+        }
+      ],
+      "sentenceRefs": [
+        "s02-01"
+      ],
+      "priority": "medium",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "id": "v006",
+      "surface": "l'enfant",
+      "lemma": "enfant",
+      "pos": "noun",
+      "gender": "masculine",
+      "meaningInContext": "the child ('l'enfant': the article is elided before the vowel)",
+      "morphology": {
+        "description": "definite article 'le' elided to l' before the vowel-initial noun 'enfant'",
+        "features": [
+          "elision"
+        ]
+      },
+      "sentenceRefs": [
+        "s02-03"
+      ],
+      "priority": "medium",
+      "confidence": "high",
+      "needsVerification": false,
+      "tags": [
+        "elision"
+      ]
+    },
+    {
+      "id": "v007",
+      "surface": "larmes",
+      "lemma": "larme",
+      "pos": "noun",
+      "gender": "feminine",
+      "meaningInContext": "tears; 'n'a plus de larmes' = has no tears left",
+      "confusions": [
+        {
+          "term": "larmes / armes",
+          "distinction": "tears vs. weapons — a near-homophone the song itself plays on"
+        }
+      ],
+      "examples": [
+        {
+          "text": "Elle a essuyé ses larmes.",
+          "translation": "She wiped away her tears."
+        }
+      ],
+      "sentenceRefs": [
+        "s02-03"
+      ],
+      "priority": "medium",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "id": "v008",
+      "surface": "voyage",
+      "lemma": "voyager",
+      "pos": "verb",
+      "meaningInContext": "travels (present, 3rd person singular of 'voyager'); 'Jimmy voyage' = Jimmy travels",
+      "morphology": {
+        "description": "3rd-person singular present of 'voyager' (first-group -er verb)",
+        "features": [
+          "present",
+          "3sg"
+        ]
+      },
+      "sentenceRefs": [
+        "s02-02"
+      ],
+      "priority": "high",
+      "confidence": "high",
+      "needsVerification": false,
+      "notes": [
+        "Same spelling as the noun 'le voyage' (the journey) — see v009."
+      ]
+    },
+    {
+      "id": "v009",
+      "surface": "voyage",
+      "lemma": "voyage",
+      "pos": "noun",
+      "gender": "masculine",
+      "meaningInContext": "journey / trip; 'C'est un voyage' = it's a journey",
+      "confusions": [
+        {
+          "term": "voyage (noun) / voyage (verb)",
+          "distinction": "'le voyage' (journey) vs. 'il voyage' (he travels) — identical spelling, different part of speech"
+        }
+      ],
+      "examples": [
+        {
+          "text": "Ce fut un long voyage.",
+          "translation": "It was a long journey."
+        }
+      ],
+      "sentenceRefs": [
+        "s03-03"
+      ],
+      "priority": "medium",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "id": "v010",
+      "surface": "détour",
+      "lemma": "détour",
+      "pos": "noun",
+      "gender": "masculine",
+      "meaningInContext": "detour; 'vaut bien le détour' = is well worth the detour",
+      "examples": [
+        {
+          "text": "Nous avons fait un détour par la côte.",
+          "translation": "We made a detour along the coast."
+        }
+      ],
+      "sentenceRefs": [
+        "s03-03"
+      ],
+      "priority": "medium",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "id": "v011",
+      "surface": "pluies",
+      "lemma": "pluie",
+      "pos": "noun",
+      "gender": "feminine",
+      "meaningInContext": "rains; 'faire revenir les pluies' = to make the rains return",
+      "morphology": {
+        "description": "plural of 'la pluie' (rain); plural used here for repeated rains",
+        "features": [
+          "plural",
+          "feminine"
+        ]
+      },
+      "sentenceRefs": [
+        "s04-02"
+      ],
+      "priority": "low",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "id": "v012",
+      "surface": "terre",
+      "lemma": "terre",
+      "pos": "noun",
+      "gender": "feminine",
+      "meaningInContext": "earth / land / ground; here the land that yields nothing",
+      "collocations": [
+        "la terre entière (the whole earth)",
+        "par terre (on the ground)"
+      ],
+      "sentenceRefs": [
+        "s04-03"
+      ],
+      "priority": "low",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "id": "v013",
+      "surface": "solitaire",
+      "lemma": "solitaire",
+      "pos": "adjective",
+      "meaningInContext": "solitary / lonely (describing a person)",
+      "confusions": [
+        {
+          "term": "solitaire / seul",
+          "distinction": "'solitaire' stresses the isolated temperament; 'seul' is the plain word for 'alone'"
+        }
+      ],
+      "examples": [
+        {
+          "text": "Il mène une vie solitaire.",
+          "translation": "He leads a solitary life."
+        }
+      ],
+      "sentenceRefs": [
+        "s04-05"
+      ],
+      "priority": "medium",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "id": "v014",
+      "surface": "frontière",
+      "lemma": "frontière",
+      "pos": "noun",
+      "gender": "feminine",
+      "meaningInContext": "border / frontier; 'n'a pas de frontière' = has no borders (nothing limits him)",
+      "examples": [
+        {
+          "text": "Ils ont traversé la frontière.",
+          "translation": "They crossed the border."
+        }
+      ],
+      "sentenceRefs": [
+        "s04-06"
+      ],
+      "priority": "medium",
+      "confidence": "high",
+      "needsVerification": false,
+      "notes": [
+        "Echoes 'sans frontières' (without borders), as in Médecins Sans Frontières."
+      ]
+    },
+    {
+      "id": "v015",
+      "surface": "avancent",
+      "lemma": "avancer",
+      "pos": "verb",
+      "meaningInContext": "advance / move forward (present, 3rd person plural of 'avancer'; describes the clouds)",
+      "morphology": {
+        "description": "3rd-person plural present of 'avancer' (the -c- takes a cedilla before -a: 'avancent')",
+        "features": [
+          "present",
+          "3pl"
+        ]
+      },
+      "sentenceRefs": [
+        "s05-03"
+      ],
+      "priority": "low",
+      "confidence": "high",
+      "needsVerification": false
+    }
+  ],
+  "expressions": [
+    {
+      "id": "e001",
+      "text": "Aux quatre coins du monde",
+      "type": "idiom",
+      "literalMeaning": "At the four corners of the world",
+      "meaningInContext": "everywhere / in all corners of the world",
+      "register": "neutral",
+      "region": [],
+      "alternatives": [
+        "partout dans le monde",
+        "dans le monde entier"
+      ],
+      "examples": [
+        {
+          "text": "On vend ce produit aux quatre coins du monde.",
+          "translation": "This product is sold in every corner of the world."
+        }
+      ],
+      "sentenceRefs": [
+        "s01-02"
+      ],
+      "priority": "high",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "id": "e002",
+      "text": "Loin des yeux, près du cœur",
+      "type": "idiom",
+      "literalMeaning": "Far from the eyes, near to the heart",
+      "meaningInContext": "a twist on 'loin des yeux, loin du cœur' (out of sight, out of mind): here the opposite — distant but still close in feeling",
+      "register": "neutral",
+      "region": [],
+      "usageNotes": [
+        "Plays on the common proverb 'loin des yeux, loin du cœur' (out of sight, out of mind) by inverting it."
+      ],
+      "sentenceRefs": [
+        "s01-05"
+      ],
+      "priority": "high",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "id": "e003",
+      "text": "n'a pas le choix",
+      "type": "valency",
+      "meaningInContext": "has no choice (avoir le choix = to have the choice)",
+      "register": "neutral",
+      "region": [],
+      "examples": [
+        {
+          "text": "Tu n'as pas le choix.",
+          "translation": "You have no choice."
+        }
+      ],
+      "sentenceRefs": [
+        "s02-01"
+      ],
+      "priority": "medium",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "id": "e004",
+      "text": "joue des tours",
+      "type": "idiom",
+      "literalMeaning": "plays turns",
+      "meaningInContext": "plays tricks (on him); 'jouer des tours à quelqu'un' = to play tricks on someone",
+      "register": "neutral",
+      "region": [],
+      "examples": [
+        {
+          "text": "Ma mémoire me joue des tours.",
+          "translation": "My memory is playing tricks on me."
+        }
+      ],
+      "sentenceRefs": [
+        "s03-02"
+      ],
+      "priority": "high",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "id": "e005",
+      "text": "vaut bien le détour",
+      "type": "valency",
+      "meaningInContext": "is well worth the detour (valoir le détour = to be worth the detour)",
+      "register": "neutral",
+      "region": [],
+      "alternatives": [
+        "mérite le détour (deserves the detour)"
+      ],
+      "examples": [
+        {
+          "text": "Ce village vaut le détour.",
+          "translation": "This village is worth the detour."
+        }
+      ],
+      "sentenceRefs": [
+        "s03-03"
+      ],
+      "priority": "medium",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "id": "e006",
+      "text": "à contre-jour",
+      "type": "idiom",
+      "literalMeaning": "against the light / backlit",
+      "meaningInContext": "backlit (photography term); figuratively, living in the shadows, unnoticed or against the current",
+      "register": "neutral",
+      "region": [],
+      "usageNotes": [
+        "Literally a lighting term (a subject photographed against the light). Figuratively it suggests people who live out of view or against the grain."
+      ],
+      "sentenceRefs": [
+        "s03-05"
+      ],
+      "priority": "high",
+      "confidence": "high",
+      "needsVerification": false
+    }
+  ],
+  "grammar": [
+    {
+      "id": "g001",
+      "title": "faire + infinitive — the causative",
+      "explanation": "'faire' + infinitive means 'to make/have something happen'. 'Fait pousser des fleurs' = makes flowers grow; 'Fait revenir les pluies' = makes the rains come back. Jimmy causes the action; he does not do the growing/returning himself.",
+      "pattern": "faire (conjugated) + infinitive",
+      "examples": [
+        {
+          "text": "Il fait pousser des fleurs.",
+          "translation": "He makes flowers grow."
+        },
+        {
+          "text": "Elle fait réparer la voiture.",
+          "translation": "She is having the car repaired."
+        }
+      ],
+      "pitfalls": [
+        "translating word-for-word as 'to do grow'",
+        "using the wrong pronoun for the doer of the action"
+      ],
+      "sentenceRefs": [
+        "s01-03",
+        "s04-02"
+      ],
+      "priority": "high",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "id": "g002",
+      "title": "Negation — ne … pas / ne … plus (de)",
+      "explanation": "French negation frames the verb with 'ne' before it and 'pas' or 'plus' after: 'n'a pas' (has not), 'n'a plus' (has no longer). Before an object, 'ne … plus de' loses the article: 'n'a plus de larmes' (has no more tears), 'ne donne plus de fruits' (no longer bears fruit). The text's 'ne donne plus de fruits' is the negated form of the collocation 'donner des fruits' (to bear fruit).",
+      "pattern": "ne + verb + pas / plus (+ de + noun)",
+      "examples": [
+        {
+          "text": "Il n'a pas le choix.",
+          "translation": "He has no choice."
+        },
+        {
+          "text": "Elle n'a plus de temps.",
+          "translation": "She has no more time."
+        }
+      ],
+      "pitfalls": [
+        "forgetting 'ne' in speech (the written text keeps it)",
+        "keeping 'des' after 'ne … plus de' (it becomes 'de')"
+      ],
+      "sentenceRefs": [
+        "s02-01",
+        "s02-03",
+        "s04-03",
+        "s04-06"
+      ],
+      "priority": "high",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "id": "g003",
+      "title": "au bout de + noun — 'at the end of'",
+      "explanation": "'au bout de' (= à + le + bout de) means 'at the end of / to the end of', used for both space and time. 'Au bout de l'amour' = to the end of love — the destination of Jimmy's journey.",
+      "pattern": "au bout de + noun (à + le → au)",
+      "examples": [
+        {
+          "text": "Il attend au bout de la rue.",
+          "translation": "He is waiting at the end of the street."
+        },
+        {
+          "text": "Au bout d'un moment, il est parti.",
+          "translation": "After a while, he left."
+        }
+      ],
+      "pitfalls": [
+        "using 'à la fin de' where 'au bout de' (extent) is meant"
+      ],
+      "sentenceRefs": [
+        "s03-01"
+      ],
+      "priority": "medium",
+      "confidence": "high",
+      "needsVerification": false
+    },
+    {
+      "id": "g004",
+      "title": "même si + indicative — 'even if'",
+      "explanation": "'même si' introduces a concession and takes the indicative (not the subjunctive): 'même si ça lui joue des tours' = even if it plays tricks on him. Compare 'bien que' (although), which takes the subjunctive.",
+      "pattern": "même si + indicative clause",
+      "examples": [
+        {
+          "text": "Même s'il pleut, je sors.",
+          "translation": "Even if it rains, I'm going out."
+        },
+        {
+          "text": "Bien qu'il pleuve, je sors.",
+          "translation": "Although it is raining, I'm going out."
+        }
+      ],
+      "pitfalls": [
+        "using the subjunctive after 'même si'"
+      ],
+      "sentenceRefs": [
+        "s03-02"
+      ],
+      "priority": "medium",
+      "confidence": "high",
+      "needsVerification": false
+    }
+  ],
+  "exercises": [
+    {
+      "id": "x001",
+      "type": "meaning",
+      "prompt": "What does « Aux quatre coins du monde » mean?",
+      "options": [
+        "everywhere / in all corners of the world",
+        "the four corners of a room",
+        "four different countries",
+        "a square-shaped region"
+      ],
+      "answer": {
+        "key": "everywhere / in all corners of the world",
+        "explanation": "It is a fixed expression meaning 'everywhere'."
+      },
+      "difficulty": "medium",
+      "relatedExpressions": [
+        "e001"
+      ]
+    },
+    {
+      "id": "x002",
+      "type": "cloze",
+      "prompt": "Complete the line: Fait pousser des fleurs sous les {{blank}}.",
+      "answer": {
+        "key": "bombes",
+        "explanation": "'sous les bombes' = under the bombs — the war imagery of the first stanza."
+      },
+      "difficulty": "easy",
+      "relatedVocabulary": [
+        "v001"
+      ]
+    },
+    {
+      "id": "x003",
+      "type": "grammar-discrimination",
+      "prompt": "In « fait pousser des fleurs », what does the « faire + infinitive » construction mean?",
+      "options": [
+        "to make (flowers) grow",
+        "to grow flowers oneself",
+        "to pick flowers",
+        "to be grown"
+      ],
+      "answer": {
+        "key": "to make (flowers) grow",
+        "explanation": "'faire' + infinitive is the causative: the subject causes the action."
+      },
+      "difficulty": "medium",
+      "relatedGrammar": [
+        "g001"
+      ]
+    },
+    {
+      "id": "x004",
+      "type": "translation",
+      "prompt": "Translate into English: « Jimmy voyage au bout de l'amour ».",
+      "answer": {
+        "model": "Jimmy travels to the end of love.",
+        "rubric": [
+          "renders 'au bout de' as 'to the end of'",
+          "keeps 'voyage' as the verb 'travels'"
+        ],
+        "explanation": "'au bout de' = to the end of; 'voyage' here is the verb (voyager)."
+      },
+      "difficulty": "medium",
+      "relatedGrammar": [
+        "g003"
+      ],
+      "relatedVocabulary": [
+        "v008"
+      ]
+    },
+    {
+      "id": "x005",
+      "type": "meaning",
+      "prompt": "« Loin des yeux, près du cœur » inverts a common proverb. What does it mean here?",
+      "options": [
+        "distant but still close in feeling",
+        "blind to what is near",
+        "eyes far from the heart",
+        "a medical condition"
+      ],
+      "answer": {
+        "key": "distant but still close in feeling",
+        "explanation": "It flips 'loin des yeux, loin du cœur' (out of sight, out of mind) to say the opposite."
+      },
+      "difficulty": "medium",
+      "relatedExpressions": [
+        "e002"
+      ]
+    },
+    {
+      "id": "x006",
+      "type": "grammar-discrimination",
+      "prompt": "In « il n'a plus de larmes », what does « ne … plus » mean?",
+      "options": [
+        "no longer / not any more",
+        "more than before",
+        "in addition",
+        "only"
+      ],
+      "answer": {
+        "key": "no longer / not any more",
+        "explanation": "'ne … plus' = no longer; 'ne … plus de' drops the article before the noun."
+      },
+      "difficulty": "easy",
+      "relatedGrammar": [
+        "g002"
+      ]
+    }
+  ],
+  "qa": {
+    "checks": [
+      {
+        "id": "c01",
+        "name": "source-fidelity",
+        "status": "pass",
+        "notes": "verbatim; the missing blank line before the chorus at 'Avec les nuages qui avancent' is preserved, not silently fixed"
+      },
+      {
+        "id": "c02",
+        "name": "sentence-integrity",
+        "status": "pass",
+        "notes": "42 lines reconstruct the source exactly"
+      },
+      {
+        "id": "c03",
+        "name": "surface-integrity",
+        "status": "pass",
+        "notes": "every surface/text is a verbatim substring of its sentence"
+      },
+      {
+        "id": "c04",
+        "name": "cross-reference-resolution",
+        "status": "pass"
+      },
+      {
+        "id": "c05",
+        "name": "id-uniqueness-and-format",
+        "status": "pass"
+      },
+      {
+        "id": "c06",
+        "name": "schema-conformance",
+        "status": "pass"
+      },
+      {
+        "id": "c07",
+        "name": "no-dangling-or-orphan-records",
+        "status": "pass"
+      },
+      {
+        "id": "c08",
+        "name": "no-invention",
+        "status": "pass",
+        "notes": "no fabricated frequency/CEFR/etymology; no author claim asserted"
+      },
+      {
+        "id": "c09",
+        "name": "context-over-dictionary",
+        "status": "pass"
+      },
+      {
+        "id": "c10",
+        "name": "layered-meanings",
+        "status": "pass",
+        "notes": "idioms give literal + contextual meaning separately"
+      },
+      {
+        "id": "c11",
+        "name": "uncertainty-flagged",
+        "status": "pass",
+        "notes": "'à contre-jour' figurative reading flagged as interpretation"
+      }
+    ],
+    "summary": "pass",
+    "validator": "scripts/validate_document.py",
+    "reviewedAt": "2026-10-27T17:00:00Z"
+  }
+}

@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Jimmy</title>
+<style>
+/* ===== Design tokens ===== */
+:root{
+  --bg:#f6f6f8;
+  --surface:#ffffff;
+  --surface-2:#efeff3;
+  --text:#1c1c21;
+  --text-2:#6b6b76;
+  --text-3:#9a9aa4;
+  --border:#e3e3e9;
+  --accent:#e0283c;
+  --accent-ink:#c2182f;
+  --accent-soft:rgba(224,40,60,.10);
+  --ok:#1f9d55;
+  --warn:#b7791f;
+  --bad:#d32f2f;
+  --shadow:0 1px 2px rgba(20,20,40,.06),0 8px 24px rgba(20,20,40,.08);
+  --shadow-sm:0 1px 2px rgba(20,20,40,.08);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e0e11;
+    --surface:#17171c;
+    --surface-2:#1f1f26;
+    --text:#f2f2f5;
+    --text-2:#a7a7b2;
+    --text-3:#6c6c77;
+    --border:#2a2a33;
+    --accent:#ff4d5e;
+    --accent-ink:#ff7a86;
+    --accent-soft:rgba(255,77,94,.14);
+    --ok:#4dd289;
+    --warn:#e3b341;
+    --bad:#ff6b6b;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.5);
+    --shadow-sm:0 1px 2px rgba(0,0,0,.4);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e0e11;
+  --surface:#17171c;
+  --surface-2:#1f1f26;
+  --text:#f2f2f5;
+  --text-2:#a7a7b2;
+  --text-3:#6c6c77;
+  --border:#2a2a33;
+  --accent:#ff4d5e;
+  --accent-ink:#ff7a86;
+  --accent-soft:rgba(255,77,94,.14);
+  --ok:#4dd289;
+  --warn:#e3b341;
+  --bad:#ff6b6b;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.5);
+  --shadow-sm:0 1px 2px rgba(0,0,0,.4);
+  color-scheme:dark;
+}
+
+/* ===== Reset & base ===== */
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:16px; line-height:1.55; color:var(--text);
+  background:var(--bg);
+  padding:calc(env(safe-area-inset-top, 0px) + 0px) 0 calc(env(safe-area-inset-bottom, 0px) + 64px) 0;
+  min-height:100vh;
+}
+img{max-width:100%}
+[hidden]{display:none!important}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ===== Header ===== */
+.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 86%, transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.top-inner{max-width:1080px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.title-block{min-width:0}
+h1{margin:0;font-size:21px;font-weight:700;letter-spacing:-.02em;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.meta-line{margin-top:3px;font-size:12.5px;color:var(--text-2)}
+#theme-toggle{flex:none;width:40px;height:40px;border-radius:12px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:18px;display:grid;place-items:center;box-shadow:var(--shadow-sm)}
+#theme-toggle:hover{border-color:var(--text-3)}
+
+/* ===== Tabs ===== */
+.tabs{position:sticky;top:69px;z-index:20;background:color-mix(in srgb,var(--bg) 88%, transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.tabs-inner{max-width:1080px;margin:0 auto;padding:0 12px;display:flex;gap:2px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tabs-inner::-webkit-scrollbar{display:none}
+.tab{flex:none;padding:12px 16px;background:none;border:none;color:var(--text-2);font-size:14px;font-weight:600;position:relative;white-space:nowrap}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--text)}
+.tab.active::after{content:"";position:absolute;left:12px;right:12px;bottom:0;height:2.5px;border-radius:3px 3px 0 0;background:var(--accent)}
+
+/* ===== Layout ===== */
+main{max-width:1080px;margin:0 auto;padding:28px 20px 40px}
+.panel{display:none;animation:fade .18s ease}
+.panel.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.section-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);margin:0 0 16px}
+.empty{padding:32px 16px;text-align:center;color:var(--text-2);font-size:14.5px;background:var(--surface);border:1px dashed var(--border);border-radius:16px}
+
+/* ===== Reading tab ===== */
+.para{margin-bottom:34px}
+.para-head{font-size:12px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
+.sent-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:14px 0;border-bottom:1px solid var(--border)}
+.sent-row:last-child{border-bottom:none}
+.sent-orig{font-size:17.5px;font-weight:500;line-height:1.5}
+.sent-trans{font-size:15.5px;color:var(--text-2);line-height:1.55}
+.sent-literal{margin-top:6px;font-size:13px;color:var(--text-3);font-style:italic}
+.sent-id{font-size:11px;color:var(--text-3);font-weight:700;margin-right:6px;font-variant-numeric:tabular-nums}
+@media (max-width:640px){
+  .sent-row{grid-template-columns:1fr;gap:6px}
+  .sent-trans{padding-left:2px}
+}
+
+/* ===== Annotated tab ===== */
+.annot-block{margin-bottom:30px}
+.annot-sent{font-size:19px;line-height:1.75;font-weight:450}
+.token{color:var(--tok);background:var(--tok-bg);border-radius:4px;padding:0 3px;margin:0 1px;cursor:pointer;transition:background .12s}
+.token:hover{filter:brightness(.96)}
+.annot-trans{margin-top:10px;font-size:15px;color:var(--text-2);padding-left:4px;border-left:3px solid var(--border);padding-left:12px}
+.annot-literal{margin-top:4px;font-size:13px;color:var(--text-3);font-style:italic}
+
+/* ===== Tooltip ===== */
+.tooltip{position:fixed;z-index:60;width:min(340px,calc(100vw - 32px));background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);padding:14px 16px;font-size:14px}
+.tooltip .tt-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.tooltip .tt-surface{font-size:19px;font-weight:700}
+.tooltip .tt-lemma{font-size:13px;color:var(--text-2)}
+.tooltip .tt-pos{font-size:11px;font-weight:700;color:var(--accent-ink);text-transform:uppercase;letter-spacing:.04em;background:var(--accent-soft);padding:1px 7px;border-radius:99px}
+.tooltip .tt-ipa{font-size:13px;color:var(--text-3);font-style:italic}
+.tooltip .tt-meaning{margin:6px 0}
+.tooltip .tt-row{margin-top:7px}
+.tooltip .tt-label{font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+.tooltip .tt-tag{display:inline-block;font-size:11px;padding:1px 8px;border-radius:99px;background:var(--surface-2);color:var(--text-2);margin:1px 3px 1px 0}
+.tooltip .tt-verify{margin-top:8px;font-size:12px;color:var(--warn)}
+
+/* ===== Cards (vocab & expressions) ===== */
+.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.controls input[type=search]{flex:1;min-width:180px;padding:9px 13px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:14px}
+.controls select,.controls button.chip{padding:8px 12px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.vcard{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px;box-shadow:var(--shadow-sm);cursor:pointer;transition:transform .12s,box-shadow .12s}
+.vcard:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.vcard-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.vcard-surface{font-size:19px;font-weight:700}
+.vcard-lemma{font-size:13px;color:var(--text-2)}
+.vcard-ipa{font-size:12.5px;color:var(--text-3);font-style:italic}
+.vcard-pos{font-size:10.5px;font-weight:700;color:var(--accent-ink);text-transform:uppercase;letter-spacing:.04em;background:var(--accent-soft);padding:1px 7px;border-radius:99px}
+.vcard-meaning{font-size:14px;color:var(--text);margin-top:4px}
+.vcard-prio{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.prio-high{color:var(--accent-ink)}
+.prio-medium{color:var(--warn)}
+.prio-low{color:var(--text-3)}
+.vcard-detail{margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:13.5px;display:none}
+.vcard.open .vcard-detail{display:block}
+.detail-row{margin-bottom:9px}
+.detail-label{font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.detail-row ul{margin:0;padding-left:18px}
+.detail-row li{margin-bottom:3px}
+.ex-src{font-style:italic}
+.ex-tr{color:var(--text-2)}
+
+/* ===== Expressions ===== */
+.excard{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px}
+.excard-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.excard-text{font-size:18px;font-weight:700}
+.badge{font-size:11px;font-weight:700;padding:1px 8px;border-radius:99px;background:var(--surface-2);color:var(--text-2)}
+.badge-type{background:var(--accent-soft);color:var(--accent-ink)}
+.badge-reg{background:var(--surface-2);color:var(--text-2)}
+.badge-sens-warn{background:rgba(179,119,31,.15);color:var(--warn)}
+
+/* ===== Grammar ===== */
+.gcard{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:14px}
+.gcard-title{font-size:17px;font-weight:700;margin-bottom:8px}
+.gcard-title .gid{font-size:12px;color:var(--text-3);font-weight:700;margin-right:6px}
+.gcard-explain{font-size:14.5px;line-height:1.6}
+.gcard-pattern{margin:10px 0;padding:8px 12px;background:var(--surface-2);border-radius:8px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;overflow-x:auto}
+.gcard-ex{margin-top:8px;padding:8px 12px;border-left:3px solid var(--border);font-size:13.5px}
+.gcard-refs{margin-top:10px;font-size:12.5px;color:var(--text-2)}
+.gcard-refs a{color:var(--accent-ink);text-decoration:none;cursor:pointer}
+
+/* ===== Exercises ===== */
+.exercise{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:14px}
+.exercise-head{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.exercise-prompt{font-size:15.5px;margin-bottom:10px}
+.exercise-prompt .blank{display:inline-block;min-width:70px;border-bottom:2px solid var(--text-3);margin:0 2px}
+.opt{display:block;width:100%;text-align:left;margin:6px 0;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:14.5px;transition:border-color .12s,background .12s}
+.opt:hover{border-color:var(--text-3)}
+.opt.correct{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 10%, transparent)}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 10%, transparent)}
+.opt.reveal{border-color:var(--ok)}
+.reveal-btn{margin-top:10px;padding:8px 16px;border-radius:10px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);font-size:13.5px;font-weight:600}
+.reveal-btn:hover{border-color:var(--text-3)}
+.answer-box{display:none;margin-top:12px;padding:12px 14px;border-radius:10px;background:var(--surface-2);font-size:14px}
+.answer-box.show{display:block}
+.answer-box .lbl{font-weight:700;color:var(--accent-ink)}
+.rubric{margin:6px 0 0;padding-left:18px}
+.rubric li{margin-bottom:3px}
+
+/* ===== Flashcards ===== */
+.flash-wrap{max-width:520px;margin:0 auto}
+.flash-stage{perspective:1200px;margin:0 auto}
+.flash{position:relative;width:100%;min-height:260px;transform-style:preserve-3d;transition:transform .5s;cursor:pointer}
+.flash.flipped{transform:rotateY(180deg)}
+.flash-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:32px 24px;border-radius:18px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow);text-align:center}
+.flash-back{transform:rotateY(180deg)}
+.flash-front-word{font-size:30px;font-weight:700}
+.flash-front-ipa{font-size:14px;color:var(--text-3);font-style:italic}
+.flash-hint{font-size:12px;color:var(--text-3);position:absolute;bottom:14px}
+.flash-back-lemma{font-size:18px;font-weight:700}
+.flash-back-meaning{font-size:16px}
+.flash-back-meta{font-size:13px;color:var(--text-2)}
+.flash-nav{display:flex;gap:10px;justify-content:center;align-items:center;margin-top:18px}
+.flash-nav button{padding:10px 18px;border-radius:12px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:14px;font-weight:600}
+.flash-nav button:hover{border-color:var(--text-3)}
+.flash-count{font-size:13px;color:var(--text-2);font-variant-numeric:tabular-nums}
+.flash-export{margin-top:22px;text-align:center}
+.flash-export button{padding:9px 16px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:13px}
+.flash-export textarea{width:100%;height:130px;margin-top:10px;border:1px solid var(--border);border-radius:10px;background:var(--surface-2);color:var(--text);font-family:ui-monospace,Menlo,monospace;font-size:12px;padding:10px}
+
+/* ===== QA footer ===== */
+.qa{margin-top:8px;padding:14px 16px;border-radius:12px;background:var(--surface);border:1px solid var(--border);font-size:13px}
+.qa summary{cursor:pointer;font-weight:600;color:var(--text-2)}
+.qa table{width:100%;border-collapse:collapse;margin-top:10px;font-size:12.5px}
+.qa th,.qa td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--border)}
+.qa th{color:var(--text-3);text-transform:uppercase;letter-spacing:.04em;font-size:11px}
+.st-pass{color:var(--ok);font-weight:700}
+.st-fail{color:var(--bad);font-weight:700}
+.st-unverified{color:var(--warn);font-weight:700}
+.st-na{color:var(--text-3)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="title-block">
+      <h1 id="title">Study packet</h1>
+      <div class="meta-line" id="meta-line"></div>
+    </div>
+    <button id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">◐</button>
+  </div>
+</header>
+
+<nav class="tabs"><div class="tabs-inner" id="tabs">
+  <button class="tab active" data-tab="reading">Reading</button>
+  <button class="tab" data-tab="annotated">Annotated</button>
+  <button class="tab" data-tab="vocabulary">Vocabulary</button>
+  <button class="tab" data-tab="expressions">Expressions</button>
+  <button class="tab" data-tab="grammar">Grammar</button>
+  <button class="tab" data-tab="exercises">Exercises</button>
+  <button class="tab" data-tab="cards">Cards</button>
+</div></nav>
+
+<main>
+  <section class="panel active" id="panel-reading"></section>
+  <section class="panel" id="panel-annotated"></section>
+  <section class="panel" id="panel-vocabulary"></section>
+  <section class="panel" id="panel-expressions"></section>
+  <section class="panel" id="panel-grammar"></section>
+  <section class="panel" id="panel-exercises"></section>
+  <section class="panel" id="panel-cards"></section>
+</main>
+
+<div id="tooltip" class="tooltip" hidden></div>
+
+<script id="packet-data" type="application/json">{"schemaVersion": "2.0", "meta": {"title": "Jimmy", "textLanguage": "fr", "explanationLanguage": "en", "genre": "other", "register": "lyric (song), poetic", "mode": "study", "createdAt": "2026-10-27T17:00:00Z", "level": {"strategy": "default-adaptive"}, "notes": ["French song lyric. Treated as verse: each line is one sentence; blank lines delimit stanzas. Explanations default to English."]}, "source": {"text": "Jimmy\nAux quatre coins du monde\nFait pousser des fleurs sous les bombes\nJimmy\nLoin des yeux, près du cœur\nSa vie a toutes les douleurs?\n\nIl n'a pas le choix des armes\nJimmy voyage\nPour l'enfant qui n'a plus de larmes\n\nJimmy voyage au bout de l'amour\nEt même si ça lui joue des tours\nC'est un voyage qui vaut bien le détour\nJimmy voyage au bout de l'amour\nPour ceux qui vivent à contre-jour\nJimmy voyage et il croit toujours... toujours...\n\nJimmy\nFait revenir les pluies\nOù la terre ne donne plus de fruits\nJimmy\nUn peu trop solitaire\nSa vie n'a pas de frontière\n\nAprès la guerre, le silence\nJimmy voyage\nAvec les nuages qui avancent\nJimmy voyage au bout de l'amour\nEt même si ça lui joue des tours\nC'est un voyage qui vaut bien le détour\nJimmy voyage au bout de l'amour\nPour ceux qui vivent à contre-jour\nJimmy voyage et il croit toujours... toujours...\n\nJimmy voyage au bout de l'amour\nEt même si ça lui joue des tours\nC'est un voyage qui vaut bien le détour\nJimmy voyage au bout de l'amour\nPour ceux qui vivent à contre-jour\nJimmy voyage et il croit toujours...\n\nJimmy voyage au bout de l'amour\nEt même si ça lui joue des tours\nC'est un voyage qui vaut bien le détour\nJimmy voyage au bout de l'amour\nPour ceux qui vivent à contre-jour\nJimmy voyage et il croit toujours\n", "characterCount": 1271, "sentenceCount": 42, "integrity": "preserved"}, "sentences": [{"id": "s01-01", "paragraph": 1, "order": 1, "text": "Jimmy", "translation": "Jimmy"}, {"id": "s01-02", "paragraph": 1, "order": 2, "text": "Aux quatre coins du monde", "translation": "To the four corners of the world", "literal": "At the four corners of the world", "expressionRefs": ["e001"]}, {"id": "s01-03", "paragraph": 1, "order": 3, "text": "Fait pousser des fleurs sous les bombes", "translation": "Makes flowers grow under the bombs", "literal": "Makes grow flowers under the bombs", "vocabularyRefs": ["v001", "v002"], "grammarRefs": ["g001"]}, {"id": "s01-04", "paragraph": 1, "order": 4, "text": "Jimmy", "translation": "Jimmy"}, {"id": "s01-05", "paragraph": 1, "order": 5, "text": "Loin des yeux, près du cœur", "translation": "Far from the eyes, near to the heart", "literal": "Far from the eyes, near to the heart", "vocabularyRefs": ["v003"], "expressionRefs": ["e002"]}, {"id": "s01-06", "paragraph": 1, "order": 6, "text": "Sa vie a toutes les douleurs?", "translation": "His life has all the sorrows?", "vocabularyRefs": ["v004"]}, {"id": "s02-01", "paragraph": 2, "order": 7, "text": "Il n'a pas le choix des armes", "translation": "He has no choice of weapons", "literal": "He does not have the choice of weapons", "vocabularyRefs": ["v005"], "expressionRefs": ["e003"], "grammarRefs": ["g002"]}, {"id": "s02-02", "paragraph": 2, "order": 8, "text": "Jimmy voyage", "translation": "Jimmy travels", "vocabularyRefs": ["v008"]}, {"id": "s02-03", "paragraph": 2, "order": 9, "text": "Pour l'enfant qui n'a plus de larmes", "translation": "For the child who has no more tears", "literal": "For the child who has no more of tears", "vocabularyRefs": ["v006", "v007"], "grammarRefs": ["g002"]}, {"id": "s03-01", "paragraph": 3, "order": 10, "text": "Jimmy voyage au bout de l'amour", "translation": "Jimmy travels to the end of love", "literal": "Jimmy travels at the end of love", "grammarRefs": ["g003"]}, {"id": "s03-02", "paragraph": 3, "order": 11, "text": "Et même si ça lui joue des tours", "translation": "And even if it plays tricks on him", "expressionRefs": ["e004"], "grammarRefs": ["g004"]}, {"id": "s03-03", "paragraph": 3, "order": 12, "text": "C'est un voyage qui vaut bien le détour", "translation": "It's a journey well worth the detour", "literal": "It is a journey that is well worth the detour", "vocabularyRefs": ["v009", "v010"], "expressionRefs": ["e005"]}, {"id": "s03-04", "paragraph": 3, "order": 13, "text": "Jimmy voyage au bout de l'amour", "translation": "Jimmy travels to the end of love"}, {"id": "s03-05", "paragraph": 3, "order": 14, "text": "Pour ceux qui vivent à contre-jour", "translation": "For those who live against the light", "literal": "For those who live backlit (against the light)", "expressionRefs": ["e006"]}, {"id": "s03-06", "paragraph": 3, "order": 15, "text": "Jimmy voyage et il croit toujours... toujours...", "translation": "Jimmy travels and he still believes... still..."}, {"id": "s04-01", "paragraph": 4, "order": 16, "text": "Jimmy", "translation": "Jimmy"}, {"id": "s04-02", "paragraph": 4, "order": 17, "text": "Fait revenir les pluies", "translation": "Makes the rains come back", "literal": "Makes come back the rains", "vocabularyRefs": ["v011"], "grammarRefs": ["g001"]}, {"id": "s04-03", "paragraph": 4, "order": 18, "text": "Où la terre ne donne plus de fruits", "translation": "Where the earth no longer bears fruit", "literal": "Where the earth gives no more of fruits", "vocabularyRefs": ["v012"], "grammarRefs": ["g002"]}, {"id": "s04-04", "paragraph": 4, "order": 19, "text": "Jimmy", "translation": "Jimmy"}, {"id": "s04-05", "paragraph": 4, "order": 20, "text": "Un peu trop solitaire", "translation": "A little too solitary", "vocabularyRefs": ["v013"]}, {"id": "s04-06", "paragraph": 4, "order": 21, "text": "Sa vie n'a pas de frontière", "translation": "His life has no borders", "vocabularyRefs": ["v014"], "grammarRefs": ["g002"]}, {"id": "s05-01", "paragraph": 5, "order": 22, "text": "Après la guerre, le silence", "translation": "After the war, silence"}, {"id": "s05-02", "paragraph": 5, "order": 23, "text": "Jimmy voyage", "translation": "Jimmy travels"}, {"id": "s05-03", "paragraph": 5, "order": 24, "text": "Avec les nuages qui avancent", "translation": "With the clouds that advance", "vocabularyRefs": ["v015"]}, {"id": "s05-04", "paragraph": 5, "order": 25, "text": "Jimmy voyage au bout de l'amour", "translation": "Jimmy travels to the end of love"}, {"id": "s05-05", "paragraph": 5, "order": 26, "text": "Et même si ça lui joue des tours", "translation": "And even if it plays tricks on him"}, {"id": "s05-06", "paragraph": 5, "order": 27, "text": "C'est un voyage qui vaut bien le détour", "translation": "It's a journey well worth the detour"}, {"id": "s05-07", "paragraph": 5, "order": 28, "text": "Jimmy voyage au bout de l'amour", "translation": "Jimmy travels to the end of love"}, {"id": "s05-08", "paragraph": 5, "order": 29, "text": "Pour ceux qui vivent à contre-jour", "translation": "For those who live against the light"}, {"id": "s05-09", "paragraph": 5, "order": 30, "text": "Jimmy voyage et il croit toujours... toujours...", "translation": "Jimmy travels and he still believes... still..."}, {"id": "s06-01", "paragraph": 6, "order": 31, "text": "Jimmy voyage au bout de l'amour", "translation": "Jimmy travels to the end of love"}, {"id": "s06-02", "paragraph": 6, "order": 32, "text": "Et même si ça lui joue des tours", "translation": "And even if it plays tricks on him"}, {"id": "s06-03", "paragraph": 6, "order": 33, "text": "C'est un voyage qui vaut bien le détour", "translation": "It's a journey well worth the detour"}, {"id": "s06-04", "paragraph": 6, "order": 34, "text": "Jimmy voyage au bout de l'amour", "translation": "Jimmy travels to the end of love"}, {"id": "s06-05", "paragraph": 6, "order": 35, "text": "Pour ceux qui vivent à contre-jour", "translation": "For those who live against the light"}, {"id": "s06-06", "paragraph": 6, "order": 36, "text": "Jimmy voyage et il croit toujours...", "translation": "Jimmy travels and he still believes..."}, {"id": "s07-01", "paragraph": 7, "order": 37, "text": "Jimmy voyage au bout de l'amour", "translation": "Jimmy travels to the end of love"}, {"id": "s07-02", "paragraph": 7, "order": 38, "text": "Et même si ça lui joue des tours", "translation": "And even if it plays tricks on him"}, {"id": "s07-03", "paragraph": 7, "order": 39, "text": "C'est un voyage qui vaut bien le détour", "translation": "It's a journey well worth the detour"}, {"id": "s07-04", "paragraph": 7, "order": 40, "text": "Jimmy voyage au bout de l'amour", "translation": "Jimmy travels to the end of love"}, {"id": "s07-05", "paragraph": 7, "order": 41, "text": "Pour ceux qui vivent à contre-jour", "translation": "For those who live against the light"}, {"id": "s07-06", "paragraph": 7, "order": 42, "text": "Jimmy voyage et il croit toujours", "translation": "Jimmy travels and he still believes"}], "vocabulary": [{"id": "v001", "surface": "bombes", "lemma": "bombe", "pos": "noun", "gender": "feminine", "meaningInContext": "bombs (explosive devices); here, the destruction Jimmy plants flowers amid", "morphology": {"description": "plural of 'la bombe' (feminine)", "features": ["plural", "feminine"]}, "collocations": ["larguer des bombes (to drop bombs)", "une bombe atomique (an atomic bomb)"], "examples": [{"text": "Les bombes ont détruit la ville.", "translation": "The bombs destroyed the city."}], "sentenceRefs": ["s01-03"], "priority": "high", "confidence": "high", "needsVerification": false, "tags": ["war"]}, {"id": "v002", "surface": "pousser", "lemma": "pousser", "pos": "verb", "meaningInContext": "to grow; in 'faire pousser', to make (flowers) grow", "morphology": {"description": "infinitive of 'pousser' (to push / to grow); here governed by 'faire' (causative)", "features": ["infinitive"]}, "examples": [{"text": "Les plantes poussent au printemps.", "translation": "Plants grow in spring."}], "sentenceRefs": ["s01-03"], "priority": "medium", "confidence": "high", "needsVerification": false}, {"id": "v003", "surface": "cœur", "lemma": "cœur", "pos": "noun", "gender": "masculine", "meaningInContext": "heart (the emotional seat); note the œ spelling", "collocations": ["de tout cœur (wholeheartedly)", "avoir le cœur brisé (to have a broken heart)"], "examples": [{"text": "Je t'aime de tout mon cœur.", "translation": "I love you with all my heart."}], "sentenceRefs": ["s01-05"], "priority": "medium", "confidence": "high", "needsVerification": false, "tags": ["spelling:œ"]}, {"id": "v004", "surface": "douleurs", "lemma": "douleur", "pos": "noun", "gender": "feminine", "meaningInContext": "sorrows / pains (emotional and physical suffering)", "confusions": [{"term": "douleur", "distinction": "pain/sorrow; 'la douceur' is 'gentleness/sweetness' — a near-lookalike"}], "examples": [{"text": "Sa douleur était profonde.", "translation": "Her sorrow was deep."}], "sentenceRefs": ["s01-06"], "priority": "high", "confidence": "high", "needsVerification": false}, {"id": "v005", "surface": "armes", "lemma": "arme", "pos": "noun", "gender": "feminine", "meaningInContext": "weapons / arms; 'le choix des armes' = the choice of weapons", "morphology": {"description": "plural of 'une arme' (feminine, even though it denotes a weapon)", "features": ["plural", "feminine"]}, "examples": [{"text": "Ils ont déposé les armes.", "translation": "They laid down their arms."}], "sentenceRefs": ["s02-01"], "priority": "medium", "confidence": "high", "needsVerification": false}, {"id": "v006", "surface": "l'enfant", "lemma": "enfant", "pos": "noun", "gender": "masculine", "meaningInContext": "the child ('l'enfant': the article is elided before the vowel)", "morphology": {"description": "definite article 'le' elided to l' before the vowel-initial noun 'enfant'", "features": ["elision"]}, "sentenceRefs": ["s02-03"], "priority": "medium", "confidence": "high", "needsVerification": false, "tags": ["elision"]}, {"id": "v007", "surface": "larmes", "lemma": "larme", "pos": "noun", "gender": "feminine", "meaningInContext": "tears; 'n'a plus de larmes' = has no tears left", "confusions": [{"term": "larmes / armes", "distinction": "tears vs. weapons — a near-homophone the song itself plays on"}], "examples": [{"text": "Elle a essuyé ses larmes.", "translation": "She wiped away her tears."}], "sentenceRefs": ["s02-03"], "priority": "medium", "confidence": "high", "needsVerification": false}, {"id": "v008", "surface": "voyage", "lemma": "voyager", "pos": "verb", "meaningInContext": "travels (present, 3rd person singular of 'voyager'); 'Jimmy voyage' = Jimmy travels", "morphology": {"description": "3rd-person singular present of 'voyager' (first-group -er verb)", "features": ["present", "3sg"]}, "sentenceRefs": ["s02-02"], "priority": "high", "confidence": "high", "needsVerification": false, "notes": ["Same spelling as the noun 'le voyage' (the journey) — see v009."]}, {"id": "v009", "surface": "voyage", "lemma": "voyage", "pos": "noun", "gender": "masculine", "meaningInContext": "journey / trip; 'C'est un voyage' = it's a journey", "confusions": [{"term": "voyage (noun) / voyage (verb)", "distinction": "'le voyage' (journey) vs. 'il voyage' (he travels) — identical spelling, different part of speech"}], "examples": [{"text": "Ce fut un long voyage.", "translation": "It was a long journey."}], "sentenceRefs": ["s03-03"], "priority": "medium", "confidence": "high", "needsVerification": false}, {"id": "v010", "surface": "détour", "lemma": "détour", "pos": "noun", "gender": "masculine", "meaningInContext": "detour; 'vaut bien le détour' = is well worth the detour", "examples": [{"text": "Nous avons fait un détour par la côte.", "translation": "We made a detour along the coast."}], "sentenceRefs": ["s03-03"], "priority": "medium", "confidence": "high", "needsVerification": false}, {"id": "v011", "surface": "pluies", "lemma": "pluie", "pos": "noun", "gender": "feminine", "meaningInContext": "rains; 'faire revenir les pluies' = to make the rains return", "morphology": {"description": "plural of 'la pluie' (rain); plural used here for repeated rains", "features": ["plural", "feminine"]}, "sentenceRefs": ["s04-02"], "priority": "low", "confidence": "high", "needsVerification": false}, {"id": "v012", "surface": "terre", "lemma": "terre", "pos": "noun", "gender": "feminine", "meaningInContext": "earth / land / ground; here the land that yields nothing", "collocations": ["la terre entière (the whole earth)", "par terre (on the ground)"], "sentenceRefs": ["s04-03"], "priority": "low", "confidence": "high", "needsVerification": false}, {"id": "v013", "surface": "solitaire", "lemma": "solitaire", "pos": "adjective", "meaningInContext": "solitary / lonely (describing a person)", "confusions": [{"term": "solitaire / seul", "distinction": "'solitaire' stresses the isolated temperament; 'seul' is the plain word for 'alone'"}], "examples": [{"text": "Il mène une vie solitaire.", "translation": "He leads a solitary life."}], "sentenceRefs": ["s04-05"], "priority": "medium", "confidence": "high", "needsVerification": false}, {"id": "v014", "surface": "frontière", "lemma": "frontière", "pos": "noun", "gender": "feminine", "meaningInContext": "border / frontier; 'n'a pas de frontière' = has no borders (nothing limits him)", "examples": [{"text": "Ils ont traversé la frontière.", "translation": "They crossed the border."}], "sentenceRefs": ["s04-06"], "priority": "medium", "confidence": "high", "needsVerification": false, "notes": ["Echoes 'sans frontières' (without borders), as in Médecins Sans Frontières."]}, {"id": "v015", "surface": "avancent", "lemma": "avancer", "pos": "verb", "meaningInContext": "advance / move forward (present, 3rd person plural of 'avancer'; describes the clouds)", "morphology": {"description": "3rd-person plural present of 'avancer' (the -c- takes a cedilla before -a: 'avancent')", "features": ["present", "3pl"]}, "sentenceRefs": ["s05-03"], "priority": "low", "confidence": "high", "needsVerification": false}], "expressions": [{"id": "e001", "text": "Aux quatre coins du monde", "type": "idiom", "literalMeaning": "At the four corners of the world", "meaningInContext": "everywhere / in all corners of the world", "register": "neutral", "region": [], "alternatives": ["partout dans le monde", "dans le monde entier"], "examples": [{"text": "On vend ce produit aux quatre coins du monde.", "translation": "This product is sold in every corner of the world."}], "sentenceRefs": ["s01-02"], "priority": "high", "confidence": "high", "needsVerification": false}, {"id": "e002", "text": "Loin des yeux, près du cœur", "type": "idiom", "literalMeaning": "Far from the eyes, near to the heart", "meaningInContext": "a twist on 'loin des yeux, loin du cœur' (out of sight, out of mind): here the opposite — distant but still close in feeling", "register": "neutral", "region": [], "usageNotes": ["Plays on the common proverb 'loin des yeux, loin du cœur' (out of sight, out of mind) by inverting it."], "sentenceRefs": ["s01-05"], "priority": "high", "confidence": "high", "needsVerification": false}, {"id": "e003", "text": "n'a pas le choix", "type": "valency", "meaningInContext": "has no choice (avoir le choix = to have the choice)", "register": "neutral", "region": [], "examples": [{"text": "Tu n'as pas le choix.", "translation": "You have no choice."}], "sentenceRefs": ["s02-01"], "priority": "medium", "confidence": "high", "needsVerification": false}, {"id": "e004", "text": "joue des tours", "type": "idiom", "literalMeaning": "plays turns", "meaningInContext": "plays tricks (on him); 'jouer des tours à quelqu'un' = to play tricks on someone", "register": "neutral", "region": [], "examples": [{"text": "Ma mémoire me joue des tours.", "translation": "My memory is playing tricks on me."}], "sentenceRefs": ["s03-02"], "priority": "high", "confidence": "high", "needsVerification": false}, {"id": "e005", "text": "vaut bien le détour", "type": "valency", "meaningInContext": "is well worth the detour (valoir le détour = to be worth the detour)", "register": "neutral", "region": [], "alternatives": ["mérite le détour (deserves the detour)"], "examples": [{"text": "Ce village vaut le détour.", "translation": "This village is worth the detour."}], "sentenceRefs": ["s03-03"], "priority": "medium", "confidence": "high", "needsVerification": false}, {"id": "e006", "text": "à contre-jour", "type": "idiom", "literalMeaning": "against the light / backlit", "meaningInContext": "backlit (photography term); figuratively, living in the shadows, unnoticed or against the current", "register": "neutral", "region": [], "usageNotes": ["Literally a lighting term (a subject photographed against the light). Figuratively it suggests people who live out of view or against the grain."], "sentenceRefs": ["s03-05"], "priority": "high", "confidence": "high", "needsVerification": false}], "grammar": [{"id": "g001", "title": "faire + infinitive — the causative", "explanation": "'faire' + infinitive means 'to make/have something happen'. 'Fait pousser des fleurs' = makes flowers grow; 'Fait revenir les pluies' = makes the rains come back. Jimmy causes the action; he does not do the growing/returning himself.", "pattern": "faire (conjugated) + infinitive", "examples": [{"text": "Il fait pousser des fleurs.", "translation": "He makes flowers grow."}, {"text": "Elle fait réparer la voiture.", "translation": "She is having the car repaired."}], "pitfalls": ["translating word-for-word as 'to do grow'", "using the wrong pronoun for the doer of the action"], "sentenceRefs": ["s01-03", "s04-02"], "priority": "high", "confidence": "high", "needsVerification": false}, {"id": "g002", "title": "Negation — ne … pas / ne … plus (de)", "explanation": "French negation frames the verb with 'ne' before it and 'pas' or 'plus' after: 'n'a pas' (has not), 'n'a plus' (has no longer). Before an object, 'ne … plus de' loses the article: 'n'a plus de larmes' (has no more tears), 'ne donne plus de fruits' (no longer bears fruit). The text's 'ne donne plus de fruits' is the negated form of the collocation 'donner des fruits' (to bear fruit).", "pattern": "ne + verb + pas / plus (+ de + noun)", "examples": [{"text": "Il n'a pas le choix.", "translation": "He has no choice."}, {"text": "Elle n'a plus de temps.", "translation": "She has no more time."}], "pitfalls": ["forgetting 'ne' in speech (the written text keeps it)", "keeping 'des' after 'ne … plus de' (it becomes 'de')"], "sentenceRefs": ["s02-01", "s02-03", "s04-03", "s04-06"], "priority": "high", "confidence": "high", "needsVerification": false}, {"id": "g003", "title": "au bout de + noun — 'at the end of'", "explanation": "'au bout de' (= à + le + bout de) means 'at the end of / to the end of', used for both space and time. 'Au bout de l'amour' = to the end of love — the destination of Jimmy's journey.", "pattern": "au bout de + noun (à + le → au)", "examples": [{"text": "Il attend au bout de la rue.", "translation": "He is waiting at the end of the street."}, {"text": "Au bout d'un moment, il est parti.", "translation": "After a while, he left."}], "pitfalls": ["using 'à la fin de' where 'au bout de' (extent) is meant"], "sentenceRefs": ["s03-01"], "priority": "medium", "confidence": "high", "needsVerification": false}, {"id": "g004", "title": "même si + indicative — 'even if'", "explanation": "'même si' introduces a concession and takes the indicative (not the subjunctive): 'même si ça lui joue des tours' = even if it plays tricks on him. Compare 'bien que' (although), which takes the subjunctive.", "pattern": "même si + indicative clause", "examples": [{"text": "Même s'il pleut, je sors.", "translation": "Even if it rains, I'm going out."}, {"text": "Bien qu'il pleuve, je sors.", "translation": "Although it is raining, I'm going out."}], "pitfalls": ["using the subjunctive after 'même si'"], "sentenceRefs": ["s03-02"], "priority": "medium", "confidence": "high", "needsVerification": false}], "exercises": [{"id": "x001", "type": "meaning", "prompt": "What does « Aux quatre coins du monde » mean?", "options": ["everywhere / in all corners of the world", "the four corners of a room", "four different countries", "a square-shaped region"], "answer": {"key": "everywhere / in all corners of the world", "explanation": "It is a fixed expression meaning 'everywhere'."}, "difficulty": "medium", "relatedExpressions": ["e001"]}, {"id": "x002", "type": "cloze", "prompt": "Complete the line: Fait pousser des fleurs sous les {{blank}}.", "answer": {"key": "bombes", "explanation": "'sous les bombes' = under the bombs — the war imagery of the first stanza."}, "difficulty": "easy", "relatedVocabulary": ["v001"]}, {"id": "x003", "type": "grammar-discrimination", "prompt": "In « fait pousser des fleurs », what does the « faire + infinitive » construction mean?", "options": ["to make (flowers) grow", "to grow flowers oneself", "to pick flowers", "to be grown"], "answer": {"key": "to make (flowers) grow", "explanation": "'faire' + infinitive is the causative: the subject causes the action."}, "difficulty": "medium", "relatedGrammar": ["g001"]}, {"id": "x004", "type": "translation", "prompt": "Translate into English: « Jimmy voyage au bout de l'amour ».", "answer": {"model": "Jimmy travels to the end of love.", "rubric": ["renders 'au bout de' as 'to the end of'", "keeps 'voyage' as the verb 'travels'"], "explanation": "'au bout de' = to the end of; 'voyage' here is the verb (voyager)."}, "difficulty": "medium", "relatedGrammar": ["g003"], "relatedVocabulary": ["v008"]}, {"id": "x005", "type": "meaning", "prompt": "« Loin des yeux, près du cœur » inverts a common proverb. What does it mean here?", "options": ["distant but still close in feeling", "blind to what is near", "eyes far from the heart", "a medical condition"], "answer": {"key": "distant but still close in feeling", "explanation": "It flips 'loin des yeux, loin du cœur' (out of sight, out of mind) to say the opposite."}, "difficulty": "medium", "relatedExpressions": ["e002"]}, {"id": "x006", "type": "grammar-discrimination", "prompt": "In « il n'a plus de larmes », what does « ne … plus » mean?", "options": ["no longer / not any more", "more than before", "in addition", "only"], "answer": {"key": "no longer / not any more", "explanation": "'ne … plus' = no longer; 'ne … plus de' drops the article before the noun."}, "difficulty": "easy", "relatedGrammar": ["g002"]}], "qa": {"checks": [{"id": "c01", "name": "source-fidelity", "status": "pass", "notes": "verbatim; the missing blank line before the chorus at 'Avec les nuages qui avancent' is preserved, not silently fixed"}, {"id": "c02", "name": "sentence-integrity", "status": "pass", "notes": "42 lines reconstruct the source exactly"}, {"id": "c03", "name": "surface-integrity", "status": "pass", "notes": "every surface/text is a verbatim substring of its sentence"}, {"id": "c04", "name": "cross-reference-resolution", "status": "pass"}, {"id": "c05", "name": "id-uniqueness-and-format", "status": "pass"}, {"id": "c06", "name": "schema-conformance", "status": "pass"}, {"id": "c07", "name": "no-dangling-or-orphan-records", "status": "pass"}, {"id": "c08", "name": "no-invention", "status": "pass", "notes": "no fabricated frequency/CEFR/etymology; no author claim asserted"}, {"id": "c09", "name": "context-over-dictionary", "status": "pass"}, {"id": "c10", "name": "layered-meanings", "status": "pass", "notes": "idioms give literal + contextual meaning separately"}, {"id": "c11", "name": "uncertainty-flagged", "status": "pass", "notes": "'à contre-jour' figurative reading flagged as interpretation"}], "summary": "pass", "validator": "scripts/validate_document.py", "reviewedAt": "2026-10-27T17:00:00Z"}}</script>
+<script id="palette-data" type="application/json">["#E74C3C", "#E67E22", "#F1C40F", "#2ECC71", "#1ABC9C", "#3498DB", "#9B59B6", "#E91E63", "#16A085", "#D35400", "#2980B9", "#8E44AD", "#27AE60", "#C0392B", "#7F8C8D", "#34495E"]</script>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- utils ---------- */
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function hexToRgba(hex,a){hex=(hex||"").replace("#","");if(!/^[0-9a-fA-F]{6}$/.test(hex))return "transparent";
+  var r=parseInt(hex.slice(0,2),16),g=parseInt(hex.slice(2,4),16),b=parseInt(hex.slice(4,6),16);
+  return "rgba("+r+","+g+","+b+","+a+")"}
+function readJSON(id){try{return JSON.parse(document.getElementById(id).textContent)}catch(e){return null}}
+
+var DATA = readJSON("packet-data") || {};
+var PALETTE = readJSON("palette-data") || ["#E74C3C","#E67E22","#F1C40F","#2ECC71","#1ABC9C","#3498DB","#9B59B6","#E91E63","#16A085","#D35400","#2980B9","#8E44AD"];
+var meta = DATA.meta || {};
+var sentences = DATA.sentences || [];
+var vocabulary = DATA.vocabulary || [];
+var expressions = DATA.expressions || [];
+var grammar = DATA.grammar || [];
+var exercises = DATA.exercises || [];
+var qa = DATA.qa || {};
+
+/* ---------- color assignment ---------- */
+var colorMap = {};
+vocabulary.forEach(function(v,i){ colorMap[v.id] = PALETTE[i % PALETTE.length]; });
+
+/* ---------- vocab card body (shared by tooltip & vocab tab) ---------- */
+function vocabDetail(v){
+  var h="";
+  if(v.morphology && v.morphology.description){h+='<div class="detail-row"><div class="detail-label">Morphology</div><div>'+esc(v.morphology.description)+'</div></div>'}
+  if(v.collocations && v.collocations.length){h+='<div class="detail-row"><div class="detail-label">Collocations</div>'+v.collocations.map(function(c){return '<span class="tt-tag">'+esc(c)+'</span>'}).join("")+'</div>'}
+  if(v.examples && v.examples.length){h+='<div class="detail-row"><div class="detail-label">Examples</div>'+v.examples.map(function(e){return '<div class="ex-src">'+esc(e.text)+'</div><div class="ex-tr">'+esc(e.translation)+'</div>'}).join("")+'</div>'}
+  if(v.commonErrors && v.commonErrors.length){h+='<div class="detail-row"><div class="detail-label">Common errors</div><ul>'+v.commonErrors.map(function(c){return "<li>"+esc(c)+"</li>"}).join("")+'</ul></div>'}
+  if(v.confusions && v.confusions.length){h+='<div class="detail-row"><div class="detail-label">Watch out</div><ul>'+v.confusions.map(function(c){return "<li><b>"+esc(c.term)+"</b> — "+esc(c.distinction)+"</li>"}).join("")+'</ul></div>'}
+  if(v.region && v.region.length){h+='<div class="detail-row"><div class="detail-label">Region</div>'+v.region.map(function(r){return '<span class="tt-tag">'+esc(r)+'</span>'}).join("")+'</div>'}
+  return h;
+}
+
+/* ---------- header ---------- */
+function renderHeader(){
+  document.title = meta.title || "Study packet";
+  document.getElementById("title").textContent = meta.title || "Study packet";
+  var langNames={en:"English",fr:"French",es:"Spanish",de:"German",it:"Italian",pt:"Portuguese",nl:"Dutch",sv:"Swedish",no:"Norwegian",da:"Danish"};
+  var src = langNames[meta.textLanguage] || meta.textLanguage || "";
+  var parts=[];
+  if(src) parts.push(src);
+  if(meta.explanationLanguage) parts.push("→ "+meta.explanationLanguage);
+  if(meta.genre) parts.push(meta.genre);
+  if(meta.register) parts.push(meta.register);
+  document.getElementById("meta-line").textContent = parts.join(" · ");
+}
+
+/* ---------- reading ---------- */
+function renderReading(){
+  var el=document.getElementById("panel-reading"); var h="";
+  if(!sentences.length){el.innerHTML='<div class="empty">No sentences.</div>';return}
+  var byPara={};
+  sentences.forEach(function(s){ (byPara[s.paragraph]=byPara[s.paragraph]||[]).push(s); });
+  Object.keys(byPara).sort(function(a,b){return a-b}).forEach(function(p){
+    h+='<div class="para"><div class="para-head">Paragraph '+p+'</div>';
+    byPara[p].forEach(function(s){
+      h+='<div class="sent-row" id="sent-'+esc(s.id)+'"><div><span class="sent-id">'+esc(s.id)+'</span><span class="sent-orig">'+esc(s.text)+'</span></div>'
+       +'<div><div class="sent-trans">'+esc(s.translation)+'</div>'
+       +(s.literal?'<div class="sent-literal">'+esc(s.literal)+'</div>':'')
+       +'</div></div>';
+    });
+    h+='</div>';
+  });
+  h+=renderQA();
+  el.innerHTML=h;
+}
+
+/* ---------- annotated (word highlighting) ---------- */
+function isWordChar(ch){ return !!ch && /[\p{L}\p{M}']/u.test(ch); }
+function highlightText(text, items){
+  // items: array of {id, surface}; sort longest-first to prefer whole expressions
+  items.sort(function(a,b){return b.surface.length-a.surface.length});
+  var marks=[];
+  items.forEach(function(it){
+    var s=it.surface, idx=text.indexOf(s);
+    while(idx!==-1){
+      if(!isWordChar(text[idx-1]) && !isWordChar(text[idx+s.length])) marks.push({start:idx,end:idx+s.length,id:it.id});
+      idx=text.indexOf(s, idx+s.length);
+    }
+  });
+  marks.sort(function(a,b){return a.start-b.start || (b.end-b.start)-(a.end-a.start)});
+  var accepted=[], lastEnd=-1;
+  marks.forEach(function(m){ if(m.start>=lastEnd){accepted.push(m);lastEnd=m.end;} });
+  var html="", pos=0;
+  accepted.forEach(function(m){
+    html+=esc(text.slice(pos,m.start));
+    var c=colorMap[m.id]||"#888888";
+    html+='<span class="token" data-vocab="'+esc(m.id)+'" style="--tok:'+c+';--tok-bg:'+hexToRgba(c,0.16)+'">'+esc(text.slice(m.start,m.end))+'</span>';
+    pos=m.end;
+  });
+  html+=esc(text.slice(pos));
+  return html;
+}
+function renderAnnotated(){
+  var el=document.getElementById("panel-annotated"); var h="";
+  if(!sentences.length){el.innerHTML='<div class="empty">No sentences.</div>';return}
+  var vocabById={}; vocabulary.forEach(function(v){vocabById[v.id]=v});
+  var byPara={};
+  sentences.forEach(function(s){ (byPara[s.paragraph]=byPara[s.paragraph]||[]).push(s); });
+  Object.keys(byPara).sort(function(a,b){return a-b}).forEach(function(p){
+    h+='<div class="para"><div class="para-head">Paragraph '+p+'</div>';
+    byPara[p].forEach(function(s){
+      var items=(s.vocabularyRefs||[]).map(function(id){var v=vocabById[id];return v?{id:id,surface:v.surface}:null}).filter(Boolean);
+      h+='<div class="annot-block"><div class="annot-sent">'+highlightText(s.text,items)+'</div>'
+        +'<div class="annot-trans">'+esc(s.translation)+'</div>'
+        +(s.literal?'<div class="annot-literal">'+esc(s.literal)+'</div>':'')
+        +'</div>';
+    });
+    h+='</div>';
+  });
+  h+='<div class="annot-hint" style="color:var(--text-3);font-size:12.5px;margin-top:4px">Tap or hover a highlighted word for its full entry.</div>';
+  h+=renderQA();
+  el.innerHTML=h;
+}
+
+/* ---------- vocabulary ---------- */
+function renderVocabulary(){
+  var el=document.getElementById("panel-vocabulary");
+  if(!vocabulary.length){el.innerHTML='<div class="empty">No vocabulary annotated for this text.</div>';return}
+  var h='<div class="controls"><input type="search" id="vocab-search" placeholder="Search…">'
+       +'<select id="vocab-sort"><option value="order">Reading order</option><option value="alpha">Alphabetical</option><option value="priority">Priority</option></select>'
+       +'<select id="vocab-filter"><option value="all">All priorities</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select></div>'
+       +'<div class="grid" id="vocab-grid"></div>'+renderQA();
+  el.innerHTML=h;
+  var grid=document.getElementById("vocab-grid");
+  function render(){
+    var q=(document.getElementById("vocab-search").value||"").toLowerCase();
+    var sort=document.getElementById("vocab-sort").value;
+    var filt=document.getElementById("vocab-filter").value;
+    var list=vocabulary.filter(function(v){
+      if(filt!=="all" && v.priority!==filt) return false;
+      if(q && !(v.surface+" "+v.lemma+" "+v.meaningInContext).toLowerCase().includes(q)) return false;
+      return true;
+    });
+    if(sort==="alpha") list.sort(function(a,b){return (a.lemma||a.surface).localeCompare(b.lemma||b.surface)});
+    else if(sort==="priority"){var order={high:0,medium:1,low:2}; list.sort(function(a,b){return (order[a.priority]??9)-(order[b.priority]??9)})}
+    grid.innerHTML=list.map(function(v){
+      var c=colorMap[v.id]||"#888888";
+      var ipa=v.pronunciation&&v.pronunciation.ipa?'<span class="vcard-ipa">/'+esc(v.pronunciation.ipa)+'/</span>':'';
+      return '<div class="vcard" data-id="'+esc(v.id)+'"><div class="vcard-head">'
+        +'<span class="vcard-surface" style="color:'+c+'">'+esc(v.surface)+'</span>'
+        +'<span class="vcard-lemma">'+esc(v.lemma)+'</span>'
+        +'<span class="vcard-pos">'+esc(v.pos)+'</span>'
+        +'</div>'+ipa
+        +'<div class="vcard-meaning">'+esc(v.meaningInContext)+'</div>'
+        +'<div class="vcard-prio prio-'+esc(v.priority||"")+'" style="margin-top:8px">'+esc(v.priority||"")+(v.needsVerification?' · ⚠ verify':'')+'</div>'
+        +'<div class="vcard-detail">'+vocabDetail(v)+'</div></div>';
+    }).join("");
+  }
+  document.getElementById("vocab-search").addEventListener("input",render);
+  document.getElementById("vocab-sort").addEventListener("change",render);
+  document.getElementById("vocab-filter").addEventListener("change",render);
+  grid.addEventListener("click",function(e){
+    var card=e.target.closest(".vcard"); if(!card) return;
+    card.classList.toggle("open");
+  });
+  render();
+}
+
+/* ---------- expressions ---------- */
+function renderExpressions(){
+  var el=document.getElementById("panel-expressions"); var h="";
+  if(!expressions.length){el.innerHTML='<div class="empty">No fixed expressions or idioms worth singling out in this text.</div>';return}
+  h=expressions.map(function(e){
+    var badges='<span class="badge badge-type">'+esc(e.type)+'</span>'
+      +'<span class="badge badge-reg">'+esc(e.register||"neutral")+'</span>'
+      +(e.sensitivity && e.sensitivity!=="none"?'<span class="badge badge-sens-warn">'+esc(e.sensitivity)+'</span>':'');
+    var region=e.region&&e.region.length?'<div class="detail-row"><div class="detail-label">Region</div>'+e.region.map(function(r){return '<span class="tt-tag">'+esc(r)+'</span>'}).join("")+(e.regionCertainty&&e.regionCertainty!=="verified"?' <span style="color:var(--text-3)">('+esc(e.regionCertainty)+')</span>':'')+'</div>':'';
+    var literal=e.literalMeaning?'<div class="detail-row"><div class="detail-label">Literal meaning</div><div class="ex-src">'+esc(e.literalMeaning)+'</div></div>':'';
+    var ex=e.examples&&e.examples.length?'<div class="detail-row"><div class="detail-label">Examples</div>'+e.examples.map(function(x){return '<div class="ex-src">'+esc(x.text)+'</div><div class="ex-tr">'+esc(x.translation)+'</div>'}).join("")+'</div>':'';
+    var alt=e.alternatives&&e.alternatives.length?'<div class="detail-row"><div class="detail-label">Alternatives</div>'+e.alternatives.map(function(a){return '<span class="tt-tag">'+esc(a)+'</span>'}).join("")+'</div>':'';
+    var notes=e.usageNotes&&e.usageNotes.length?'<div class="detail-row"><div class="detail-label">Usage</div><ul>'+e.usageNotes.map(function(n){return "<li>"+esc(n)+"</li>"}).join("")+'</ul></div>':'';
+    return '<div class="excard"><div class="excard-head"><span class="excard-text">'+esc(e.text)+'</span>'+badges+'</div>'
+      +'<div class="vcard-meaning">'+esc(e.meaningInContext)+'</div>'
+      +'<div class="vcard-detail" style="display:block">'+literal+region+ex+alt+notes
+      +(e.needsVerification?'<div class="tt-verify">⚠ needs verification</div>':'')+'</div></div>';
+  }).join("");
+  el.innerHTML=h+renderQA();
+}
+
+/* ---------- grammar ---------- */
+function renderGrammar(){
+  var el=document.getElementById("panel-grammar"); var h="";
+  if(!grammar.length){el.innerHTML='<div class="empty">No grammar points explained for this text.</div>';return}
+  h=grammar.map(function(g){
+    var pat=g.pattern?'<div class="gcard-pattern">'+esc(g.pattern)+'</div>':'';
+    var ex=g.examples&&g.examples.length?'<div class="gcard-ex">'+g.examples.map(function(x){return '<div class="ex-src">'+esc(x.text)+'</div><div class="ex-tr">'+esc(x.translation)+'</div>'}).join("")+'</div>':'';
+    var pit=g.pitfalls&&g.pitfalls.length?'<div class="detail-row"><div class="detail-label">Common errors</div><ul>'+g.pitfalls.map(function(p){return "<li>"+esc(p)+"</li>"}).join("")+'</ul></div>':'';
+    var refs=(g.sentenceRefs||[]).map(function(r){return '<a data-goto="'+esc(r)+'">'+esc(r)+'</a>'}).join(", ");
+    return '<div class="gcard"><div class="gcard-title"><span class="gid">'+esc(g.id)+'</span>'+esc(g.title)+'</div>'
+      +'<div class="gcard-explain">'+esc(g.explanation)+'</div>'+pat+ex+pit
+      +'<div class="gcard-refs">In: '+refs+'</div></div>';
+  }).join("");
+  el.innerHTML=h+renderQA();
+}
+
+/* ---------- exercises ---------- */
+function renderExercises(){
+  var el=document.getElementById("panel-exercises"); var h="";
+  if(!exercises.length){el.innerHTML='<div class="empty">No exercises for this text.</div>';return}
+  h=exercises.map(function(x,i){
+    var typeBadge='<span class="badge badge-type">'+esc(x.type)+'</span><span class="badge">'+esc(x.difficulty)+'</span>';
+    var prompt=x.prompt.replace(/\{\{\s*blank\s*\}\}/g,'<span class="blank"></span>');
+    var opts="";
+    if(x.options && x.options.length){
+      opts='<div class="opts">'+x.options.map(function(o,oi){
+        return '<button class="opt" data-key="'+esc(o)+'" data-idx="'+i+'">'+String.fromCharCode(65+oi)+'. '+esc(o)+'</button>';
+      }).join("")+'</div>';
+    }
+    var ans=x.answer||{};
+    var ansHtml='';
+    if(ans.key!=null) ansHtml+='<span class="lbl">Answer: </span>'+esc(ans.key);
+    if(ans.model!=null) ansHtml+='<span class="lbl">Model answer: </span>'+esc(ans.model);
+    if(ans.rubric && ans.rubric.length) ansHtml+='<div class="lbl">Rubric</div><ul class="rubric">'+ans.rubric.map(function(r){return "<li>"+esc(r)+"</li>"}).join("")+'</ul>';
+    if(ans.explanation) ansHtml+='<div style="margin-top:6px">'+esc(ans.explanation)+'</div>';
+    var reveal='<button class="reveal-btn" data-idx="'+i+'">Show answer</button><div class="answer-box" data-idx="'+i+'">'+ansHtml+'</div>';
+    return '<div class="exercise"><div class="exercise-head"><span class="gid">'+esc(x.id)+'</span>'+typeBadge+'</div>'
+      +'<div class="exercise-prompt">'+esc(prompt)+'</div>'+opts+reveal+'</div>';
+  }).join("");
+  el.innerHTML=h+renderQA();
+}
+
+/* ---------- cards (flashcards) ---------- */
+function buildCards(){
+  var cards=[];
+  vocabulary.forEach(function(v){
+    cards.push({kind:"vocab",front:v.surface,ipa:(v.pronunciation&&v.pronunciation.ipa)||"",
+      backTop:v.lemma+" ("+v.pos+")",backMain:v.meaningInContext,
+      backMeta:(v.morphology&&v.morphology.description)||""});
+  });
+  expressions.forEach(function(e){
+    cards.push({kind:"expr",front:e.text,ipa:"",
+      backTop:e.type+(e.register?" · "+e.register:""),backMain:e.meaningInContext,
+      backMeta:e.literalMeaning?("Literal: "+e.literalMeaning):""});
+  });
+  return cards;
+}
+function renderCards(){
+  var el=document.getElementById("panel-cards");
+  var cards=buildCards();
+  if(!cards.length){el.innerHTML='<div class="empty">No cards — annotate some vocabulary or expressions first.</div>';return}
+  var h='<div class="flash-wrap"><div class="flash-stage"><div class="flash" id="flash">'
+    +'<div class="flash-face flash-front"><div class="flash-front-word" id="f-front"></div><div class="flash-front-ipa" id="f-ipa"></div><div class="flash-hint">Tap to flip</div></div>'
+    +'<div class="flash-face flash-back"><div class="flash-back-lemma" id="f-top"></div><div class="flash-back-meaning" id="f-main"></div><div class="flash-back-meta" id="f-meta"></div></div>'
+    +'</div></div>'
+    +'<div class="flash-nav"><button id="f-prev">←</button><span class="flash-count" id="f-count"></span><button id="f-next">→</button><button id="f-shuffle">Shuffle</button></div>'
+    +'<div class="flash-export"><button id="f-export">Copy Anki TSV</button><textarea id="f-tsv" hidden></textarea></div></div>'
+    +renderQA();
+  el.innerHTML=h;
+  var idx=0, flash=document.getElementById("flash");
+  function show(i){
+    idx=(i+cards.length)%cards.length;
+    document.getElementById("f-front").textContent=cards[idx].front;
+    document.getElementById("f-ipa").textContent=cards[idx].ipa?"/"+cards[idx].ipa+"/":"";
+    document.getElementById("f-top").textContent=cards[idx].backTop;
+    document.getElementById("f-main").textContent=cards[idx].backMain;
+    document.getElementById("f-meta").textContent=cards[idx].backMeta;
+    document.getElementById("f-count").textContent=(idx+1)+" / "+cards.length;
+    flash.classList.remove("flipped");
+  }
+  flash.addEventListener("click",function(){flash.classList.toggle("flipped")});
+  document.getElementById("f-prev").addEventListener("click",function(e){e.stopPropagation();show(idx-1)});
+  document.getElementById("f-next").addEventListener("click",function(e){e.stopPropagation();show(idx+1)});
+  document.getElementById("f-shuffle").addEventListener("click",function(e){e.stopPropagation();for(var i=cards.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=cards[i];cards[i]=cards[j];cards[j]=t}show(0)});
+  document.getElementById("f-export").addEventListener("click",function(){
+    var tsv="#separator:tab\n#html:false\n#columns:Front\tBack\tTags\n";
+    vocabulary.forEach(function(v){
+      tsv+=v.surface+"\t"+v.lemma+" — "+v.meaningInContext+"\tlang-"+(meta.textLanguage||"")+" vocab "+v.priority+"\n";
+    });
+    expressions.forEach(function(e){
+      tsv+=e.text+"\t"+e.meaningInContext+" ("+e.register+")"+"\tlang-"+(meta.textLanguage||"")+" expr "+e.priority+"\n";
+    });
+    var ta=document.getElementById("f-tsv"); ta.hidden=false; ta.value=tsv;
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(tsv).then(function(){alert("Copied to clipboard")}).catch(function(){ta.select()})}
+    else{ta.select();}
+  });
+  show(0);
+}
+
+/* ---------- QA ---------- */
+function renderQA(){
+  var checks=(qa&&qa.checks)||[]; if(!checks.length) return "";
+  var cls={pass:"st-pass",fail:"st-fail",unverified:"st-unverified","not-applicable":"st-na"};
+  return '<details class="qa"><summary>Quality check — '+esc((qa.summary||"").toUpperCase())+'</summary><table><thead><tr><th>Check</th><th>Status</th><th>Notes</th></tr></thead><tbody>'
+    +checks.map(function(c){return '<tr><td>'+esc(c.name||c.id)+'</td><td class="'+(cls[c.status]||"")+'">'+esc(c.status||"")+'</td><td>'+esc(c.notes||"")+'</td></tr>'}).join("")
+    +'</tbody></table></details>';
+}
+
+/* ---------- tabs ---------- */
+function setupTabs(){
+  var tabs=document.getElementById("tabs");
+  tabs.addEventListener("click",function(e){
+    var b=e.target.closest(".tab"); if(!b) return;
+    document.querySelectorAll(".tab").forEach(function(t){t.classList.toggle("active",t===b)});
+    document.querySelectorAll(".panel").forEach(function(p){p.classList.remove("active")});
+    var panel=document.getElementById("panel-"+b.dataset.tab);
+    if(panel) panel.classList.add("active");
+  });
+}
+
+/* ---------- tooltip ---------- */
+function setupTooltip(){
+  var tip=document.getElementById("tooltip"); var vocabById={}; vocabulary.forEach(function(v){vocabById[v.id]=v});
+  var pinned=null;
+  function showFor(token, pin){
+    var v=vocabById[token.dataset.vocab]; if(!v) return;
+    var c=colorMap[v.id]||"#888888";
+    var ipa=(v.pronunciation&&v.pronunciation.ipa)?"<div class='tt-ipa'>/"+esc(v.pronunciation.ipa)+"/</div>":"";
+    tip.innerHTML='<div class="tt-head"><span class="tt-surface" style="color:'+c+'">'+esc(v.surface)+'</span><span class="tt-lemma">'+esc(v.lemma)+'</span><span class="tt-pos">'+esc(v.pos)+'</span></div>'
+      +ipa+'<div class="tt-meaning">'+esc(v.meaningInContext)+'</div>'+vocabDetail(v)
+      +(v.needsVerification?'<div class="tt-verify">⚠ needs verification</div>':'');
+    tip.hidden=false;
+    var r=token.getBoundingClientRect();
+    var tw=tip.offsetWidth, th=tip.offsetHeight;
+    var left=Math.min(Math.max(8, r.left + r.width/2 - tw/2), window.innerWidth-tw-8);
+    var top=r.bottom+8;
+    if(top+th>window.innerHeight-8){ top=Math.max(8, r.top-th-8); }
+    tip.style.left=left+"px"; tip.style.top=top+"px";
+    pinned=pin?token:null;
+  }
+  document.addEventListener("mouseover",function(e){
+    var t=e.target.closest(".token"); if(!t) return; showFor(t,false);
+  });
+  document.addEventListener("mouseout",function(e){
+    var t=e.target.closest(".token"); if(!t||pinned) return; tip.hidden=true;
+  });
+  document.addEventListener("click",function(e){
+    var t=e.target.closest(".token");
+    if(!t){ if(!e.target.closest("#tooltip")) tip.hidden=true; pinned=null; return; }
+    if(pinned===t){pinned=null;tip.hidden=true;} else {showFor(t,true);}
+  });
+  document.addEventListener("scroll",function(){ if(!pinned) tip.hidden=true; },true);
+  window.addEventListener("resize",function(){ if(!pinned) tip.hidden=true; });
+}
+
+/* ---------- grammar sentence links ---------- */
+function setupGoto(){
+  document.addEventListener("click",function(e){
+    var a=e.target.closest("a[data-goto]"); if(!a) return;
+    var id=a.dataset.goto;
+    var rtab=document.querySelector('.tab[data-tab="reading"]');
+    var rpanel=document.getElementById("panel-reading");
+    document.querySelectorAll(".tab").forEach(function(t){t.classList.toggle("active",t===rtab)});
+    document.querySelectorAll(".panel").forEach(function(p){p.classList.remove("active")});
+    rpanel.classList.add("active");
+    var target=document.getElementById("sent-"+id);
+    if(target) target.scrollIntoView({behavior:"smooth",block:"center"});
+  });
+}
+
+/* ---------- exercise interactions ---------- */
+function setupExercises(){
+  document.addEventListener("click",function(e){
+    var opt=e.target.closest(".opt");
+    if(opt){
+      var key=opt.dataset.key, idx=opt.dataset.idx, ex=exercises[idx];
+      if(!ex) return;
+      var correct=ex.answer&&ex.answer.key;
+      var box=document.querySelector('.answer-box[data-idx="'+idx+'"]');
+      var opts=opt.parentElement.querySelectorAll(".opt");
+      if(ex.answer&&ex.answer.key!=null){
+        opts.forEach(function(o){
+          if(o.dataset.key===correct){o.classList.add("reveal","correct")}
+          if(o===opt&&o.dataset.key!==correct){o.classList.add("wrong")}
+        });
+      }
+      if(box) box.classList.add("show");
+      return;
+    }
+    var rb=e.target.closest(".reveal-btn");
+    if(rb){var box=document.querySelector('.answer-box[data-idx="'+rb.dataset.idx+'"]'); if(box) box.classList.toggle("show");}
+  });
+}
+
+/* ---------- theme ---------- */
+function setupTheme(){
+  var btn=document.getElementById("theme-toggle");
+  function current(){
+    if(document.documentElement.dataset.theme==="dark") return "dark";
+    if(document.documentElement.dataset.theme==="light") return "light";
+    return "system";
+  }
+  function apply(){
+    var c=current();
+    btn.textContent = c==="dark" ? "☾" : c==="light" ? "☀" : "◐";
+  }
+  try{
+    var saved=localStorage.getItem("els-theme");
+    if(saved==="dark"||saved==="light") document.documentElement.dataset.theme=saved;
+  }catch(e){}
+  apply();
+  btn.addEventListener("click",function(){
+    var c=current();
+    var next = c==="system" ? "light" : c==="light" ? "dark" : "system";
+    if(next==="system") delete document.documentElement.dataset.theme;
+    else document.documentElement.dataset.theme=next;
+    try{ if(next==="system") localStorage.removeItem("els-theme"); else localStorage.setItem("els-theme",next);}catch(e){}
+    apply();
+  });
+}
+
+/* ---------- init ---------- */
+renderHeader();
+setupTheme();
+setupTabs();
+renderReading();
+renderAnnotated();
+renderVocabulary();
+renderExpressions();
+renderGrammar();
+renderExercises();
+renderCards();
+setupTooltip();
+setupGoto();
+setupExercises();
+})();
+</script>
+</body>
+</html>

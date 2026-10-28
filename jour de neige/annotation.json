@@ -1,0 +1,3273 @@
+{
+  "verse_id": "jour-de-neige",
+  "text_direction": "ltr",
+  "script_family": "latin",
+  "metadata": {
+    "source_language": "fr",
+    "target_language": "zh",
+    "title": "Jour de neige",
+    "artist": "",
+    "sentiment": "tender"
+  },
+  "structure": {
+    "structure_type": "verse-chorus",
+    "sections": [
+      {
+        "type": "Verse",
+        "number": 1,
+        "line_start": 1,
+        "line_end": 10
+      },
+      {
+        "type": "Chorus",
+        "number": 1,
+        "line_start": 11,
+        "line_end": 17
+      },
+      {
+        "type": "Verse",
+        "number": 2,
+        "line_start": 18,
+        "line_end": 27
+      },
+      {
+        "type": "Chorus",
+        "number": 2,
+        "line_start": 28,
+        "line_end": 34
+      },
+      {
+        "type": "Outro",
+        "number": 1,
+        "line_start": 35,
+        "line_end": 48
+      }
+    ]
+  },
+  "rows": [
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "轻轻柔柔，轻轻柔柔",
+      "segments": [
+        {
+          "text": "Tout doux, ",
+          "color": "#E74C3C",
+          "group_id": "L01-W1",
+          "pronunciation": "doo"
+        },
+        {
+          "text": "tout doux",
+          "color": "#E74C3C",
+          "group_id": "L01-W2",
+          "pronunciation": "doo"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "轻轻的，",
+          "color": "#E74C3C",
+          "group_id": "L01-W1"
+        },
+        {
+          "text": "轻轻的",
+          "color": "#E74C3C",
+          "group_id": "L01-W2"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "像一场朦胧的梦",
+      "segments": [
+        {
+          "text": "Comme ",
+          "color": "#2ECC71",
+          "group_id": "L02-W1",
+          "pronunciation": "kom"
+        },
+        {
+          "text": "un ",
+          "color": "#3498DB",
+          "group_id": "L02-W2",
+          "pronunciation": "un"
+        },
+        {
+          "text": "rêve ",
+          "color": "#F39C12",
+          "group_id": "L02-W3",
+          "pronunciation": "rev"
+        },
+        {
+          "text": "un peu ",
+          "color": "#9B59B6",
+          "group_id": "L02-W4",
+          "pronunciation": "un puh"
+        },
+        {
+          "text": "flou",
+          "color": "#1ABC9C",
+          "group_id": "L02-W5",
+          "pronunciation": "floo"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "像",
+          "color": "#2ECC71",
+          "group_id": "L02-W1"
+        },
+        {
+          "text": "一场",
+          "color": "#3498DB",
+          "group_id": "L02-W2"
+        },
+        {
+          "text": "有点",
+          "color": "#9B59B6",
+          "group_id": "L02-W4"
+        },
+        {
+          "text": "朦胧的",
+          "color": "#1ABC9C",
+          "group_id": "L02-W5"
+        },
+        {
+          "text": "梦",
+          "color": "#F39C12",
+          "group_id": "L02-W3"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "外面冷，里面暖",
+      "segments": [
+        {
+          "text": "Froid ",
+          "color": "#E67E22",
+          "group_id": "L03-W1",
+          "pronunciation": "frwa"
+        },
+        {
+          "text": "dehors ",
+          "color": "#2980B9",
+          "group_id": "L03-W2",
+          "pronunciation": "duh-or"
+        },
+        {
+          "text": "et ",
+          "color": "#C0392B",
+          "group_id": "L03-W3",
+          "pronunciation": "ay"
+        },
+        {
+          "text": "chaud ",
+          "color": "#27AE60",
+          "group_id": "L03-W4",
+          "pronunciation": "sho"
+        },
+        {
+          "text": "dedans",
+          "color": "#8E44AD",
+          "group_id": "L03-W5",
+          "pronunciation": "duh-dahn"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "外面",
+          "color": "#2980B9",
+          "group_id": "L03-W2"
+        },
+        {
+          "text": "冷",
+          "color": "#E67E22",
+          "group_id": "L03-W1"
+        },
+        {
+          "text": "，",
+          "color": "#C0392B",
+          "group_id": "L03-W3"
+        },
+        {
+          "text": "里面",
+          "color": "#8E44AD",
+          "group_id": "L03-W5"
+        },
+        {
+          "text": "暖",
+          "color": "#27AE60",
+          "group_id": "L03-W4"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "一路小跑冲下楼梯",
+      "segments": [
+        {
+          "text": "Descendre ",
+          "color": "#D35400",
+          "group_id": "L04-W1",
+          "pronunciation": "deh-sahndr"
+        },
+        {
+          "text": "en courant ",
+          "color": "#16A085",
+          "group_id": "L04-W2",
+          "pronunciation": "ahn koo-rahn"
+        },
+        {
+          "text": "l'escalier",
+          "color": "#2C3E50",
+          "group_id": "L04-W3",
+          "pronunciation": "ess-kal-yay"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "跑着",
+          "color": "#16A085",
+          "group_id": "L04-W2"
+        },
+        {
+          "text": "冲下",
+          "color": "#D35400",
+          "group_id": "L04-W1"
+        },
+        {
+          "text": "楼梯",
+          "color": "#2C3E50",
+          "group_id": "L04-W3"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "当一切，连天空都是白的",
+      "segments": [
+        {
+          "text": "Quand ",
+          "color": "#F1C40F",
+          "group_id": "L05-W1",
+          "pronunciation": "kahn"
+        },
+        {
+          "text": "tout, ",
+          "color": "#7F8C8D",
+          "group_id": "L05-W2",
+          "pronunciation": "too"
+        },
+        {
+          "text": "même ",
+          "color": "#E91E63",
+          "group_id": "L05-W3",
+          "pronunciation": "mem"
+        },
+        {
+          "text": "le ciel ",
+          "color": "#00BCD4",
+          "group_id": "L05-W4",
+          "pronunciation": "syel"
+        },
+        {
+          "text": "est ",
+          "color": "#FF5722",
+          "group_id": "L05-W5",
+          "pronunciation": "eh"
+        },
+        {
+          "text": "blanc",
+          "color": "#795548",
+          "group_id": "L05-W6",
+          "pronunciation": "blahn"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "当",
+          "color": "#F1C40F",
+          "group_id": "L05-W1"
+        },
+        {
+          "text": "一切，",
+          "color": "#7F8C8D",
+          "group_id": "L05-W2"
+        },
+        {
+          "text": "连",
+          "color": "#E91E63",
+          "group_id": "L05-W3"
+        },
+        {
+          "text": "天空",
+          "color": "#00BCD4",
+          "group_id": "L05-W4"
+        },
+        {
+          "text": "都是",
+          "color": "#FF5722",
+          "group_id": "L05-W5"
+        },
+        {
+          "text": "白的",
+          "color": "#795548",
+          "group_id": "L05-W6"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "像一张折起的秘密纸条",
+      "segments": [
+        {
+          "text": "Comme ",
+          "color": "#2ECC71",
+          "group_id": "L06-W1",
+          "pronunciation": "kom"
+        },
+        {
+          "text": "le ",
+          "color": "#607D8B",
+          "group_id": "L06-W2",
+          "pronunciation": "luh"
+        },
+        {
+          "text": "papier ",
+          "color": "#4CAF50",
+          "group_id": "L06-W3",
+          "pronunciation": "pah-pyay"
+        },
+        {
+          "text": "plié ",
+          "color": "#FFC107",
+          "group_id": "L06-W4",
+          "pronunciation": "plee-yay"
+        },
+        {
+          "text": "d'un secret",
+          "color": "#2196F3",
+          "group_id": "L06-W5",
+          "pronunciation": "suh-kreh"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "像",
+          "color": "#2ECC71",
+          "group_id": "L06-W1"
+        },
+        {
+          "text": "一张",
+          "color": "#607D8B",
+          "group_id": "L06-W2"
+        },
+        {
+          "text": "折起的",
+          "color": "#FFC107",
+          "group_id": "L06-W4"
+        },
+        {
+          "text": "秘密",
+          "color": "#2196F3",
+          "group_id": "L06-W5"
+        },
+        {
+          "text": "纸",
+          "color": "#4CAF50",
+          "group_id": "L06-W3"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "匆匆忙忙，却不知为何",
+      "segments": [
+        {
+          "text": "Pressée ",
+          "color": "#9C27B0",
+          "group_id": "L07-W1",
+          "pronunciation": "preh-say"
+        },
+        {
+          "text": "sans savoir ",
+          "color": "#FF9800",
+          "group_id": "L07-W2",
+          "pronunciation": "sahn sah-vwar"
+        },
+        {
+          "text": "pourquoi",
+          "color": "#009688",
+          "group_id": "L07-W3",
+          "pronunciation": "poor-kwa"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "匆匆忙忙",
+          "color": "#9C27B0",
+          "group_id": "L07-W1"
+        },
+        {
+          "text": "却不知",
+          "color": "#FF9800",
+          "group_id": "L07-W2"
+        },
+        {
+          "text": "为何",
+          "color": "#009688",
+          "group_id": "L07-W3"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "已经骑上单车飞驰",
+      "segments": [
+        {
+          "text": "Filer ",
+          "color": "#673AB7",
+          "group_id": "L08-W1",
+          "pronunciation": "fee-lay"
+        },
+        {
+          "text": "déjà ",
+          "color": "#CDDC39",
+          "group_id": "L08-W2",
+          "pronunciation": "day-zhah"
+        },
+        {
+          "text": "sur ",
+          "color": "#03A9F4",
+          "group_id": "L08-W3",
+          "pronunciation": "soor"
+        },
+        {
+          "text": "mon vélo",
+          "color": "#E74C3C",
+          "group_id": "L08-W4",
+          "pronunciation": "vay-lo"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "已经",
+          "color": "#CDDC39",
+          "group_id": "L08-W2"
+        },
+        {
+          "text": "骑上",
+          "color": "#03A9F4",
+          "group_id": "L08-W3"
+        },
+        {
+          "text": "我的单车",
+          "color": "#E74C3C",
+          "group_id": "L08-W4"
+        },
+        {
+          "text": "飞驰",
+          "color": "#673AB7",
+          "group_id": "L08-W1"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "长围巾拖在身后",
+      "segments": [
+        {
+          "text": "La longue ",
+          "color": "#2ECC71",
+          "group_id": "L09-W1",
+          "pronunciation": "lohng"
+        },
+        {
+          "text": "écharpe ",
+          "color": "#3498DB",
+          "group_id": "L09-W2",
+          "pronunciation": "ay-sharp"
+        },
+        {
+          "text": "après moi",
+          "color": "#F39C12",
+          "group_id": "L09-W3",
+          "pronunciation": "ah-preh mwa"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "长长的",
+          "color": "#2ECC71",
+          "group_id": "L09-W1"
+        },
+        {
+          "text": "围巾",
+          "color": "#3498DB",
+          "group_id": "L09-W2"
+        },
+        {
+          "text": "拖在身后",
+          "color": "#F39C12",
+          "group_id": "L09-W3"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "心在狂奔",
+      "segments": [
+        {
+          "text": "Le cœur ",
+          "color": "#9B59B6",
+          "group_id": "L10-W1",
+          "pronunciation": "kur"
+        },
+        {
+          "text": "en plein galop",
+          "color": "#1ABC9C",
+          "group_id": "L10-W2",
+          "pronunciation": "gah-lo"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "心",
+          "color": "#9B59B6",
+          "group_id": "L10-W1"
+        },
+        {
+          "text": "在狂奔",
+          "color": "#1ABC9C",
+          "group_id": "L10-W2"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "下雪天",
+      "segments": [
+        {
+          "text": "Jour ",
+          "color": "#E67E22",
+          "group_id": "L11-W1",
+          "pronunciation": "zhoor"
+        },
+        {
+          "text": "de neige",
+          "color": "#2980B9",
+          "group_id": "L11-W2",
+          "pronunciation": "nezh"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "雪",
+          "color": "#2980B9",
+          "group_id": "L11-W2"
+        },
+        {
+          "text": "天",
+          "color": "#E67E22",
+          "group_id": "L11-W1"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "裹在一件保护着我的大毛衣里",
+      "segments": [
+        {
+          "text": "Dans ",
+          "color": "#C0392B",
+          "group_id": "L12-W1",
+          "pronunciation": "dahn"
+        },
+        {
+          "text": "un ",
+          "color": "#3498DB",
+          "group_id": "L12-W2",
+          "pronunciation": "un"
+        },
+        {
+          "text": "grand ",
+          "color": "#27AE60",
+          "group_id": "L12-W3",
+          "pronunciation": "grahn"
+        },
+        {
+          "text": "pull ",
+          "color": "#8E44AD",
+          "group_id": "L12-W4",
+          "pronunciation": "puhl"
+        },
+        {
+          "text": "qui me protège",
+          "color": "#D35400",
+          "group_id": "L12-W5",
+          "pronunciation": "pro-tezh"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "裹在",
+          "color": "#C0392B",
+          "group_id": "L12-W1"
+        },
+        {
+          "text": "一件",
+          "color": "#3498DB",
+          "group_id": "L12-W2"
+        },
+        {
+          "text": "保护我的",
+          "color": "#D35400",
+          "group_id": "L12-W5"
+        },
+        {
+          "text": "大",
+          "color": "#27AE60",
+          "group_id": "L12-W3"
+        },
+        {
+          "text": "毛衣里",
+          "color": "#8E44AD",
+          "group_id": "L12-W4"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "初雪",
+      "segments": [
+        {
+          "text": "Première ",
+          "color": "#16A085",
+          "group_id": "L13-W1",
+          "pronunciation": "pruh-myair"
+        },
+        {
+          "text": "neige",
+          "color": "#2980B9",
+          "group_id": "L13-W2",
+          "pronunciation": "nezh"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "初",
+          "color": "#16A085",
+          "group_id": "L13-W1"
+        },
+        {
+          "text": "雪",
+          "color": "#2980B9",
+          "group_id": "L13-W2"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "心中的眩晕像旋转木马",
+      "segments": [
+        {
+          "text": "Vertige ",
+          "color": "#2C3E50",
+          "group_id": "L14-W1",
+          "pronunciation": "ver-teezh"
+        },
+        {
+          "text": "en moi ",
+          "color": "#F1C40F",
+          "group_id": "L14-W2",
+          "pronunciation": "ahn mwa"
+        },
+        {
+          "text": "comme ",
+          "color": "#2ECC71",
+          "group_id": "L14-W3",
+          "pronunciation": "kom"
+        },
+        {
+          "text": "un manège",
+          "color": "#7F8C8D",
+          "group_id": "L14-W4",
+          "pronunciation": "mah-nezh"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "心中的",
+          "color": "#F1C40F",
+          "group_id": "L14-W2"
+        },
+        {
+          "text": "眩晕",
+          "color": "#2C3E50",
+          "group_id": "L14-W1"
+        },
+        {
+          "text": "像",
+          "color": "#2ECC71",
+          "group_id": "L14-W3"
+        },
+        {
+          "text": "旋转木马",
+          "color": "#7F8C8D",
+          "group_id": "L14-W4"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "温柔的日子",
+      "segments": [
+        {
+          "text": "Jour ",
+          "color": "#E67E22",
+          "group_id": "L15-W1",
+          "pronunciation": "zhoor"
+        },
+        {
+          "text": "bien tendre",
+          "color": "#E91E63",
+          "group_id": "L15-W2",
+          "pronunciation": "tahndr"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "温柔的",
+          "color": "#E91E63",
+          "group_id": "L15-W2"
+        },
+        {
+          "text": "日子",
+          "color": "#E67E22",
+          "group_id": "L15-W1"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "像那个来等我的人",
+      "segments": [
+        {
+          "text": "Comme ",
+          "color": "#2ECC71",
+          "group_id": "L16-W1",
+          "pronunciation": "kom"
+        },
+        {
+          "text": "ce ",
+          "color": "#00BCD4",
+          "group_id": "L16-W2",
+          "pronunciation": "suh"
+        },
+        {
+          "text": "quelqu'un ",
+          "color": "#FF5722",
+          "group_id": "L16-W3",
+          "pronunciation": "kel-kun"
+        },
+        {
+          "text": "qui vient ",
+          "color": "#795548",
+          "group_id": "L16-W4",
+          "pronunciation": "vyahn"
+        },
+        {
+          "text": "m'attendre",
+          "color": "#607D8B",
+          "group_id": "L16-W5",
+          "pronunciation": "ah-tahndr"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "像",
+          "color": "#2ECC71",
+          "group_id": "L16-W1"
+        },
+        {
+          "text": "那个",
+          "color": "#00BCD4",
+          "group_id": "L16-W2"
+        },
+        {
+          "text": "来",
+          "color": "#795548",
+          "group_id": "L16-W4"
+        },
+        {
+          "text": "等我",
+          "color": "#607D8B",
+          "group_id": "L16-W5"
+        },
+        {
+          "text": "的人",
+          "color": "#FF5722",
+          "group_id": "L16-W3"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "在路的尽头",
+      "segments": [
+        {
+          "text": "Au ",
+          "color": "#4CAF50",
+          "group_id": "L17-W1",
+          "pronunciation": "oh"
+        },
+        {
+          "text": "bout ",
+          "color": "#FFC107",
+          "group_id": "L17-W2",
+          "pronunciation": "boo"
+        },
+        {
+          "text": "du chemin",
+          "color": "#2196F3",
+          "group_id": "L17-W3",
+          "pronunciation": "shuh-man"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "在",
+          "color": "#4CAF50",
+          "group_id": "L17-W1"
+        },
+        {
+          "text": "路的",
+          "color": "#2196F3",
+          "group_id": "L17-W3"
+        },
+        {
+          "text": "尽头",
+          "color": "#FFC107",
+          "group_id": "L17-W2"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "轻轻柔柔，轻轻柔柔",
+      "segments": [
+        {
+          "text": "Tout doux, ",
+          "color": "#E74C3C",
+          "group_id": "L18-W1",
+          "pronunciation": "doo"
+        },
+        {
+          "text": "tout doux",
+          "color": "#E74C3C",
+          "group_id": "L18-W2",
+          "pronunciation": "doo"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "轻轻的，",
+          "color": "#E74C3C",
+          "group_id": "L18-W1"
+        },
+        {
+          "text": "轻轻的",
+          "color": "#E74C3C",
+          "group_id": "L18-W2"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "像一场朦胧的梦",
+      "segments": [
+        {
+          "text": "Comme ",
+          "color": "#2ECC71",
+          "group_id": "L19-W1",
+          "pronunciation": "kom"
+        },
+        {
+          "text": "un ",
+          "color": "#3498DB",
+          "group_id": "L19-W2",
+          "pronunciation": "un"
+        },
+        {
+          "text": "rêve ",
+          "color": "#F39C12",
+          "group_id": "L19-W3",
+          "pronunciation": "rev"
+        },
+        {
+          "text": "un peu ",
+          "color": "#9B59B6",
+          "group_id": "L19-W4",
+          "pronunciation": "un puh"
+        },
+        {
+          "text": "flou",
+          "color": "#1ABC9C",
+          "group_id": "L19-W5",
+          "pronunciation": "floo"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "像",
+          "color": "#2ECC71",
+          "group_id": "L19-W1"
+        },
+        {
+          "text": "一场",
+          "color": "#3498DB",
+          "group_id": "L19-W2"
+        },
+        {
+          "text": "有点",
+          "color": "#9B59B6",
+          "group_id": "L19-W4"
+        },
+        {
+          "text": "朦胧的",
+          "color": "#1ABC9C",
+          "group_id": "L19-W5"
+        },
+        {
+          "text": "梦",
+          "color": "#F39C12",
+          "group_id": "L19-W3"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "外面冷，里面暖",
+      "segments": [
+        {
+          "text": "Froid ",
+          "color": "#E67E22",
+          "group_id": "L20-W1",
+          "pronunciation": "frwa"
+        },
+        {
+          "text": "dehors ",
+          "color": "#2980B9",
+          "group_id": "L20-W2",
+          "pronunciation": "duh-or"
+        },
+        {
+          "text": "et ",
+          "color": "#C0392B",
+          "group_id": "L20-W3",
+          "pronunciation": "ay"
+        },
+        {
+          "text": "chaud ",
+          "color": "#27AE60",
+          "group_id": "L20-W4",
+          "pronunciation": "sho"
+        },
+        {
+          "text": "dedans",
+          "color": "#8E44AD",
+          "group_id": "L20-W5",
+          "pronunciation": "duh-dahn"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "外面",
+          "color": "#2980B9",
+          "group_id": "L20-W2"
+        },
+        {
+          "text": "冷",
+          "color": "#E67E22",
+          "group_id": "L20-W1"
+        },
+        {
+          "text": "，",
+          "color": "#C0392B",
+          "group_id": "L20-W3"
+        },
+        {
+          "text": "里面",
+          "color": "#8E44AD",
+          "group_id": "L20-W5"
+        },
+        {
+          "text": "暖",
+          "color": "#27AE60",
+          "group_id": "L20-W4"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "雪花像蝴蝶一样",
+      "segments": [
+        {
+          "text": "Les flocons ",
+          "color": "#9C27B0",
+          "group_id": "L21-W1",
+          "pronunciation": "flo-kon"
+        },
+        {
+          "text": "comme ",
+          "color": "#2ECC71",
+          "group_id": "L21-W2",
+          "pronunciation": "kom"
+        },
+        {
+          "text": "des papillons",
+          "color": "#FF9800",
+          "group_id": "L21-W3",
+          "pronunciation": "pah-pee-yon"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "雪花",
+          "color": "#9C27B0",
+          "group_id": "L21-W1"
+        },
+        {
+          "text": "像",
+          "color": "#2ECC71",
+          "group_id": "L21-W2"
+        },
+        {
+          "text": "蝴蝶",
+          "color": "#FF9800",
+          "group_id": "L21-W3"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "落在我的唇上，落在我的齿间",
+      "segments": [
+        {
+          "text": "Sur ",
+          "color": "#03A9F4",
+          "group_id": "L22-W1",
+          "pronunciation": "soor"
+        },
+        {
+          "text": "mes lèvres ",
+          "color": "#009688",
+          "group_id": "L22-W2",
+          "pronunciation": "levr"
+        },
+        {
+          "text": "et ",
+          "color": "#C0392B",
+          "group_id": "L22-W3",
+          "pronunciation": "ay"
+        },
+        {
+          "text": "sur ",
+          "color": "#03A9F4",
+          "group_id": "L22-W4",
+          "pronunciation": "soor"
+        },
+        {
+          "text": "mes dents",
+          "color": "#673AB7",
+          "group_id": "L22-W5",
+          "pronunciation": "dahn"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "落在",
+          "color": "#03A9F4",
+          "group_id": "L22-W1"
+        },
+        {
+          "text": "我的唇上",
+          "color": "#009688",
+          "group_id": "L22-W2"
+        },
+        {
+          "text": "，",
+          "color": "#C0392B",
+          "group_id": "L22-W3"
+        },
+        {
+          "text": "落在",
+          "color": "#03A9F4",
+          "group_id": "L22-W4"
+        },
+        {
+          "text": "我的齿上",
+          "color": "#673AB7",
+          "group_id": "L22-W5"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "一阵颤栗的感觉",
+      "segments": [
+        {
+          "text": "Une ",
+          "color": "#CDDC39",
+          "group_id": "L23-W1",
+          "pronunciation": "oon"
+        },
+        {
+          "text": "sensation ",
+          "color": "#03A9F4",
+          "group_id": "L23-W2",
+          "pronunciation": "sahn-sah-syon"
+        },
+        {
+          "text": "frisson",
+          "color": "#E74C3C",
+          "group_id": "L23-W3",
+          "pronunciation": "free-son"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "一阵",
+          "color": "#CDDC39",
+          "group_id": "L23-W1"
+        },
+        {
+          "text": "颤栗的",
+          "color": "#E74C3C",
+          "group_id": "L23-W3"
+        },
+        {
+          "text": "感觉",
+          "color": "#03A9F4",
+          "group_id": "L23-W2"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "正因如此，想要把它原样留住",
+      "segments": [
+        {
+          "text": "Et pour ça, ",
+          "color": "#2ECC71",
+          "group_id": "L24-W1",
+          "pronunciation": "ay poor sah"
+        },
+        {
+          "text": "vouloir ",
+          "color": "#3498DB",
+          "group_id": "L24-W2",
+          "pronunciation": "voo-lwar"
+        },
+        {
+          "text": "préserver ",
+          "color": "#F39C12",
+          "group_id": "L24-W3",
+          "pronunciation": "pray-zer-vay"
+        },
+        {
+          "text": "pareille",
+          "color": "#9B59B6",
+          "group_id": "L24-W4",
+          "pronunciation": "pah-rey"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "正因如此，",
+          "color": "#2ECC71",
+          "group_id": "L24-W1"
+        },
+        {
+          "text": "想要",
+          "color": "#3498DB",
+          "group_id": "L24-W2"
+        },
+        {
+          "text": "原样",
+          "color": "#9B59B6",
+          "group_id": "L24-W4"
+        },
+        {
+          "text": "把它留住",
+          "color": "#F39C12",
+          "group_id": "L24-W3"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "那终将消逝的洁白",
+      "segments": [
+        {
+          "text": "La blancheur ",
+          "color": "#1ABC9C",
+          "group_id": "L25-W1",
+          "pronunciation": "blahn-shur"
+        },
+        {
+          "text": "que rien ",
+          "color": "#E67E22",
+          "group_id": "L25-W2",
+          "pronunciation": "kuh ryahn"
+        },
+        {
+          "text": "ne sauvera",
+          "color": "#2980B9",
+          "group_id": "L25-W3",
+          "pronunciation": "so-vrah"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "什么都",
+          "color": "#E67E22",
+          "group_id": "L25-W2"
+        },
+        {
+          "text": "无法挽回的",
+          "color": "#2980B9",
+          "group_id": "L25-W3"
+        },
+        {
+          "text": "洁白",
+          "color": "#1ABC9C",
+          "group_id": "L25-W1"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "当太阳归来之后",
+      "segments": [
+        {
+          "text": "Après ",
+          "color": "#C0392B",
+          "group_id": "L26-W1",
+          "pronunciation": "ah-preh"
+        },
+        {
+          "text": "le retour ",
+          "color": "#27AE60",
+          "group_id": "L26-W2",
+          "pronunciation": "ruh-toor"
+        },
+        {
+          "text": "du soleil",
+          "color": "#8E44AD",
+          "group_id": "L26-W3",
+          "pronunciation": "so-lay"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "太阳",
+          "color": "#8E44AD",
+          "group_id": "L26-W3"
+        },
+        {
+          "text": "归来",
+          "color": "#27AE60",
+          "group_id": "L26-W2"
+        },
+        {
+          "text": "之后",
+          "color": "#C0392B",
+          "group_id": "L26-W1"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "永远，永远在我心中",
+      "segments": [
+        {
+          "text": "Toujours, ",
+          "color": "#D35400",
+          "group_id": "L27-W1",
+          "pronunciation": "too-zhoor"
+        },
+        {
+          "text": "toujours ",
+          "color": "#D35400",
+          "group_id": "L27-W2",
+          "pronunciation": "too-zhoor"
+        },
+        {
+          "text": "en moi",
+          "color": "#F1C40F",
+          "group_id": "L27-W3",
+          "pronunciation": "ahn mwa"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "永远，",
+          "color": "#D35400",
+          "group_id": "L27-W1"
+        },
+        {
+          "text": "永远",
+          "color": "#D35400",
+          "group_id": "L27-W2"
+        },
+        {
+          "text": "在我心中",
+          "color": "#F1C40F",
+          "group_id": "L27-W3"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "下雪天",
+      "segments": [
+        {
+          "text": "Jour ",
+          "color": "#E67E22",
+          "group_id": "L28-W1",
+          "pronunciation": "zhoor"
+        },
+        {
+          "text": "de neige",
+          "color": "#2980B9",
+          "group_id": "L28-W2",
+          "pronunciation": "nezh"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "雪",
+          "color": "#2980B9",
+          "group_id": "L28-W2"
+        },
+        {
+          "text": "天",
+          "color": "#E67E22",
+          "group_id": "L28-W1"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "裹在一件保护着我的大毛衣里",
+      "segments": [
+        {
+          "text": "Dans ",
+          "color": "#C0392B",
+          "group_id": "L29-W1",
+          "pronunciation": "dahn"
+        },
+        {
+          "text": "un ",
+          "color": "#3498DB",
+          "group_id": "L29-W2",
+          "pronunciation": "un"
+        },
+        {
+          "text": "grand ",
+          "color": "#27AE60",
+          "group_id": "L29-W3",
+          "pronunciation": "grahn"
+        },
+        {
+          "text": "pull ",
+          "color": "#8E44AD",
+          "group_id": "L29-W4",
+          "pronunciation": "puhl"
+        },
+        {
+          "text": "qui me protège",
+          "color": "#D35400",
+          "group_id": "L29-W5",
+          "pronunciation": "pro-tezh"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "裹在",
+          "color": "#C0392B",
+          "group_id": "L29-W1"
+        },
+        {
+          "text": "一件",
+          "color": "#3498DB",
+          "group_id": "L29-W2"
+        },
+        {
+          "text": "保护我的",
+          "color": "#D35400",
+          "group_id": "L29-W5"
+        },
+        {
+          "text": "大",
+          "color": "#27AE60",
+          "group_id": "L29-W3"
+        },
+        {
+          "text": "毛衣里",
+          "color": "#8E44AD",
+          "group_id": "L29-W4"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "初雪",
+      "segments": [
+        {
+          "text": "Première ",
+          "color": "#16A085",
+          "group_id": "L30-W1",
+          "pronunciation": "pruh-myair"
+        },
+        {
+          "text": "neige",
+          "color": "#2980B9",
+          "group_id": "L30-W2",
+          "pronunciation": "nezh"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "初",
+          "color": "#16A085",
+          "group_id": "L30-W1"
+        },
+        {
+          "text": "雪",
+          "color": "#2980B9",
+          "group_id": "L30-W2"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "心中的眩晕像旋转木马",
+      "segments": [
+        {
+          "text": "Vertige ",
+          "color": "#2C3E50",
+          "group_id": "L31-W1",
+          "pronunciation": "ver-teezh"
+        },
+        {
+          "text": "en moi ",
+          "color": "#F1C40F",
+          "group_id": "L31-W2",
+          "pronunciation": "ahn mwa"
+        },
+        {
+          "text": "comme ",
+          "color": "#2ECC71",
+          "group_id": "L31-W3",
+          "pronunciation": "kom"
+        },
+        {
+          "text": "un manège",
+          "color": "#7F8C8D",
+          "group_id": "L31-W4",
+          "pronunciation": "mah-nezh"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "心中的",
+          "color": "#F1C40F",
+          "group_id": "L31-W2"
+        },
+        {
+          "text": "眩晕",
+          "color": "#2C3E50",
+          "group_id": "L31-W1"
+        },
+        {
+          "text": "像",
+          "color": "#2ECC71",
+          "group_id": "L31-W3"
+        },
+        {
+          "text": "旋转木马",
+          "color": "#7F8C8D",
+          "group_id": "L31-W4"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "温柔的日子",
+      "segments": [
+        {
+          "text": "Jour ",
+          "color": "#E67E22",
+          "group_id": "L32-W1",
+          "pronunciation": "zhoor"
+        },
+        {
+          "text": "bien tendre",
+          "color": "#E91E63",
+          "group_id": "L32-W2",
+          "pronunciation": "tahndr"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "温柔的",
+          "color": "#E91E63",
+          "group_id": "L32-W2"
+        },
+        {
+          "text": "日子",
+          "color": "#E67E22",
+          "group_id": "L32-W1"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "像那个来等我的人",
+      "segments": [
+        {
+          "text": "Comme ",
+          "color": "#2ECC71",
+          "group_id": "L33-W1",
+          "pronunciation": "kom"
+        },
+        {
+          "text": "ce ",
+          "color": "#00BCD4",
+          "group_id": "L33-W2",
+          "pronunciation": "suh"
+        },
+        {
+          "text": "quelqu'un ",
+          "color": "#FF5722",
+          "group_id": "L33-W3",
+          "pronunciation": "kel-kun"
+        },
+        {
+          "text": "qui vient ",
+          "color": "#795548",
+          "group_id": "L33-W4",
+          "pronunciation": "vyahn"
+        },
+        {
+          "text": "m'attendre",
+          "color": "#607D8B",
+          "group_id": "L33-W5",
+          "pronunciation": "ah-tahndr"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "像",
+          "color": "#2ECC71",
+          "group_id": "L33-W1"
+        },
+        {
+          "text": "那个",
+          "color": "#00BCD4",
+          "group_id": "L33-W2"
+        },
+        {
+          "text": "来",
+          "color": "#795548",
+          "group_id": "L33-W4"
+        },
+        {
+          "text": "等我",
+          "color": "#607D8B",
+          "group_id": "L33-W5"
+        },
+        {
+          "text": "的人",
+          "color": "#FF5722",
+          "group_id": "L33-W3"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "在路的尽头",
+      "segments": [
+        {
+          "text": "Au ",
+          "color": "#4CAF50",
+          "group_id": "L34-W1",
+          "pronunciation": "oh"
+        },
+        {
+          "text": "bout ",
+          "color": "#FFC107",
+          "group_id": "L34-W2",
+          "pronunciation": "boo"
+        },
+        {
+          "text": "du chemin",
+          "color": "#2196F3",
+          "group_id": "L34-W3",
+          "pronunciation": "shuh-man"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "在",
+          "color": "#4CAF50",
+          "group_id": "L34-W1"
+        },
+        {
+          "text": "路的",
+          "color": "#2196F3",
+          "group_id": "L34-W3"
+        },
+        {
+          "text": "尽头",
+          "color": "#FFC107",
+          "group_id": "L34-W2"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "轻轻柔柔，轻轻柔柔",
+      "segments": [
+        {
+          "text": "Tout doux, ",
+          "color": "#E74C3C",
+          "group_id": "L35-W1",
+          "pronunciation": "doo"
+        },
+        {
+          "text": "tout doux",
+          "color": "#E74C3C",
+          "group_id": "L35-W2",
+          "pronunciation": "doo"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "轻轻的，",
+          "color": "#E74C3C",
+          "group_id": "L35-W1"
+        },
+        {
+          "text": "轻轻的",
+          "color": "#E74C3C",
+          "group_id": "L35-W2"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "像一场朦胧的梦",
+      "segments": [
+        {
+          "text": "Comme ",
+          "color": "#2ECC71",
+          "group_id": "L36-W1",
+          "pronunciation": "kom"
+        },
+        {
+          "text": "un ",
+          "color": "#3498DB",
+          "group_id": "L36-W2",
+          "pronunciation": "un"
+        },
+        {
+          "text": "rêve ",
+          "color": "#F39C12",
+          "group_id": "L36-W3",
+          "pronunciation": "rev"
+        },
+        {
+          "text": "un peu ",
+          "color": "#9B59B6",
+          "group_id": "L36-W4",
+          "pronunciation": "un puh"
+        },
+        {
+          "text": "flou",
+          "color": "#1ABC9C",
+          "group_id": "L36-W5",
+          "pronunciation": "floo"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "像",
+          "color": "#2ECC71",
+          "group_id": "L36-W1"
+        },
+        {
+          "text": "一场",
+          "color": "#3498DB",
+          "group_id": "L36-W2"
+        },
+        {
+          "text": "有点",
+          "color": "#9B59B6",
+          "group_id": "L36-W4"
+        },
+        {
+          "text": "朦胧的",
+          "color": "#1ABC9C",
+          "group_id": "L36-W5"
+        },
+        {
+          "text": "梦",
+          "color": "#F39C12",
+          "group_id": "L36-W3"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "下雪天",
+      "segments": [
+        {
+          "text": "Jour ",
+          "color": "#E67E22",
+          "group_id": "L37-W1",
+          "pronunciation": "zhoor"
+        },
+        {
+          "text": "de neige",
+          "color": "#2980B9",
+          "group_id": "L37-W2",
+          "pronunciation": "nezh"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "雪",
+          "color": "#2980B9",
+          "group_id": "L37-W2"
+        },
+        {
+          "text": "天",
+          "color": "#E67E22",
+          "group_id": "L37-W1"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "裹在一件保护着我的大毛衣里",
+      "segments": [
+        {
+          "text": "Dans ",
+          "color": "#C0392B",
+          "group_id": "L38-W1",
+          "pronunciation": "dahn"
+        },
+        {
+          "text": "un ",
+          "color": "#3498DB",
+          "group_id": "L38-W2",
+          "pronunciation": "un"
+        },
+        {
+          "text": "grand ",
+          "color": "#27AE60",
+          "group_id": "L38-W3",
+          "pronunciation": "grahn"
+        },
+        {
+          "text": "pull ",
+          "color": "#8E44AD",
+          "group_id": "L38-W4",
+          "pronunciation": "puhl"
+        },
+        {
+          "text": "qui me protège",
+          "color": "#D35400",
+          "group_id": "L38-W5",
+          "pronunciation": "pro-tezh"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "裹在",
+          "color": "#C0392B",
+          "group_id": "L38-W1"
+        },
+        {
+          "text": "一件",
+          "color": "#3498DB",
+          "group_id": "L38-W2"
+        },
+        {
+          "text": "保护我的",
+          "color": "#D35400",
+          "group_id": "L38-W5"
+        },
+        {
+          "text": "大",
+          "color": "#27AE60",
+          "group_id": "L38-W3"
+        },
+        {
+          "text": "毛衣里",
+          "color": "#8E44AD",
+          "group_id": "L38-W4"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "下雪天",
+      "segments": [
+        {
+          "text": "Jour ",
+          "color": "#E67E22",
+          "group_id": "L39-W1",
+          "pronunciation": "zhoor"
+        },
+        {
+          "text": "de neige",
+          "color": "#2980B9",
+          "group_id": "L39-W2",
+          "pronunciation": "nezh"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "雪",
+          "color": "#2980B9",
+          "group_id": "L39-W2"
+        },
+        {
+          "text": "天",
+          "color": "#E67E22",
+          "group_id": "L39-W1"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "远处，旋转木马渐渐消失",
+      "segments": [
+        {
+          "text": "Au loin ",
+          "color": "#16A085",
+          "group_id": "L40-W1",
+          "pronunciation": "oh lwan"
+        },
+        {
+          "text": "disparaît ",
+          "color": "#2C3E50",
+          "group_id": "L40-W2",
+          "pronunciation": "dee-spa-reh"
+        },
+        {
+          "text": "le manège",
+          "color": "#7F8C8D",
+          "group_id": "L40-W3",
+          "pronunciation": "mah-nezh"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "远处",
+          "color": "#16A085",
+          "group_id": "L40-W1"
+        },
+        {
+          "text": "旋转木马",
+          "color": "#7F8C8D",
+          "group_id": "L40-W3"
+        },
+        {
+          "text": "消失了",
+          "color": "#2C3E50",
+          "group_id": "L40-W2"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "初雪",
+      "segments": [
+        {
+          "text": "Première ",
+          "color": "#16A085",
+          "group_id": "L41-W1",
+          "pronunciation": "pruh-myair"
+        },
+        {
+          "text": "neige",
+          "color": "#2980B9",
+          "group_id": "L41-W2",
+          "pronunciation": "nezh"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "初",
+          "color": "#16A085",
+          "group_id": "L41-W1"
+        },
+        {
+          "text": "雪",
+          "color": "#2980B9",
+          "group_id": "L41-W2"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "轻柔的旋风把我卷起",
+      "segments": [
+        {
+          "text": "Tourbillon ",
+          "color": "#F1C40F",
+          "group_id": "L42-W1",
+          "pronunciation": "toor-bee-yon"
+        },
+        {
+          "text": "léger ",
+          "color": "#7F8C8D",
+          "group_id": "L42-W2",
+          "pronunciation": "lay-zhay"
+        },
+        {
+          "text": "qui m'enlève",
+          "color": "#E91E63",
+          "group_id": "L42-W3",
+          "pronunciation": "ahn-lev"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "轻柔的",
+          "color": "#7F8C8D",
+          "group_id": "L42-W2"
+        },
+        {
+          "text": "旋风",
+          "color": "#F1C40F",
+          "group_id": "L42-W1"
+        },
+        {
+          "text": "把我带走",
+          "color": "#E91E63",
+          "group_id": "L42-W3"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "下雪天",
+      "segments": [
+        {
+          "text": "Jour ",
+          "color": "#E67E22",
+          "group_id": "L43-W1",
+          "pronunciation": "zhoor"
+        },
+        {
+          "text": "de neige",
+          "color": "#2980B9",
+          "group_id": "L43-W2",
+          "pronunciation": "nezh"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "雪",
+          "color": "#2980B9",
+          "group_id": "L43-W2"
+        },
+        {
+          "text": "天",
+          "color": "#E67E22",
+          "group_id": "L43-W1"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "骑着单车，如在梦中",
+      "segments": [
+        {
+          "text": "Sur mon vélo ",
+          "color": "#00BCD4",
+          "group_id": "L44-W1",
+          "pronunciation": "soor mon vay-lo"
+        },
+        {
+          "text": "comme ",
+          "color": "#2ECC71",
+          "group_id": "L44-W2",
+          "pronunciation": "kom"
+        },
+        {
+          "text": "dans un rêve",
+          "color": "#FF5722",
+          "group_id": "L44-W3",
+          "pronunciation": "dahn un rev"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "骑着单车",
+          "color": "#00BCD4",
+          "group_id": "L44-W1"
+        },
+        {
+          "text": "如",
+          "color": "#2ECC71",
+          "group_id": "L44-W2"
+        },
+        {
+          "text": "在梦中",
+          "color": "#FF5722",
+          "group_id": "L44-W3"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "下雪天",
+      "segments": [
+        {
+          "text": "Jour ",
+          "color": "#E67E22",
+          "group_id": "L45-W1",
+          "pronunciation": "zhoor"
+        },
+        {
+          "text": "de neige",
+          "color": "#2980B9",
+          "group_id": "L45-W2",
+          "pronunciation": "nezh"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "雪",
+          "color": "#2980B9",
+          "group_id": "L45-W2"
+        },
+        {
+          "text": "天",
+          "color": "#E67E22",
+          "group_id": "L45-W1"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "然而我什么陷阱都不怕",
+      "segments": [
+        {
+          "text": "Et pourtant ",
+          "color": "#795548",
+          "group_id": "L46-W1",
+          "pronunciation": "poor-tahn"
+        },
+        {
+          "text": "j'ai peur ",
+          "color": "#607D8B",
+          "group_id": "L46-W2",
+          "pronunciation": "ah-vwar pur"
+        },
+        {
+          "text": "d'aucun piège",
+          "color": "#4CAF50",
+          "group_id": "L46-W3",
+          "pronunciation": "oh-kun pyezh"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "然而",
+          "color": "#795548",
+          "group_id": "L46-W1"
+        },
+        {
+          "text": "我不怕",
+          "color": "#607D8B",
+          "group_id": "L46-W2"
+        },
+        {
+          "text": "任何陷阱",
+          "color": "#4CAF50",
+          "group_id": "L46-W3"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "下雪天",
+      "segments": [
+        {
+          "text": "Jour ",
+          "color": "#E67E22",
+          "group_id": "L47-W1",
+          "pronunciation": "zhoor"
+        },
+        {
+          "text": "de neige",
+          "color": "#2980B9",
+          "group_id": "L47-W2",
+          "pronunciation": "nezh"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "雪",
+          "color": "#2980B9",
+          "group_id": "L47-W2"
+        },
+        {
+          "text": "天",
+          "color": "#E67E22",
+          "group_id": "L47-W1"
+        }
+      ]
+    },
+    {
+      "type": "original",
+      "language": "fr",
+      "direction": "ltr",
+      "script": "Latin",
+      "free_translation": "裹在大毛衣里",
+      "segments": [
+        {
+          "text": "Dans ",
+          "color": "#C0392B",
+          "group_id": "L48-W1",
+          "pronunciation": "dahn"
+        },
+        {
+          "text": "un grand ",
+          "color": "#27AE60",
+          "group_id": "L48-W2",
+          "pronunciation": "grahn"
+        },
+        {
+          "text": "pull",
+          "color": "#8E44AD",
+          "group_id": "L48-W3",
+          "pronunciation": "puhl"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "language": "zh",
+      "direction": "ltr",
+      "script": "CJK",
+      "segments": [
+        {
+          "text": "裹在",
+          "color": "#C0392B",
+          "group_id": "L48-W1"
+        },
+        {
+          "text": "大",
+          "color": "#27AE60",
+          "group_id": "L48-W2"
+        },
+        {
+          "text": "毛衣里",
+          "color": "#8E44AD",
+          "group_id": "L48-W3"
+        }
+      ]
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "comme",
+      "romanization": "kom",
+      "meaning": "像；如同",
+      "pos": "连词",
+      "color": "#2ECC71",
+      "frequency": 10
+    },
+    {
+      "word": "neige",
+      "romanization": "nezh",
+      "meaning": "雪",
+      "pos": "名词",
+      "color": "#2980B9",
+      "frequency": 10
+    },
+    {
+      "word": "jour",
+      "romanization": "zhoor",
+      "meaning": "日子；天",
+      "pos": "名词",
+      "color": "#E67E22",
+      "frequency": 9
+    },
+    {
+      "word": "doux",
+      "romanization": "doo",
+      "meaning": "轻柔的；温和的",
+      "pos": "形容词",
+      "color": "#E74C3C",
+      "frequency": 6
+    },
+    {
+      "word": "un / une",
+      "romanization": "un",
+      "meaning": "一个（量词）",
+      "pos": "量词",
+      "color": "#3498DB",
+      "frequency": 6
+    },
+    {
+      "word": "dans",
+      "romanization": "dahn",
+      "meaning": "在……里",
+      "pos": "介词",
+      "color": "#C0392B",
+      "frequency": 4
+    },
+    {
+      "word": "grand",
+      "romanization": "grahn",
+      "meaning": "大的",
+      "pos": "形容词",
+      "color": "#27AE60",
+      "frequency": 4
+    },
+    {
+      "word": "pull",
+      "romanization": "puhl",
+      "meaning": "毛衣；套头衫",
+      "pos": "名词",
+      "color": "#8E44AD",
+      "frequency": 4
+    },
+    {
+      "word": "en moi",
+      "romanization": "ahn mwa",
+      "meaning": "在我心中",
+      "pos": "短语",
+      "color": "#F1C40F",
+      "frequency": 3
+    },
+    {
+      "word": "et",
+      "romanization": "ay",
+      "meaning": "和；而",
+      "pos": "连词",
+      "color": "#C0392B",
+      "frequency": 3
+    },
+    {
+      "word": "flou",
+      "romanization": "floo",
+      "meaning": "朦胧的；模糊的",
+      "pos": "形容词",
+      "color": "#1ABC9C",
+      "frequency": 3
+    },
+    {
+      "word": "manège",
+      "romanization": "mah-nezh",
+      "meaning": "旋转木马",
+      "pos": "名词",
+      "color": "#7F8C8D",
+      "frequency": 3
+    },
+    {
+      "word": "première",
+      "romanization": "pruh-myair",
+      "meaning": "第一的；初次的",
+      "pos": "形容词",
+      "color": "#16A085",
+      "frequency": 3
+    },
+    {
+      "word": "protège",
+      "romanization": "pro-tezh",
+      "meaning": "保护",
+      "pos": "动词",
+      "color": "#D35400",
+      "frequency": 3
+    },
+    {
+      "word": "rêve",
+      "romanization": "rev",
+      "meaning": "梦",
+      "pos": "名词",
+      "color": "#F39C12",
+      "frequency": 3
+    },
+    {
+      "word": "sur",
+      "romanization": "soor",
+      "meaning": "在……上；落在",
+      "pos": "介词",
+      "color": "#03A9F4",
+      "frequency": 3
+    },
+    {
+      "word": "un peu",
+      "romanization": "un puh",
+      "meaning": "一点；有点",
+      "pos": "副词",
+      "color": "#9B59B6",
+      "frequency": 3
+    },
+    {
+      "word": "attendre",
+      "romanization": "ah-tahndr",
+      "meaning": "等待",
+      "pos": "动词",
+      "color": "#607D8B",
+      "frequency": 2
+    },
+    {
+      "word": "au",
+      "romanization": "oh",
+      "meaning": "在（à+le）",
+      "pos": "介词",
+      "color": "#4CAF50",
+      "frequency": 2
+    },
+    {
+      "word": "bout",
+      "romanization": "boo",
+      "meaning": "尽头；末端",
+      "pos": "名词",
+      "color": "#FFC107",
+      "frequency": 2
+    },
+    {
+      "word": "ce",
+      "romanization": "suh",
+      "meaning": "这个；那个",
+      "pos": "指示词",
+      "color": "#00BCD4",
+      "frequency": 2
+    },
+    {
+      "word": "chaud",
+      "romanization": "sho",
+      "meaning": "温暖的",
+      "pos": "形容词",
+      "color": "#27AE60",
+      "frequency": 2
+    },
+    {
+      "word": "chemin",
+      "romanization": "shuh-man",
+      "meaning": "路；小路",
+      "pos": "名词",
+      "color": "#2196F3",
+      "frequency": 2
+    },
+    {
+      "word": "dedans",
+      "romanization": "duh-dahn",
+      "meaning": "里面",
+      "pos": "副词",
+      "color": "#8E44AD",
+      "frequency": 2
+    },
+    {
+      "word": "dehors",
+      "romanization": "duh-or",
+      "meaning": "外面",
+      "pos": "副词",
+      "color": "#2980B9",
+      "frequency": 2
+    },
+    {
+      "word": "froid",
+      "romanization": "frwa",
+      "meaning": "寒冷的",
+      "pos": "形容词",
+      "color": "#E67E22",
+      "frequency": 2
+    },
+    {
+      "word": "quelqu'un",
+      "romanization": "kel-kun",
+      "meaning": "某人；那个人",
+      "pos": "代词",
+      "color": "#FF5722",
+      "frequency": 2
+    },
+    {
+      "word": "tendre",
+      "romanization": "tahndr",
+      "meaning": "温柔的",
+      "pos": "形容词",
+      "color": "#E91E63",
+      "frequency": 2
+    },
+    {
+      "word": "toujours",
+      "romanization": "too-zhoor",
+      "meaning": "永远",
+      "pos": "副词",
+      "color": "#D35400",
+      "frequency": 2
+    },
+    {
+      "word": "vertige",
+      "romanization": "ver-teezh",
+      "meaning": "眩晕",
+      "pos": "名词",
+      "color": "#2C3E50",
+      "frequency": 2
+    },
+    {
+      "word": "vient",
+      "romanization": "vyahn",
+      "meaning": "来（venir）",
+      "pos": "动词",
+      "color": "#795548",
+      "frequency": 2
+    },
+    {
+      "word": "après",
+      "romanization": "ah-preh",
+      "meaning": "在……之后",
+      "pos": "介词",
+      "color": "#C0392B",
+      "frequency": 1
+    },
+    {
+      "word": "après moi",
+      "romanization": "ah-preh mwa",
+      "meaning": "在我身后",
+      "pos": "短语",
+      "color": "#F39C12",
+      "frequency": 1
+    },
+    {
+      "word": "au loin",
+      "romanization": "oh lwan",
+      "meaning": "在远处",
+      "pos": "短语",
+      "color": "#16A085",
+      "frequency": 1
+    },
+    {
+      "word": "aucun piège",
+      "romanization": "oh-kun pyezh",
+      "meaning": "任何陷阱",
+      "pos": "短语",
+      "color": "#4CAF50",
+      "frequency": 1
+    },
+    {
+      "word": "avoir peur",
+      "romanization": "ah-vwar pur",
+      "meaning": "害怕",
+      "pos": "动词短语",
+      "color": "#607D8B",
+      "frequency": 1
+    },
+    {
+      "word": "blanc",
+      "romanization": "blahn",
+      "meaning": "白色的",
+      "pos": "形容词",
+      "color": "#795548",
+      "frequency": 1
+    },
+    {
+      "word": "blancheur",
+      "romanization": "blahn-shur",
+      "meaning": "洁白；白色",
+      "pos": "名词",
+      "color": "#1ABC9C",
+      "frequency": 1
+    },
+    {
+      "word": "ciel",
+      "romanization": "syel",
+      "meaning": "天空",
+      "pos": "名词",
+      "color": "#00BCD4",
+      "frequency": 1
+    },
+    {
+      "word": "cœur",
+      "romanization": "kur",
+      "meaning": "心",
+      "pos": "名词",
+      "color": "#9B59B6",
+      "frequency": 1
+    },
+    {
+      "word": "dans un rêve",
+      "romanization": "dahn un rev",
+      "meaning": "在梦中",
+      "pos": "短语",
+      "color": "#FF5722",
+      "frequency": 1
+    },
+    {
+      "word": "dents",
+      "romanization": "dahn",
+      "meaning": "牙齿",
+      "pos": "名词",
+      "color": "#673AB7",
+      "frequency": 1
+    },
+    {
+      "word": "descendre",
+      "romanization": "deh-sahndr",
+      "meaning": "走下；冲下",
+      "pos": "动词",
+      "color": "#D35400",
+      "frequency": 1
+    },
+    {
+      "word": "disparaît",
+      "romanization": "dee-spa-reh",
+      "meaning": "消失",
+      "pos": "动词",
+      "color": "#2C3E50",
+      "frequency": 1
+    },
+    {
+      "word": "déjà",
+      "romanization": "day-zhah",
+      "meaning": "已经",
+      "pos": "副词",
+      "color": "#CDDC39",
+      "frequency": 1
+    },
+    {
+      "word": "en courant",
+      "romanization": "ahn koo-rahn",
+      "meaning": "跑着",
+      "pos": "副动词",
+      "color": "#16A085",
+      "frequency": 1
+    },
+    {
+      "word": "enlève",
+      "romanization": "ahn-lev",
+      "meaning": "带走；卷起",
+      "pos": "动词",
+      "color": "#E91E63",
+      "frequency": 1
+    },
+    {
+      "word": "escalier",
+      "romanization": "ess-kal-yay",
+      "meaning": "楼梯",
+      "pos": "名词",
+      "color": "#2C3E50",
+      "frequency": 1
+    },
+    {
+      "word": "est",
+      "romanization": "eh",
+      "meaning": "是（être）",
+      "pos": "动词",
+      "color": "#FF5722",
+      "frequency": 1
+    },
+    {
+      "word": "et pour ça",
+      "romanization": "ay poor sah",
+      "meaning": "正因如此",
+      "pos": "短语",
+      "color": "#2ECC71",
+      "frequency": 1
+    },
+    {
+      "word": "filer",
+      "romanization": "fee-lay",
+      "meaning": "飞奔；疾驰",
+      "pos": "动词",
+      "color": "#673AB7",
+      "frequency": 1
+    },
+    {
+      "word": "flocon",
+      "romanization": "flo-kon",
+      "meaning": "雪花",
+      "pos": "名词",
+      "color": "#9C27B0",
+      "frequency": 1
+    },
+    {
+      "word": "frisson",
+      "romanization": "free-son",
+      "meaning": "颤栗；寒战",
+      "pos": "名词",
+      "color": "#E74C3C",
+      "frequency": 1
+    },
+    {
+      "word": "galop",
+      "romanization": "gah-lo",
+      "meaning": "疾驰；狂奔",
+      "pos": "名词",
+      "color": "#1ABC9C",
+      "frequency": 1
+    },
+    {
+      "word": "le",
+      "romanization": "luh",
+      "meaning": "定冠词（量词）",
+      "pos": "冠词",
+      "color": "#607D8B",
+      "frequency": 1
+    },
+    {
+      "word": "longue",
+      "romanization": "lohng",
+      "meaning": "长的",
+      "pos": "形容词",
+      "color": "#2ECC71",
+      "frequency": 1
+    },
+    {
+      "word": "lèvres",
+      "romanization": "levr",
+      "meaning": "嘴唇",
+      "pos": "名词",
+      "color": "#009688",
+      "frequency": 1
+    },
+    {
+      "word": "léger",
+      "romanization": "lay-zhay",
+      "meaning": "轻盈的；轻柔的",
+      "pos": "形容词",
+      "color": "#7F8C8D",
+      "frequency": 1
+    },
+    {
+      "word": "même",
+      "romanization": "mem",
+      "meaning": "甚至；连",
+      "pos": "副词",
+      "color": "#E91E63",
+      "frequency": 1
+    },
+    {
+      "word": "papier",
+      "romanization": "pah-pyay",
+      "meaning": "纸",
+      "pos": "名词",
+      "color": "#4CAF50",
+      "frequency": 1
+    },
+    {
+      "word": "papillon",
+      "romanization": "pah-pee-yon",
+      "meaning": "蝴蝶",
+      "pos": "名词",
+      "color": "#FF9800",
+      "frequency": 1
+    },
+    {
+      "word": "pareille",
+      "romanization": "pah-rey",
+      "meaning": "同样的；原样",
+      "pos": "形容词",
+      "color": "#9B59B6",
+      "frequency": 1
+    },
+    {
+      "word": "plié",
+      "romanization": "plee-yay",
+      "meaning": "折起的",
+      "pos": "形容词",
+      "color": "#FFC107",
+      "frequency": 1
+    },
+    {
+      "word": "pourquoi",
+      "romanization": "poor-kwa",
+      "meaning": "为什么；为何",
+      "pos": "副词",
+      "color": "#009688",
+      "frequency": 1
+    },
+    {
+      "word": "pourtant",
+      "romanization": "poor-tahn",
+      "meaning": "然而",
+      "pos": "连词",
+      "color": "#795548",
+      "frequency": 1
+    },
+    {
+      "word": "pressée",
+      "romanization": "preh-say",
+      "meaning": "匆忙的",
+      "pos": "形容词",
+      "color": "#9C27B0",
+      "frequency": 1
+    },
+    {
+      "word": "préserver",
+      "romanization": "pray-zer-vay",
+      "meaning": "保留；留住",
+      "pos": "动词",
+      "color": "#F39C12",
+      "frequency": 1
+    },
+    {
+      "word": "quand",
+      "romanization": "kahn",
+      "meaning": "当……时",
+      "pos": "连词",
+      "color": "#F1C40F",
+      "frequency": 1
+    },
+    {
+      "word": "que rien",
+      "romanization": "kuh ryahn",
+      "meaning": "什么都不",
+      "pos": "短语",
+      "color": "#E67E22",
+      "frequency": 1
+    },
+    {
+      "word": "retour",
+      "romanization": "ruh-toor",
+      "meaning": "归来；返回",
+      "pos": "名词",
+      "color": "#27AE60",
+      "frequency": 1
+    },
+    {
+      "word": "sans savoir",
+      "romanization": "sahn sah-vwar",
+      "meaning": "却不知",
+      "pos": "短语",
+      "color": "#FF9800",
+      "frequency": 1
+    },
+    {
+      "word": "sauvera",
+      "romanization": "so-vrah",
+      "meaning": "挽救；挽回",
+      "pos": "动词",
+      "color": "#2980B9",
+      "frequency": 1
+    },
+    {
+      "word": "secret",
+      "romanization": "suh-kreh",
+      "meaning": "秘密",
+      "pos": "名词",
+      "color": "#2196F3",
+      "frequency": 1
+    },
+    {
+      "word": "sensation",
+      "romanization": "sahn-sah-syon",
+      "meaning": "感觉",
+      "pos": "名词",
+      "color": "#03A9F4",
+      "frequency": 1
+    },
+    {
+      "word": "soleil",
+      "romanization": "so-lay",
+      "meaning": "太阳",
+      "pos": "名词",
+      "color": "#8E44AD",
+      "frequency": 1
+    },
+    {
+      "word": "sur mon vélo",
+      "romanization": "soor mon vay-lo",
+      "meaning": "骑着我的单车",
+      "pos": "短语",
+      "color": "#00BCD4",
+      "frequency": 1
+    },
+    {
+      "word": "tourbillon",
+      "romanization": "toor-bee-yon",
+      "meaning": "漩涡；旋风",
+      "pos": "名词",
+      "color": "#F1C40F",
+      "frequency": 1
+    },
+    {
+      "word": "tout",
+      "romanization": "too",
+      "meaning": "一切；所有",
+      "pos": "代词",
+      "color": "#7F8C8D",
+      "frequency": 1
+    },
+    {
+      "word": "une",
+      "romanization": "oon",
+      "meaning": "一阵（量词）",
+      "pos": "量词",
+      "color": "#CDDC39",
+      "frequency": 1
+    },
+    {
+      "word": "vouloir",
+      "romanization": "voo-lwar",
+      "meaning": "想要",
+      "pos": "动词",
+      "color": "#3498DB",
+      "frequency": 1
+    },
+    {
+      "word": "vélo",
+      "romanization": "vay-lo",
+      "meaning": "自行车；单车",
+      "pos": "名词",
+      "color": "#E74C3C",
+      "frequency": 1
+    },
+    {
+      "word": "écharpe",
+      "romanization": "ay-sharp",
+      "meaning": "围巾",
+      "pos": "名词",
+      "color": "#3498DB",
+      "frequency": 1
+    }
+  ],
+  "annotations": []
+}

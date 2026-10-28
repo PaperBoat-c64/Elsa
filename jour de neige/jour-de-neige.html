@@ -1,0 +1,2187 @@
+<!DOCTYPE html>
+<html lang="zh" data-source-lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour de neige</title>
+<style>
+/* ================================================================
+   Apple Music Inspired — Multilingual Lyrics Display
+   Three-tab interface: Annotated • Reading • Vocabulary
+   Design tokens, reset, typography, layout, interactions, RTL.
+   Clean, opaque surfaces — no frosted glass effects.
+   ================================================================ */
+
+/* ---- CSS Custom Properties (Design Tokens) ---- */
+:root {
+  /* Surfaces */
+  --bg-page: #000000;
+  --bg-surface: #1C1C1E;
+  --bg-card: #1C1C1E;
+  --bg-elevated: #2C2C2E;
+  --bg-seg-hover: rgba(255, 255, 255, 0.08);
+
+  /* Text */
+  --text-primary: #FFFFFF;
+  --text-secondary: rgba(255, 255, 255, 0.58);
+  --text-tertiary: rgba(255, 255, 255, 0.42);
+
+  /* Accent */
+  --accent: #0A84FF;
+  --accent-soft: rgba(10, 132, 255, 0.15);
+
+  /* Borders / Dividers */
+  --divider: rgba(255, 255, 255, 0.08);
+  --border-glass: rgba(255, 255, 255, 0.10);
+
+  /* Typography scale */
+  --fs-title: 28px;
+  --fs-meta: 15px;
+  --fs-original: 24px;
+  --fs-romanization: 15px;
+  --fs-translation: 18px;
+  --fs-section: 11px;
+  --fs-tooltip: 13px;
+  --fs-card: 14px;
+
+  /* Spacing */
+  --page-pad-y: 40px;
+  --page-pad-x: 32px;
+  --line-group-gap: 48px;
+  --row-gap: 8px;
+  --section-gap: 28px;
+  --seg-pad: 4px 8px;
+  --seg-margin: 1px 2px;
+  --container-max: 720px;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-tooltip: 0 8px 40px rgba(0, 0, 0, 0.50);
+  --shadow-card: 0 16px 60px rgba(0, 0, 0, 0.60);
+
+  /* Transitions */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 0.15s;
+  --dur-normal: 0.22s;
+  --dur-slow: 0.35s;
+}
+
+/* ---- Light Mode ---- */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-page: #F5F5F7;
+    --bg-surface: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --bg-elevated: #FFFFFF;
+    --bg-seg-hover: rgba(0, 0, 0, 0.04);
+    --text-primary: #1D1D1F;
+    --text-secondary: rgba(0, 0, 0, 0.58);
+    --text-tertiary: rgba(0, 0, 0, 0.42);
+    --divider: rgba(0, 0, 0, 0.06);
+    --border-glass: rgba(0, 0, 0, 0.08);
+    --shadow-tooltip: 0 8px 40px rgba(0, 0, 0, 0.12);
+    --shadow-card: 0 16px 60px rgba(0, 0, 0, 0.16);
+  }
+}
+
+/* ---- Reduced Motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---- Reset ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+               "Helvetica Neue", "Inter", system-ui, sans-serif;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  min-height: 100vh;
+}
+
+/* ---- Page Background ---- */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(255,255,255,0.03) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---- Container ---- */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--page-pad-y) var(--page-pad-x);
+}
+
+/* ---- Title ---- */
+.doc-title {
+  text-align: center;
+  font-size: var(--fs-title);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.12em;
+  color: var(--text-primary);
+}
+.doc-meta {
+  text-align: center;
+  font-size: var(--fs-meta);
+  color: var(--text-secondary);
+  letter-spacing: -0.01em;
+  margin-bottom: 32px;
+}
+
+/* ================================================================
+   TAB NAVIGATION
+   ================================================================ */
+.tab-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 16px;
+  margin-bottom: 40px;
+  background: var(--bg-surface);
+
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  transition: background var(--dur-normal) var(--ease-in-out),
+              border-color var(--dur-normal) var(--ease-in-out);
+}
+
+.tab-btn {
+  flex: 1;
+  max-width: 160px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: all var(--dur-normal) var(--ease-in-out);
+  white-space: nowrap;
+  position: relative;
+}
+.tab-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-seg-hover);
+}
+.tab-btn.active {
+  color: #FFFFFF;
+  background: var(--accent);
+  font-weight: 600;
+  box-shadow: 0 2px 12px var(--accent-soft);
+}
+@media (prefers-color-scheme: light) {
+  .tab-btn.active { color: #FFFFFF; }
+}
+
+/* ---- Tab Content ---- */
+.tab-content {
+  display: none;
+  animation: tabFadeIn var(--dur-normal) var(--ease-out-expo);
+}
+.tab-content.active {
+  display: block;
+}
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Section Labels ---- */
+.section-label {
+  text-align: center;
+  font-size: var(--fs-section);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-tertiary);
+  margin-bottom: var(--section-gap);
+  padding-top: var(--section-gap);
+}
+.section-label:first-child { padding-top: 0; }
+
+/* ================================================================
+   TAB 1: ANNOTATED VIEW — Strict row-per-line layout
+   ================================================================ */
+
+/* ---- Line Groups ---- */
+.line-group {
+  margin-bottom: var(--line-group-gap);
+  text-align: center;
+}
+
+/* ---- Rows (strict: one line each) ---- */
+.row {
+  display: block;
+  margin-bottom: var(--row-gap);
+  padding: 2px 0;
+  /* Ensure segments flow inline — no forced multi-line comparison */
+  line-height: 2.0;
+}
+.row:last-child { margin-bottom: 0; }
+
+.row.original {
+  font-size: var(--fs-original);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.row.romanization {
+  font-size: var(--fs-romanization);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-tertiary);
+}
+.row.translation {
+  font-size: var(--fs-translation);
+  font-weight: 500;
+}
+.row.gloss {
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+.row.ipa {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+}
+.row.notes {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Each row is a single cohesive line — separator between row types */
+.row + .row {
+  border-top: none;
+}
+
+/* ================================================================
+   SCRIPT-APPROPRIATE FONT SYSTEM
+   ================================================================ */
+
+/* RTL Scripts */
+[lang="ar"], [lang="fa"], [lang="ur"], [lang="ps"],
+[lang="ku-Arab"], [lang="ug-Arab"], [lang="sd"], [lang="bal"] {
+  font-family: 'Noto Naskh Arabic', 'Scheherazade New', 'Amiri', serif;
+  font-size: 1.15em;
+  line-height: 2.3;
+}
+[lang="he"], [lang="yi"], [lang="lad"] {
+  font-family: 'Noto Sans Hebrew', 'David', 'Frank Ruhl Hofshi', serif;
+  font-size: 1.05em;
+  line-height: 2.1;
+}
+[lang="syr"] { font-family: 'Noto Sans Syriac', serif; }
+[lang="dv"] { font-family: 'Noto Sans Thaana', serif; }
+
+/* CJK */
+[lang="zh"], [lang="zh-Hans"] {
+  font-family: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', sans-serif;
+  font-size: 1.1em;
+}
+[lang="zh-Hant"] {
+  font-family: 'Noto Sans TC', 'Source Han Sans TC', 'PingFang TC', sans-serif;
+  font-size: 1.1em;
+}
+[lang="ja"] {
+  font-family: 'Noto Sans JP', 'Source Han Sans JP', 'Hiragino Sans', sans-serif;
+  font-size: 1.08em;
+}
+[lang="ko"] {
+  font-family: 'Noto Sans KR', 'Source Han Sans KR', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 1.08em;
+}
+
+/* Indic */
+[lang="hi"], [lang="mr"], [lang="ne"], [lang="sa"], [lang="mai"], [lang="bho"] {
+  font-family: 'Noto Sans Devanagari', 'Mukta', serif;
+  font-size: 1.2em; line-height: 2.2;
+}
+[lang="bn"], [lang="as"] {
+  font-family: 'Noto Sans Bengali', 'Hind Siliguri', serif;
+  font-size: 1.2em; line-height: 2.2;
+}
+[lang="pa-Guru"] {
+  font-family: 'Noto Sans Gurmukhi', 'Mukta Mahee', serif;
+  font-size: 1.2em; line-height: 2.1;
+}
+[lang="gu"] { font-family: 'Noto Sans Gujarati', serif; font-size: 1.15em; }
+[lang="or"] { font-family: 'Noto Sans Odia', serif; font-size: 1.15em; line-height: 2.2; }
+[lang="ta"] { font-family: 'Noto Sans Tamil', serif; font-size: 1.1em; }
+[lang="te"] { font-family: 'Noto Sans Telugu', serif; font-size: 1.15em; }
+[lang="kn"] { font-family: 'Noto Sans Kannada', serif; font-size: 1.15em; }
+[lang="ml"] { font-family: 'Noto Sans Malayalam', serif; font-size: 1.15em; line-height: 2.2; }
+[lang="si"] { font-family: 'Noto Sans Sinhala', serif; font-size: 1.2em; line-height: 2.2; }
+
+/* Southeast Asian */
+[lang="th"] { font-family: 'Noto Sans Thai', 'Sarabun', sans-serif; font-size: 1.15em; line-height: 2.3; }
+[lang="lo"] { font-family: 'Noto Sans Lao', 'Phetsarath', sans-serif; font-size: 1.15em; line-height: 2.3; }
+[lang="my"] { font-family: 'Noto Sans Myanmar', 'Padauk', serif; font-size: 1.15em; line-height: 2.3; }
+[lang="km"] { font-family: 'Noto Sans Khmer', 'Khmer OS', serif; font-size: 1.25em; line-height: 2.5; }
+
+/* European & Other */
+[lang="el"] { font-family: 'Noto Sans', 'Gentium', serif; }
+[lang="ka"] { font-family: 'Noto Sans Georgian', serif; }
+[lang="hy"] { font-family: 'Noto Sans Armenian', serif; }
+[lang="ru"], [lang="uk"], [lang="bg"], [lang="sr"],
+[lang="be"], [lang="mk"], [lang="mn-Cyrl"], [lang="kk"] {
+  font-family: 'Noto Sans', 'PT Sans', sans-serif;
+}
+[lang="am"], [lang="ti"], [lang="gez"] { font-family: 'Noto Sans Ethiopic', serif; font-size: 1.1em; }
+[lang="bo"], [lang="dz"] { font-family: 'Noto Sans Tibetan', 'Jomolhari', serif; font-size: 1.1em; line-height: 2.2; }
+[lang="mn-Mong"] { font-family: 'Noto Sans Mongolian', serif; font-size: 1.2em; }
+[lang="chr"] { font-family: 'Noto Sans Cherokee', sans-serif; }
+[lang="iu"], [lang="cr"], [lang="oj"] { font-family: 'Noto Sans Canadian Aboriginal', sans-serif; }
+
+/* ================================================================
+   RTL LAYOUT ENGINE
+   ================================================================ */
+.row[dir="rtl"] {
+  direction: rtl;
+  text-align: center;
+}
+
+/* ================================================================
+   SEGMENTS (Interactive Word Tokens)
+   ================================================================ */
+.seg {
+  display: inline-block;
+  padding: var(--seg-pad);
+  margin: var(--seg-margin);
+  border-radius: var(--radius-sm);
+  transition: background var(--dur-fast) var(--ease-in-out),
+              box-shadow var(--dur-fast) var(--ease-in-out),
+              transform var(--dur-fast) var(--ease-in-out);
+  will-change: transform, background;
+  cursor: default;
+  position: relative;
+  unicode-bidi: isolate;
+  /* Prevent segment breaking across lines */
+  white-space: nowrap;
+}
+.seg.has-tooltip:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+.seg.has-tooltip {
+  cursor: pointer;
+}
+.seg.has-tooltip:hover {
+  background: var(--bg-seg-hover);
+  box-shadow: 0 0 0 3px var(--bg-seg-hover);
+  transform: translateY(-1px);
+}
+.seg.has-tooltip:active {
+  transform: scale(0.97);
+  transition: transform 0.08s ease;
+}
+.seg.low-confidence {
+  text-decoration: underline wavy rgba(255, 200, 40, 0.45);
+  text-underline-offset: 0.35em;
+}
+.seg.active-word {
+  background: var(--accent-soft) !important;
+  box-shadow: 0 0 0 3px var(--accent) !important;
+  z-index: 55;
+}
+
+/* ---- Hover Tooltip (opaque) ---- */
+.tooltip-popup {
+  position: fixed;
+  will-change: transform, opacity;
+  background: var(--bg-surface);
+
+  color: var(--text-primary);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  min-width: 100px;
+  max-width: 300px;
+  box-shadow: var(--shadow-tooltip);
+  font-size: var(--fs-tooltip);
+  line-height: 1.5;
+  z-index: 200;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur-normal) var(--ease-out-expo),
+              visibility var(--dur-normal) var(--ease-out-expo),
+              transform var(--dur-normal) var(--ease-out-expo);
+  transform: translateY(6px) scale(0.96);
+  pointer-events: none;
+  text-align: center;
+  font-style: normal;
+  font-weight: 400;
+}
+.tooltip-popup.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+.tooltip-popup .tt-word {
+  font-weight: 700;
+  font-size: 1.2em;
+  margin-bottom: 3px;
+  letter-spacing: -0.01em;
+}
+.tooltip-popup .tt-word[dir="rtl"] {
+  font-family: 'Noto Naskh Arabic', 'Noto Sans Hebrew', serif;
+  font-size: 1.35em;
+}
+.tooltip-popup .tt-pronunciation {
+  color: var(--text-secondary);
+  font-style: italic;
+  font-size: 0.92em;
+  margin-bottom: 3px;
+}
+.tooltip-popup .tt-pos {
+  color: var(--text-tertiary);
+  font-size: 0.82em;
+  font-style: italic;
+  margin-bottom: 2px;
+}
+.tooltip-popup .tt-translation {
+  font-weight: 600;
+  font-size: 1em;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+.tooltip-popup .tt-phrase {
+  font-weight: 600;
+  font-size: 0.95em;
+  color: var(--accent);
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px dashed var(--divider);
+}
+.tooltip-popup .tt-grammar {
+  font-size: 0.84em;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+/* ---- Dictionary Card Backdrop ---- */
+.dict-card-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.30);
+
+  z-index: 250;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur-normal) var(--ease-in-out),
+              visibility var(--dur-normal) var(--ease-in-out);
+}
+.dict-card-backdrop.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ---- Dictionary Card (opaque) ---- */
+.dict-card {
+  position: fixed;
+  will-change: transform, opacity;
+  background: var(--bg-card);
+
+  color: var(--text-primary);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  width: 380px;
+  max-width: calc(100vw - 24px);
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-card);
+  font-size: var(--fs-card);
+  line-height: 1.6;
+  z-index: 260;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur-normal) var(--ease-out-expo),
+              visibility var(--dur-normal) var(--ease-out-expo),
+              transform var(--dur-normal) var(--ease-out-expo);
+  transform: translateY(12px) scale(0.95);
+}
+.dict-card.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.dict-card-header {
+  padding: 20px 22px 16px;
+  border-bottom: 1px solid var(--divider);
+}
+.dict-card-header .dc-word {
+  font-size: 1.6em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.dict-card-header .dc-word[dir="rtl"] {
+  font-family: 'Noto Naskh Arabic', 'Noto Sans Hebrew', serif;
+}
+.dict-card-header .dc-pronunciation-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+.dict-card-header .dc-pronunciation {
+  color: var(--text-secondary);
+  font-style: italic;
+  font-size: 1.08em;
+}
+.dict-card-header .dc-pos-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.82em;
+  font-weight: 600;
+  margin-top: 8px;
+  letter-spacing: 0.03em;
+}
+.dict-card-header .dc-frequency {
+  display: inline-block;
+  margin-inline-start: 8px;
+  font-size: 0.8em;
+  color: var(--text-tertiary);
+}
+
+.dict-card-body {
+  padding: 16px 22px 22px;
+}
+.dict-card-body .dc-section {
+  margin-bottom: 18px;
+}
+.dict-card-body .dc-section:last-child { margin-bottom: 0; }
+.dict-card-body .dc-section-title {
+  font-size: 0.78em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+.dict-card-body .dc-meaning-current {
+  font-weight: 600;
+  color: var(--accent);
+  padding: 6px 12px;
+  background: var(--accent-soft);
+  border-radius: var(--radius-sm);
+  font-size: 1.04em;
+}
+.dict-card-body .dc-meaning-list {
+  list-style: none;
+  padding: 0;
+}
+.dict-card-body .dc-meaning-list li {
+  padding: 4px 0;
+  border-bottom: 1px solid var(--divider);
+}
+.dict-card-body .dc-meaning-list li:last-child { border-bottom: none; }
+.dict-card-body .dc-meaning-num {
+  display: inline-block;
+  min-width: 1.5em;
+  color: var(--text-tertiary);
+  font-size: 0.85em;
+}
+.dict-card-body .dc-lemma {
+  font-style: italic;
+  color: var(--text-secondary);
+}
+.dict-card-body .dc-example {
+  padding: 6px 12px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-sm);
+  margin-bottom: 5px;
+  font-style: italic;
+}
+.dict-card-body .dc-example .dc-example-trans {
+  font-style: normal;
+  color: var(--text-secondary);
+  display: block;
+  font-size: 0.92em;
+  margin-top: 2px;
+}
+.dict-card-body .dc-synonyms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.dict-card-body .dc-syn-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  background: var(--bg-elevated);
+  border: 1px solid var(--divider);
+  font-size: 0.88em;
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-in-out);
+}
+.dict-card-body .dc-syn-tag:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.dict-card-body .dc-etymology {
+  padding: 6px 12px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-sm);
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: 0.92em;
+}
+.dict-card-body .dc-usage {
+  font-size: 0.92em;
+  color: var(--text-secondary);
+}
+.dict-card-body .dc-collocations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.dict-card-body .dc-col-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  background: var(--bg-elevated);
+  border: 1px solid var(--divider);
+  font-size: 0.88em;
+  color: var(--text-secondary);
+  transition: all var(--dur-fast) var(--ease-in-out);
+}
+.dict-card-body .dc-col-tag:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.dict-card-close {
+  position: absolute;
+  inset-block-start: 14px;
+  inset-inline-end: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--dur-fast) var(--ease-in-out);
+  z-index: 5;
+}
+.dict-card-close:hover {
+  background: var(--border-glass);
+  color: var(--text-primary);
+}
+
+/* ================================================================
+   TAB 2: READING VIEW — Two-column side-by-side
+   ================================================================ */
+.reading-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.reading-column {
+  min-width: 0;
+}
+.reading-column-header {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
+  margin-bottom: 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--divider);
+  text-align: center;
+}
+.reading-line-pair {
+  display: contents;
+}
+.reading-line {
+  padding: 12px 0;
+  line-height: 2.0;
+  border-bottom: 1px solid var(--divider);
+}
+.reading-line.original-text {
+  font-size: var(--fs-original);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.reading-line.translation-text {
+  font-size: var(--fs-translation);
+  font-weight: 500;
+}
+.reading-line:last-child {
+  border-bottom: none;
+}
+.reading-section-label {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: var(--fs-section);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-tertiary);
+  padding-top: 28px;
+  margin-bottom: 8px;
+}
+.reading-section-label:first-child { padding-top: 0; }
+
+/* ---- Reading view: subtle hover sync ---- */
+.reading-line:hover {
+  background: var(--bg-seg-hover);
+}
+
+/* ================================================================
+   TAB 3: VOCABULARY VIEW — Word Card Grid
+   ================================================================ */
+.vocab-controls {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.vocab-sort-btn {
+  padding: 6px 16px;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-in-out);
+}
+.vocab-sort-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.vocab-sort-btn.active-sort {
+  background: var(--accent);
+  color: #FFFFFF;
+  border-color: var(--accent);
+}
+.vocab-search {
+  padding: 6px 16px;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-full);
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  min-width: 180px;
+  transition: border-color var(--dur-fast);
+}
+.vocab-search:focus {
+  border-color: var(--accent);
+}
+.vocab-search::placeholder {
+  color: var(--text-tertiary);
+}
+
+.vocab-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+/* ---- Word Card ---- */
+.word-card {
+  background: var(--bg-surface);
+
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 20px 18px;
+  cursor: pointer;
+  transition: all var(--dur-normal) var(--ease-out-expo);
+  position: relative;
+  overflow: hidden;
+}
+.word-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  border-radius: inherit;
+  pointer-events: none;
+  transition: opacity var(--dur-normal);
+}
+.word-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--accent);
+}
+.word-card:hover::before {
+  opacity: 0.12;
+}
+.word-card:active {
+  transform: scale(0.97);
+}
+
+.word-card .wc-word {
+  font-size: 1.4em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.word-card .wc-word[dir="rtl"] {
+  font-family: 'Noto Naskh Arabic', 'Noto Sans Hebrew', serif;
+}
+.word-card .wc-pronunciation {
+  font-size: 0.88em;
+  font-style: italic;
+  color: var(--text-tertiary);
+  margin-bottom: 8px;
+}
+.word-card .wc-meaning {
+  font-size: 0.95em;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+.word-card .wc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.word-card .wc-pos {
+  font-size: 0.72em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  padding: 2px 8px;
+  background: var(--accent-soft);
+  border-radius: var(--radius-full);
+}
+.word-card .wc-freq {
+  font-size: 0.72em;
+  color: var(--text-tertiary);
+}
+.word-card .wc-freq-stars {
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+
+/* Card expanded state (click to reveal translation + romanization) */
+.word-card .wc-pronunciation,
+.word-card .wc-meaning,
+.word-card .wc-footer {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease, max-height 0.4s ease, margin 0.4s ease;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.word-card.expanded .wc-pronunciation,
+.word-card.expanded .wc-meaning,
+.word-card.expanded .wc-footer {
+  opacity: 1;
+  max-height: 80px;
+}
+.word-card.expanded .wc-pronunciation { margin-bottom: 6px; }
+.word-card.expanded .wc-meaning { margin-bottom: 8px; }
+.word-card.expanded .wc-footer { margin-top: 4px; display: flex; }
+.word-card .wc-details {
+  display: none;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--divider);
+  font-size: 0.85em;
+  line-height: 1.6;
+}
+.word-card.expanded .wc-details {
+  display: block;
+}
+.wc-detail-row {
+  margin-bottom: 8px;
+}
+.wc-detail-label {
+  font-weight: 600;
+  font-size: 0.82em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+  margin-bottom: 2px;
+}
+.wc-detail-value {
+  color: var(--text-secondary);
+}
+
+/* Card color accent bar */
+.word-card .wc-color-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+/* Empty state */
+.vocab-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-tertiary);
+  font-size: 1.05em;
+}
+
+/* ---- Annotations / Summary ---- */
+.summary-section {
+  margin-top: 60px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-md);
+  padding: 26px;
+}
+.summary-section h2 {
+  font-size: 1.05em;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.summary-section table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+.summary-section th, .summary-section td {
+  padding: 7px 10px;
+  text-align: start;
+  border-bottom: 1px solid var(--divider);
+}
+.annotation-note {
+  background: rgba(255, 200, 40, 0.08);
+  border-inline-start: 3px solid #d4a017;
+  padding: 10px 16px;
+  margin: 14px 0;
+  font-size: 0.88em;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 768px) {
+  /* Reading view stacks on tablet/mobile */
+  .reading-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .reading-column-header {
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --fs-title: 22px;
+    --fs-original: 19px;
+    --fs-romanization: 13px;
+    --fs-translation: 15px;
+    --page-pad-y: 24px;
+    --page-pad-x: 16px;
+    --line-group-gap: 36px;
+    --row-gap: 6px;
+    --container-max: 100%;
+  }
+  .tab-nav {
+    gap: 2px;
+    padding: 6px;
+    margin-bottom: 24px;
+    border-radius: var(--radius-lg);
+  }
+  .tab-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+    max-width: none;
+  }
+  .doc-meta { margin-bottom: 20px; }
+  .tooltip-popup { max-width: 220px; font-size: 12px; }
+  .dict-card {
+    width: calc(100vw - 16px);
+    max-height: 65vh;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    bottom: 0 !important;
+    top: auto !important;
+    left: 8px !important;
+  }
+  .vocab-card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+  }
+  .word-card {
+    padding: 14px 12px;
+  }
+  .word-card .wc-word { font-size: 1.2em; }
+  /* Boost font sizes for complex scripts on mobile */
+  [lang="ar"], [lang="fa"], [lang="ur"] { font-size: 1.2em; }
+  [lang="km"] { font-size: 1.3em; }
+  [lang="hi"], [lang="bn"], [lang="si"] { font-size: 1.25em; }
+}
+</style>
+</head>
+<body>
+
+<!-- Data Injection -->
+<script>
+window.__ANNOTATION_DATA__ = {
+  metadata: {"source_language": "fr", "target_language": "zh", "title": "Jour de neige", "artist": "", "sentiment": "tender"},
+  rows: [{"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "轻轻柔柔，轻轻柔柔", "segments": [{"text": "Tout doux, ", "color": "#E74C3C", "group_id": "L01-W1", "pronunciation": "doo"}, {"text": "tout doux", "color": "#E74C3C", "group_id": "L01-W2", "pronunciation": "doo"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "轻轻的，", "color": "#E74C3C", "group_id": "L01-W1"}, {"text": "轻轻的", "color": "#E74C3C", "group_id": "L01-W2"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "像一场朦胧的梦", "segments": [{"text": "Comme ", "color": "#2ECC71", "group_id": "L02-W1", "pronunciation": "kom"}, {"text": "un ", "color": "#3498DB", "group_id": "L02-W2", "pronunciation": "un"}, {"text": "rêve ", "color": "#F39C12", "group_id": "L02-W3", "pronunciation": "rev"}, {"text": "un peu ", "color": "#9B59B6", "group_id": "L02-W4", "pronunciation": "un puh"}, {"text": "flou", "color": "#1ABC9C", "group_id": "L02-W5", "pronunciation": "floo"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "像", "color": "#2ECC71", "group_id": "L02-W1"}, {"text": "一场", "color": "#3498DB", "group_id": "L02-W2"}, {"text": "有点", "color": "#9B59B6", "group_id": "L02-W4"}, {"text": "朦胧的", "color": "#1ABC9C", "group_id": "L02-W5"}, {"text": "梦", "color": "#F39C12", "group_id": "L02-W3"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "外面冷，里面暖", "segments": [{"text": "Froid ", "color": "#E67E22", "group_id": "L03-W1", "pronunciation": "frwa"}, {"text": "dehors ", "color": "#2980B9", "group_id": "L03-W2", "pronunciation": "duh-or"}, {"text": "et ", "color": "#C0392B", "group_id": "L03-W3", "pronunciation": "ay"}, {"text": "chaud ", "color": "#27AE60", "group_id": "L03-W4", "pronunciation": "sho"}, {"text": "dedans", "color": "#8E44AD", "group_id": "L03-W5", "pronunciation": "duh-dahn"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "外面", "color": "#2980B9", "group_id": "L03-W2"}, {"text": "冷", "color": "#E67E22", "group_id": "L03-W1"}, {"text": "，", "color": "#C0392B", "group_id": "L03-W3"}, {"text": "里面", "color": "#8E44AD", "group_id": "L03-W5"}, {"text": "暖", "color": "#27AE60", "group_id": "L03-W4"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "一路小跑冲下楼梯", "segments": [{"text": "Descendre ", "color": "#D35400", "group_id": "L04-W1", "pronunciation": "deh-sahndr"}, {"text": "en courant ", "color": "#16A085", "group_id": "L04-W2", "pronunciation": "ahn koo-rahn"}, {"text": "l'escalier", "color": "#2C3E50", "group_id": "L04-W3", "pronunciation": "ess-kal-yay"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "跑着", "color": "#16A085", "group_id": "L04-W2"}, {"text": "冲下", "color": "#D35400", "group_id": "L04-W1"}, {"text": "楼梯", "color": "#2C3E50", "group_id": "L04-W3"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "当一切，连天空都是白的", "segments": [{"text": "Quand ", "color": "#F1C40F", "group_id": "L05-W1", "pronunciation": "kahn"}, {"text": "tout, ", "color": "#7F8C8D", "group_id": "L05-W2", "pronunciation": "too"}, {"text": "même ", "color": "#E91E63", "group_id": "L05-W3", "pronunciation": "mem"}, {"text": "le ciel ", "color": "#00BCD4", "group_id": "L05-W4", "pronunciation": "syel"}, {"text": "est ", "color": "#FF5722", "group_id": "L05-W5", "pronunciation": "eh"}, {"text": "blanc", "color": "#795548", "group_id": "L05-W6", "pronunciation": "blahn"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "当", "color": "#F1C40F", "group_id": "L05-W1"}, {"text": "一切，", "color": "#7F8C8D", "group_id": "L05-W2"}, {"text": "连", "color": "#E91E63", "group_id": "L05-W3"}, {"text": "天空", "color": "#00BCD4", "group_id": "L05-W4"}, {"text": "都是", "color": "#FF5722", "group_id": "L05-W5"}, {"text": "白的", "color": "#795548", "group_id": "L05-W6"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "像一张折起的秘密纸条", "segments": [{"text": "Comme ", "color": "#2ECC71", "group_id": "L06-W1", "pronunciation": "kom"}, {"text": "le ", "color": "#607D8B", "group_id": "L06-W2", "pronunciation": "luh"}, {"text": "papier ", "color": "#4CAF50", "group_id": "L06-W3", "pronunciation": "pah-pyay"}, {"text": "plié ", "color": "#FFC107", "group_id": "L06-W4", "pronunciation": "plee-yay"}, {"text": "d'un secret", "color": "#2196F3", "group_id": "L06-W5", "pronunciation": "suh-kreh"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "像", "color": "#2ECC71", "group_id": "L06-W1"}, {"text": "一张", "color": "#607D8B", "group_id": "L06-W2"}, {"text": "折起的", "color": "#FFC107", "group_id": "L06-W4"}, {"text": "秘密", "color": "#2196F3", "group_id": "L06-W5"}, {"text": "纸", "color": "#4CAF50", "group_id": "L06-W3"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "匆匆忙忙，却不知为何", "segments": [{"text": "Pressée ", "color": "#9C27B0", "group_id": "L07-W1", "pronunciation": "preh-say"}, {"text": "sans savoir ", "color": "#FF9800", "group_id": "L07-W2", "pronunciation": "sahn sah-vwar"}, {"text": "pourquoi", "color": "#009688", "group_id": "L07-W3", "pronunciation": "poor-kwa"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "匆匆忙忙", "color": "#9C27B0", "group_id": "L07-W1"}, {"text": "却不知", "color": "#FF9800", "group_id": "L07-W2"}, {"text": "为何", "color": "#009688", "group_id": "L07-W3"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "已经骑上单车飞驰", "segments": [{"text": "Filer ", "color": "#673AB7", "group_id": "L08-W1", "pronunciation": "fee-lay"}, {"text": "déjà ", "color": "#CDDC39", "group_id": "L08-W2", "pronunciation": "day-zhah"}, {"text": "sur ", "color": "#03A9F4", "group_id": "L08-W3", "pronunciation": "soor"}, {"text": "mon vélo", "color": "#E74C3C", "group_id": "L08-W4", "pronunciation": "vay-lo"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "已经", "color": "#CDDC39", "group_id": "L08-W2"}, {"text": "骑上", "color": "#03A9F4", "group_id": "L08-W3"}, {"text": "我的单车", "color": "#E74C3C", "group_id": "L08-W4"}, {"text": "飞驰", "color": "#673AB7", "group_id": "L08-W1"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "长围巾拖在身后", "segments": [{"text": "La longue ", "color": "#2ECC71", "group_id": "L09-W1", "pronunciation": "lohng"}, {"text": "écharpe ", "color": "#3498DB", "group_id": "L09-W2", "pronunciation": "ay-sharp"}, {"text": "après moi", "color": "#F39C12", "group_id": "L09-W3", "pronunciation": "ah-preh mwa"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "长长的", "color": "#2ECC71", "group_id": "L09-W1"}, {"text": "围巾", "color": "#3498DB", "group_id": "L09-W2"}, {"text": "拖在身后", "color": "#F39C12", "group_id": "L09-W3"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "心在狂奔", "segments": [{"text": "Le cœur ", "color": "#9B59B6", "group_id": "L10-W1", "pronunciation": "kur"}, {"text": "en plein galop", "color": "#1ABC9C", "group_id": "L10-W2", "pronunciation": "gah-lo"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "心", "color": "#9B59B6", "group_id": "L10-W1"}, {"text": "在狂奔", "color": "#1ABC9C", "group_id": "L10-W2"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "下雪天", "segments": [{"text": "Jour ", "color": "#E67E22", "group_id": "L11-W1", "pronunciation": "zhoor"}, {"text": "de neige", "color": "#2980B9", "group_id": "L11-W2", "pronunciation": "nezh"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "雪", "color": "#2980B9", "group_id": "L11-W2"}, {"text": "天", "color": "#E67E22", "group_id": "L11-W1"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "裹在一件保护着我的大毛衣里", "segments": [{"text": "Dans ", "color": "#C0392B", "group_id": "L12-W1", "pronunciation": "dahn"}, {"text": "un ", "color": "#3498DB", "group_id": "L12-W2", "pronunciation": "un"}, {"text": "grand ", "color": "#27AE60", "group_id": "L12-W3", "pronunciation": "grahn"}, {"text": "pull ", "color": "#8E44AD", "group_id": "L12-W4", "pronunciation": "puhl"}, {"text": "qui me protège", "color": "#D35400", "group_id": "L12-W5", "pronunciation": "pro-tezh"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "裹在", "color": "#C0392B", "group_id": "L12-W1"}, {"text": "一件", "color": "#3498DB", "group_id": "L12-W2"}, {"text": "保护我的", "color": "#D35400", "group_id": "L12-W5"}, {"text": "大", "color": "#27AE60", "group_id": "L12-W3"}, {"text": "毛衣里", "color": "#8E44AD", "group_id": "L12-W4"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "初雪", "segments": [{"text": "Première ", "color": "#16A085", "group_id": "L13-W1", "pronunciation": "pruh-myair"}, {"text": "neige", "color": "#2980B9", "group_id": "L13-W2", "pronunciation": "nezh"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "初", "color": "#16A085", "group_id": "L13-W1"}, {"text": "雪", "color": "#2980B9", "group_id": "L13-W2"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "心中的眩晕像旋转木马", "segments": [{"text": "Vertige ", "color": "#2C3E50", "group_id": "L14-W1", "pronunciation": "ver-teezh"}, {"text": "en moi ", "color": "#F1C40F", "group_id": "L14-W2", "pronunciation": "ahn mwa"}, {"text": "comme ", "color": "#2ECC71", "group_id": "L14-W3", "pronunciation": "kom"}, {"text": "un manège", "color": "#7F8C8D", "group_id": "L14-W4", "pronunciation": "mah-nezh"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "心中的", "color": "#F1C40F", "group_id": "L14-W2"}, {"text": "眩晕", "color": "#2C3E50", "group_id": "L14-W1"}, {"text": "像", "color": "#2ECC71", "group_id": "L14-W3"}, {"text": "旋转木马", "color": "#7F8C8D", "group_id": "L14-W4"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "温柔的日子", "segments": [{"text": "Jour ", "color": "#E67E22", "group_id": "L15-W1", "pronunciation": "zhoor"}, {"text": "bien tendre", "color": "#E91E63", "group_id": "L15-W2", "pronunciation": "tahndr"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "温柔的", "color": "#E91E63", "group_id": "L15-W2"}, {"text": "日子", "color": "#E67E22", "group_id": "L15-W1"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "像那个来等我的人", "segments": [{"text": "Comme ", "color": "#2ECC71", "group_id": "L16-W1", "pronunciation": "kom"}, {"text": "ce ", "color": "#00BCD4", "group_id": "L16-W2", "pronunciation": "suh"}, {"text": "quelqu'un ", "color": "#FF5722", "group_id": "L16-W3", "pronunciation": "kel-kun"}, {"text": "qui vient ", "color": "#795548", "group_id": "L16-W4", "pronunciation": "vyahn"}, {"text": "m'attendre", "color": "#607D8B", "group_id": "L16-W5", "pronunciation": "ah-tahndr"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "像", "color": "#2ECC71", "group_id": "L16-W1"}, {"text": "那个", "color": "#00BCD4", "group_id": "L16-W2"}, {"text": "来", "color": "#795548", "group_id": "L16-W4"}, {"text": "等我", "color": "#607D8B", "group_id": "L16-W5"}, {"text": "的人", "color": "#FF5722", "group_id": "L16-W3"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "在路的尽头", "segments": [{"text": "Au ", "color": "#4CAF50", "group_id": "L17-W1", "pronunciation": "oh"}, {"text": "bout ", "color": "#FFC107", "group_id": "L17-W2", "pronunciation": "boo"}, {"text": "du chemin", "color": "#2196F3", "group_id": "L17-W3", "pronunciation": "shuh-man"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "在", "color": "#4CAF50", "group_id": "L17-W1"}, {"text": "路的", "color": "#2196F3", "group_id": "L17-W3"}, {"text": "尽头", "color": "#FFC107", "group_id": "L17-W2"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "轻轻柔柔，轻轻柔柔", "segments": [{"text": "Tout doux, ", "color": "#E74C3C", "group_id": "L18-W1", "pronunciation": "doo"}, {"text": "tout doux", "color": "#E74C3C", "group_id": "L18-W2", "pronunciation": "doo"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "轻轻的，", "color": "#E74C3C", "group_id": "L18-W1"}, {"text": "轻轻的", "color": "#E74C3C", "group_id": "L18-W2"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "像一场朦胧的梦", "segments": [{"text": "Comme ", "color": "#2ECC71", "group_id": "L19-W1", "pronunciation": "kom"}, {"text": "un ", "color": "#3498DB", "group_id": "L19-W2", "pronunciation": "un"}, {"text": "rêve ", "color": "#F39C12", "group_id": "L19-W3", "pronunciation": "rev"}, {"text": "un peu ", "color": "#9B59B6", "group_id": "L19-W4", "pronunciation": "un puh"}, {"text": "flou", "color": "#1ABC9C", "group_id": "L19-W5", "pronunciation": "floo"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "像", "color": "#2ECC71", "group_id": "L19-W1"}, {"text": "一场", "color": "#3498DB", "group_id": "L19-W2"}, {"text": "有点", "color": "#9B59B6", "group_id": "L19-W4"}, {"text": "朦胧的", "color": "#1ABC9C", "group_id": "L19-W5"}, {"text": "梦", "color": "#F39C12", "group_id": "L19-W3"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "外面冷，里面暖", "segments": [{"text": "Froid ", "color": "#E67E22", "group_id": "L20-W1", "pronunciation": "frwa"}, {"text": "dehors ", "color": "#2980B9", "group_id": "L20-W2", "pronunciation": "duh-or"}, {"text": "et ", "color": "#C0392B", "group_id": "L20-W3", "pronunciation": "ay"}, {"text": "chaud ", "color": "#27AE60", "group_id": "L20-W4", "pronunciation": "sho"}, {"text": "dedans", "color": "#8E44AD", "group_id": "L20-W5", "pronunciation": "duh-dahn"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "外面", "color": "#2980B9", "group_id": "L20-W2"}, {"text": "冷", "color": "#E67E22", "group_id": "L20-W1"}, {"text": "，", "color": "#C0392B", "group_id": "L20-W3"}, {"text": "里面", "color": "#8E44AD", "group_id": "L20-W5"}, {"text": "暖", "color": "#27AE60", "group_id": "L20-W4"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "雪花像蝴蝶一样", "segments": [{"text": "Les flocons ", "color": "#9C27B0", "group_id": "L21-W1", "pronunciation": "flo-kon"}, {"text": "comme ", "color": "#2ECC71", "group_id": "L21-W2", "pronunciation": "kom"}, {"text": "des papillons", "color": "#FF9800", "group_id": "L21-W3", "pronunciation": "pah-pee-yon"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "雪花", "color": "#9C27B0", "group_id": "L21-W1"}, {"text": "像", "color": "#2ECC71", "group_id": "L21-W2"}, {"text": "蝴蝶", "color": "#FF9800", "group_id": "L21-W3"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "落在我的唇上，落在我的齿间", "segments": [{"text": "Sur ", "color": "#03A9F4", "group_id": "L22-W1", "pronunciation": "soor"}, {"text": "mes lèvres ", "color": "#009688", "group_id": "L22-W2", "pronunciation": "levr"}, {"text": "et ", "color": "#C0392B", "group_id": "L22-W3", "pronunciation": "ay"}, {"text": "sur ", "color": "#03A9F4", "group_id": "L22-W4", "pronunciation": "soor"}, {"text": "mes dents", "color": "#673AB7", "group_id": "L22-W5", "pronunciation": "dahn"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "落在", "color": "#03A9F4", "group_id": "L22-W1"}, {"text": "我的唇上", "color": "#009688", "group_id": "L22-W2"}, {"text": "，", "color": "#C0392B", "group_id": "L22-W3"}, {"text": "落在", "color": "#03A9F4", "group_id": "L22-W4"}, {"text": "我的齿上", "color": "#673AB7", "group_id": "L22-W5"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "一阵颤栗的感觉", "segments": [{"text": "Une ", "color": "#CDDC39", "group_id": "L23-W1", "pronunciation": "oon"}, {"text": "sensation ", "color": "#03A9F4", "group_id": "L23-W2", "pronunciation": "sahn-sah-syon"}, {"text": "frisson", "color": "#E74C3C", "group_id": "L23-W3", "pronunciation": "free-son"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "一阵", "color": "#CDDC39", "group_id": "L23-W1"}, {"text": "颤栗的", "color": "#E74C3C", "group_id": "L23-W3"}, {"text": "感觉", "color": "#03A9F4", "group_id": "L23-W2"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "正因如此，想要把它原样留住", "segments": [{"text": "Et pour ça, ", "color": "#2ECC71", "group_id": "L24-W1", "pronunciation": "ay poor sah"}, {"text": "vouloir ", "color": "#3498DB", "group_id": "L24-W2", "pronunciation": "voo-lwar"}, {"text": "préserver ", "color": "#F39C12", "group_id": "L24-W3", "pronunciation": "pray-zer-vay"}, {"text": "pareille", "color": "#9B59B6", "group_id": "L24-W4", "pronunciation": "pah-rey"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "正因如此，", "color": "#2ECC71", "group_id": "L24-W1"}, {"text": "想要", "color": "#3498DB", "group_id": "L24-W2"}, {"text": "原样", "color": "#9B59B6", "group_id": "L24-W4"}, {"text": "把它留住", "color": "#F39C12", "group_id": "L24-W3"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "那终将消逝的洁白", "segments": [{"text": "La blancheur ", "color": "#1ABC9C", "group_id": "L25-W1", "pronunciation": "blahn-shur"}, {"text": "que rien ", "color": "#E67E22", "group_id": "L25-W2", "pronunciation": "kuh ryahn"}, {"text": "ne sauvera", "color": "#2980B9", "group_id": "L25-W3", "pronunciation": "so-vrah"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "什么都", "color": "#E67E22", "group_id": "L25-W2"}, {"text": "无法挽回的", "color": "#2980B9", "group_id": "L25-W3"}, {"text": "洁白", "color": "#1ABC9C", "group_id": "L25-W1"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "当太阳归来之后", "segments": [{"text": "Après ", "color": "#C0392B", "group_id": "L26-W1", "pronunciation": "ah-preh"}, {"text": "le retour ", "color": "#27AE60", "group_id": "L26-W2", "pronunciation": "ruh-toor"}, {"text": "du soleil", "color": "#8E44AD", "group_id": "L26-W3", "pronunciation": "so-lay"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "太阳", "color": "#8E44AD", "group_id": "L26-W3"}, {"text": "归来", "color": "#27AE60", "group_id": "L26-W2"}, {"text": "之后", "color": "#C0392B", "group_id": "L26-W1"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "永远，永远在我心中", "segments": [{"text": "Toujours, ", "color": "#D35400", "group_id": "L27-W1", "pronunciation": "too-zhoor"}, {"text": "toujours ", "color": "#D35400", "group_id": "L27-W2", "pronunciation": "too-zhoor"}, {"text": "en moi", "color": "#F1C40F", "group_id": "L27-W3", "pronunciation": "ahn mwa"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "永远，", "color": "#D35400", "group_id": "L27-W1"}, {"text": "永远", "color": "#D35400", "group_id": "L27-W2"}, {"text": "在我心中", "color": "#F1C40F", "group_id": "L27-W3"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "下雪天", "segments": [{"text": "Jour ", "color": "#E67E22", "group_id": "L28-W1", "pronunciation": "zhoor"}, {"text": "de neige", "color": "#2980B9", "group_id": "L28-W2", "pronunciation": "nezh"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "雪", "color": "#2980B9", "group_id": "L28-W2"}, {"text": "天", "color": "#E67E22", "group_id": "L28-W1"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "裹在一件保护着我的大毛衣里", "segments": [{"text": "Dans ", "color": "#C0392B", "group_id": "L29-W1", "pronunciation": "dahn"}, {"text": "un ", "color": "#3498DB", "group_id": "L29-W2", "pronunciation": "un"}, {"text": "grand ", "color": "#27AE60", "group_id": "L29-W3", "pronunciation": "grahn"}, {"text": "pull ", "color": "#8E44AD", "group_id": "L29-W4", "pronunciation": "puhl"}, {"text": "qui me protège", "color": "#D35400", "group_id": "L29-W5", "pronunciation": "pro-tezh"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "裹在", "color": "#C0392B", "group_id": "L29-W1"}, {"text": "一件", "color": "#3498DB", "group_id": "L29-W2"}, {"text": "保护我的", "color": "#D35400", "group_id": "L29-W5"}, {"text": "大", "color": "#27AE60", "group_id": "L29-W3"}, {"text": "毛衣里", "color": "#8E44AD", "group_id": "L29-W4"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "初雪", "segments": [{"text": "Première ", "color": "#16A085", "group_id": "L30-W1", "pronunciation": "pruh-myair"}, {"text": "neige", "color": "#2980B9", "group_id": "L30-W2", "pronunciation": "nezh"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "初", "color": "#16A085", "group_id": "L30-W1"}, {"text": "雪", "color": "#2980B9", "group_id": "L30-W2"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "心中的眩晕像旋转木马", "segments": [{"text": "Vertige ", "color": "#2C3E50", "group_id": "L31-W1", "pronunciation": "ver-teezh"}, {"text": "en moi ", "color": "#F1C40F", "group_id": "L31-W2", "pronunciation": "ahn mwa"}, {"text": "comme ", "color": "#2ECC71", "group_id": "L31-W3", "pronunciation": "kom"}, {"text": "un manège", "color": "#7F8C8D", "group_id": "L31-W4", "pronunciation": "mah-nezh"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "心中的", "color": "#F1C40F", "group_id": "L31-W2"}, {"text": "眩晕", "color": "#2C3E50", "group_id": "L31-W1"}, {"text": "像", "color": "#2ECC71", "group_id": "L31-W3"}, {"text": "旋转木马", "color": "#7F8C8D", "group_id": "L31-W4"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "温柔的日子", "segments": [{"text": "Jour ", "color": "#E67E22", "group_id": "L32-W1", "pronunciation": "zhoor"}, {"text": "bien tendre", "color": "#E91E63", "group_id": "L32-W2", "pronunciation": "tahndr"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "温柔的", "color": "#E91E63", "group_id": "L32-W2"}, {"text": "日子", "color": "#E67E22", "group_id": "L32-W1"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "像那个来等我的人", "segments": [{"text": "Comme ", "color": "#2ECC71", "group_id": "L33-W1", "pronunciation": "kom"}, {"text": "ce ", "color": "#00BCD4", "group_id": "L33-W2", "pronunciation": "suh"}, {"text": "quelqu'un ", "color": "#FF5722", "group_id": "L33-W3", "pronunciation": "kel-kun"}, {"text": "qui vient ", "color": "#795548", "group_id": "L33-W4", "pronunciation": "vyahn"}, {"text": "m'attendre", "color": "#607D8B", "group_id": "L33-W5", "pronunciation": "ah-tahndr"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "像", "color": "#2ECC71", "group_id": "L33-W1"}, {"text": "那个", "color": "#00BCD4", "group_id": "L33-W2"}, {"text": "来", "color": "#795548", "group_id": "L33-W4"}, {"text": "等我", "color": "#607D8B", "group_id": "L33-W5"}, {"text": "的人", "color": "#FF5722", "group_id": "L33-W3"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "在路的尽头", "segments": [{"text": "Au ", "color": "#4CAF50", "group_id": "L34-W1", "pronunciation": "oh"}, {"text": "bout ", "color": "#FFC107", "group_id": "L34-W2", "pronunciation": "boo"}, {"text": "du chemin", "color": "#2196F3", "group_id": "L34-W3", "pronunciation": "shuh-man"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "在", "color": "#4CAF50", "group_id": "L34-W1"}, {"text": "路的", "color": "#2196F3", "group_id": "L34-W3"}, {"text": "尽头", "color": "#FFC107", "group_id": "L34-W2"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "轻轻柔柔，轻轻柔柔", "segments": [{"text": "Tout doux, ", "color": "#E74C3C", "group_id": "L35-W1", "pronunciation": "doo"}, {"text": "tout doux", "color": "#E74C3C", "group_id": "L35-W2", "pronunciation": "doo"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "轻轻的，", "color": "#E74C3C", "group_id": "L35-W1"}, {"text": "轻轻的", "color": "#E74C3C", "group_id": "L35-W2"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "像一场朦胧的梦", "segments": [{"text": "Comme ", "color": "#2ECC71", "group_id": "L36-W1", "pronunciation": "kom"}, {"text": "un ", "color": "#3498DB", "group_id": "L36-W2", "pronunciation": "un"}, {"text": "rêve ", "color": "#F39C12", "group_id": "L36-W3", "pronunciation": "rev"}, {"text": "un peu ", "color": "#9B59B6", "group_id": "L36-W4", "pronunciation": "un puh"}, {"text": "flou", "color": "#1ABC9C", "group_id": "L36-W5", "pronunciation": "floo"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "像", "color": "#2ECC71", "group_id": "L36-W1"}, {"text": "一场", "color": "#3498DB", "group_id": "L36-W2"}, {"text": "有点", "color": "#9B59B6", "group_id": "L36-W4"}, {"text": "朦胧的", "color": "#1ABC9C", "group_id": "L36-W5"}, {"text": "梦", "color": "#F39C12", "group_id": "L36-W3"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "下雪天", "segments": [{"text": "Jour ", "color": "#E67E22", "group_id": "L37-W1", "pronunciation": "zhoor"}, {"text": "de neige", "color": "#2980B9", "group_id": "L37-W2", "pronunciation": "nezh"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "雪", "color": "#2980B9", "group_id": "L37-W2"}, {"text": "天", "color": "#E67E22", "group_id": "L37-W1"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "裹在一件保护着我的大毛衣里", "segments": [{"text": "Dans ", "color": "#C0392B", "group_id": "L38-W1", "pronunciation": "dahn"}, {"text": "un ", "color": "#3498DB", "group_id": "L38-W2", "pronunciation": "un"}, {"text": "grand ", "color": "#27AE60", "group_id": "L38-W3", "pronunciation": "grahn"}, {"text": "pull ", "color": "#8E44AD", "group_id": "L38-W4", "pronunciation": "puhl"}, {"text": "qui me protège", "color": "#D35400", "group_id": "L38-W5", "pronunciation": "pro-tezh"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "裹在", "color": "#C0392B", "group_id": "L38-W1"}, {"text": "一件", "color": "#3498DB", "group_id": "L38-W2"}, {"text": "保护我的", "color": "#D35400", "group_id": "L38-W5"}, {"text": "大", "color": "#27AE60", "group_id": "L38-W3"}, {"text": "毛衣里", "color": "#8E44AD", "group_id": "L38-W4"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "下雪天", "segments": [{"text": "Jour ", "color": "#E67E22", "group_id": "L39-W1", "pronunciation": "zhoor"}, {"text": "de neige", "color": "#2980B9", "group_id": "L39-W2", "pronunciation": "nezh"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "雪", "color": "#2980B9", "group_id": "L39-W2"}, {"text": "天", "color": "#E67E22", "group_id": "L39-W1"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "远处，旋转木马渐渐消失", "segments": [{"text": "Au loin ", "color": "#16A085", "group_id": "L40-W1", "pronunciation": "oh lwan"}, {"text": "disparaît ", "color": "#2C3E50", "group_id": "L40-W2", "pronunciation": "dee-spa-reh"}, {"text": "le manège", "color": "#7F8C8D", "group_id": "L40-W3", "pronunciation": "mah-nezh"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "远处", "color": "#16A085", "group_id": "L40-W1"}, {"text": "旋转木马", "color": "#7F8C8D", "group_id": "L40-W3"}, {"text": "消失了", "color": "#2C3E50", "group_id": "L40-W2"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "初雪", "segments": [{"text": "Première ", "color": "#16A085", "group_id": "L41-W1", "pronunciation": "pruh-myair"}, {"text": "neige", "color": "#2980B9", "group_id": "L41-W2", "pronunciation": "nezh"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "初", "color": "#16A085", "group_id": "L41-W1"}, {"text": "雪", "color": "#2980B9", "group_id": "L41-W2"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "轻柔的旋风把我卷起", "segments": [{"text": "Tourbillon ", "color": "#F1C40F", "group_id": "L42-W1", "pronunciation": "toor-bee-yon"}, {"text": "léger ", "color": "#7F8C8D", "group_id": "L42-W2", "pronunciation": "lay-zhay"}, {"text": "qui m'enlève", "color": "#E91E63", "group_id": "L42-W3", "pronunciation": "ahn-lev"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "轻柔的", "color": "#7F8C8D", "group_id": "L42-W2"}, {"text": "旋风", "color": "#F1C40F", "group_id": "L42-W1"}, {"text": "把我带走", "color": "#E91E63", "group_id": "L42-W3"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "下雪天", "segments": [{"text": "Jour ", "color": "#E67E22", "group_id": "L43-W1", "pronunciation": "zhoor"}, {"text": "de neige", "color": "#2980B9", "group_id": "L43-W2", "pronunciation": "nezh"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "雪", "color": "#2980B9", "group_id": "L43-W2"}, {"text": "天", "color": "#E67E22", "group_id": "L43-W1"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "骑着单车，如在梦中", "segments": [{"text": "Sur mon vélo ", "color": "#00BCD4", "group_id": "L44-W1", "pronunciation": "soor mon vay-lo"}, {"text": "comme ", "color": "#2ECC71", "group_id": "L44-W2", "pronunciation": "kom"}, {"text": "dans un rêve", "color": "#FF5722", "group_id": "L44-W3", "pronunciation": "dahn un rev"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "骑着单车", "color": "#00BCD4", "group_id": "L44-W1"}, {"text": "如", "color": "#2ECC71", "group_id": "L44-W2"}, {"text": "在梦中", "color": "#FF5722", "group_id": "L44-W3"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "下雪天", "segments": [{"text": "Jour ", "color": "#E67E22", "group_id": "L45-W1", "pronunciation": "zhoor"}, {"text": "de neige", "color": "#2980B9", "group_id": "L45-W2", "pronunciation": "nezh"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "雪", "color": "#2980B9", "group_id": "L45-W2"}, {"text": "天", "color": "#E67E22", "group_id": "L45-W1"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "然而我什么陷阱都不怕", "segments": [{"text": "Et pourtant ", "color": "#795548", "group_id": "L46-W1", "pronunciation": "poor-tahn"}, {"text": "j'ai peur ", "color": "#607D8B", "group_id": "L46-W2", "pronunciation": "ah-vwar pur"}, {"text": "d'aucun piège", "color": "#4CAF50", "group_id": "L46-W3", "pronunciation": "oh-kun pyezh"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "然而", "color": "#795548", "group_id": "L46-W1"}, {"text": "我不怕", "color": "#607D8B", "group_id": "L46-W2"}, {"text": "任何陷阱", "color": "#4CAF50", "group_id": "L46-W3"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "下雪天", "segments": [{"text": "Jour ", "color": "#E67E22", "group_id": "L47-W1", "pronunciation": "zhoor"}, {"text": "de neige", "color": "#2980B9", "group_id": "L47-W2", "pronunciation": "nezh"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "雪", "color": "#2980B9", "group_id": "L47-W2"}, {"text": "天", "color": "#E67E22", "group_id": "L47-W1"}]}, {"type": "original", "language": "fr", "direction": "ltr", "script": "Latin", "free_translation": "裹在大毛衣里", "segments": [{"text": "Dans ", "color": "#C0392B", "group_id": "L48-W1", "pronunciation": "dahn"}, {"text": "un grand ", "color": "#27AE60", "group_id": "L48-W2", "pronunciation": "grahn"}, {"text": "pull", "color": "#8E44AD", "group_id": "L48-W3", "pronunciation": "puhl"}]}, {"type": "translation", "language": "zh", "direction": "ltr", "script": "CJK", "segments": [{"text": "裹在", "color": "#C0392B", "group_id": "L48-W1"}, {"text": "大", "color": "#27AE60", "group_id": "L48-W2"}, {"text": "毛衣里", "color": "#8E44AD", "group_id": "L48-W3"}]}],
+  vocabulary: [{"word": "comme", "romanization": "kom", "meaning": "像；如同", "pos": "连词", "color": "#2ECC71", "frequency": 10}, {"word": "neige", "romanization": "nezh", "meaning": "雪", "pos": "名词", "color": "#2980B9", "frequency": 10}, {"word": "jour", "romanization": "zhoor", "meaning": "日子；天", "pos": "名词", "color": "#E67E22", "frequency": 9}, {"word": "doux", "romanization": "doo", "meaning": "轻柔的；温和的", "pos": "形容词", "color": "#E74C3C", "frequency": 6}, {"word": "un / une", "romanization": "un", "meaning": "一个（量词）", "pos": "量词", "color": "#3498DB", "frequency": 6}, {"word": "dans", "romanization": "dahn", "meaning": "在……里", "pos": "介词", "color": "#C0392B", "frequency": 4}, {"word": "grand", "romanization": "grahn", "meaning": "大的", "pos": "形容词", "color": "#27AE60", "frequency": 4}, {"word": "pull", "romanization": "puhl", "meaning": "毛衣；套头衫", "pos": "名词", "color": "#8E44AD", "frequency": 4}, {"word": "en moi", "romanization": "ahn mwa", "meaning": "在我心中", "pos": "短语", "color": "#F1C40F", "frequency": 3}, {"word": "et", "romanization": "ay", "meaning": "和；而", "pos": "连词", "color": "#C0392B", "frequency": 3}, {"word": "flou", "romanization": "floo", "meaning": "朦胧的；模糊的", "pos": "形容词", "color": "#1ABC9C", "frequency": 3}, {"word": "manège", "romanization": "mah-nezh", "meaning": "旋转木马", "pos": "名词", "color": "#7F8C8D", "frequency": 3}, {"word": "première", "romanization": "pruh-myair", "meaning": "第一的；初次的", "pos": "形容词", "color": "#16A085", "frequency": 3}, {"word": "protège", "romanization": "pro-tezh", "meaning": "保护", "pos": "动词", "color": "#D35400", "frequency": 3}, {"word": "rêve", "romanization": "rev", "meaning": "梦", "pos": "名词", "color": "#F39C12", "frequency": 3}, {"word": "sur", "romanization": "soor", "meaning": "在……上；落在", "pos": "介词", "color": "#03A9F4", "frequency": 3}, {"word": "un peu", "romanization": "un puh", "meaning": "一点；有点", "pos": "副词", "color": "#9B59B6", "frequency": 3}, {"word": "attendre", "romanization": "ah-tahndr", "meaning": "等待", "pos": "动词", "color": "#607D8B", "frequency": 2}, {"word": "au", "romanization": "oh", "meaning": "在（à+le）", "pos": "介词", "color": "#4CAF50", "frequency": 2}, {"word": "bout", "romanization": "boo", "meaning": "尽头；末端", "pos": "名词", "color": "#FFC107", "frequency": 2}, {"word": "ce", "romanization": "suh", "meaning": "这个；那个", "pos": "指示词", "color": "#00BCD4", "frequency": 2}, {"word": "chaud", "romanization": "sho", "meaning": "温暖的", "pos": "形容词", "color": "#27AE60", "frequency": 2}, {"word": "chemin", "romanization": "shuh-man", "meaning": "路；小路", "pos": "名词", "color": "#2196F3", "frequency": 2}, {"word": "dedans", "romanization": "duh-dahn", "meaning": "里面", "pos": "副词", "color": "#8E44AD", "frequency": 2}, {"word": "dehors", "romanization": "duh-or", "meaning": "外面", "pos": "副词", "color": "#2980B9", "frequency": 2}, {"word": "froid", "romanization": "frwa", "meaning": "寒冷的", "pos": "形容词", "color": "#E67E22", "frequency": 2}, {"word": "quelqu'un", "romanization": "kel-kun", "meaning": "某人；那个人", "pos": "代词", "color": "#FF5722", "frequency": 2}, {"word": "tendre", "romanization": "tahndr", "meaning": "温柔的", "pos": "形容词", "color": "#E91E63", "frequency": 2}, {"word": "toujours", "romanization": "too-zhoor", "meaning": "永远", "pos": "副词", "color": "#D35400", "frequency": 2}, {"word": "vertige", "romanization": "ver-teezh", "meaning": "眩晕", "pos": "名词", "color": "#2C3E50", "frequency": 2}, {"word": "vient", "romanization": "vyahn", "meaning": "来（venir）", "pos": "动词", "color": "#795548", "frequency": 2}, {"word": "après", "romanization": "ah-preh", "meaning": "在……之后", "pos": "介词", "color": "#C0392B", "frequency": 1}, {"word": "après moi", "romanization": "ah-preh mwa", "meaning": "在我身后", "pos": "短语", "color": "#F39C12", "frequency": 1}, {"word": "au loin", "romanization": "oh lwan", "meaning": "在远处", "pos": "短语", "color": "#16A085", "frequency": 1}, {"word": "aucun piège", "romanization": "oh-kun pyezh", "meaning": "任何陷阱", "pos": "短语", "color": "#4CAF50", "frequency": 1}, {"word": "avoir peur", "romanization": "ah-vwar pur", "meaning": "害怕", "pos": "动词短语", "color": "#607D8B", "frequency": 1}, {"word": "blanc", "romanization": "blahn", "meaning": "白色的", "pos": "形容词", "color": "#795548", "frequency": 1}, {"word": "blancheur", "romanization": "blahn-shur", "meaning": "洁白；白色", "pos": "名词", "color": "#1ABC9C", "frequency": 1}, {"word": "ciel", "romanization": "syel", "meaning": "天空", "pos": "名词", "color": "#00BCD4", "frequency": 1}, {"word": "cœur", "romanization": "kur", "meaning": "心", "pos": "名词", "color": "#9B59B6", "frequency": 1}, {"word": "dans un rêve", "romanization": "dahn un rev", "meaning": "在梦中", "pos": "短语", "color": "#FF5722", "frequency": 1}, {"word": "dents", "romanization": "dahn", "meaning": "牙齿", "pos": "名词", "color": "#673AB7", "frequency": 1}, {"word": "descendre", "romanization": "deh-sahndr", "meaning": "走下；冲下", "pos": "动词", "color": "#D35400", "frequency": 1}, {"word": "disparaît", "romanization": "dee-spa-reh", "meaning": "消失", "pos": "动词", "color": "#2C3E50", "frequency": 1}, {"word": "déjà", "romanization": "day-zhah", "meaning": "已经", "pos": "副词", "color": "#CDDC39", "frequency": 1}, {"word": "en courant", "romanization": "ahn koo-rahn", "meaning": "跑着", "pos": "副动词", "color": "#16A085", "frequency": 1}, {"word": "enlève", "romanization": "ahn-lev", "meaning": "带走；卷起", "pos": "动词", "color": "#E91E63", "frequency": 1}, {"word": "escalier", "romanization": "ess-kal-yay", "meaning": "楼梯", "pos": "名词", "color": "#2C3E50", "frequency": 1}, {"word": "est", "romanization": "eh", "meaning": "是（être）", "pos": "动词", "color": "#FF5722", "frequency": 1}, {"word": "et pour ça", "romanization": "ay poor sah", "meaning": "正因如此", "pos": "短语", "color": "#2ECC71", "frequency": 1}, {"word": "filer", "romanization": "fee-lay", "meaning": "飞奔；疾驰", "pos": "动词", "color": "#673AB7", "frequency": 1}, {"word": "flocon", "romanization": "flo-kon", "meaning": "雪花", "pos": "名词", "color": "#9C27B0", "frequency": 1}, {"word": "frisson", "romanization": "free-son", "meaning": "颤栗；寒战", "pos": "名词", "color": "#E74C3C", "frequency": 1}, {"word": "galop", "romanization": "gah-lo", "meaning": "疾驰；狂奔", "pos": "名词", "color": "#1ABC9C", "frequency": 1}, {"word": "le", "romanization": "luh", "meaning": "定冠词（量词）", "pos": "冠词", "color": "#607D8B", "frequency": 1}, {"word": "longue", "romanization": "lohng", "meaning": "长的", "pos": "形容词", "color": "#2ECC71", "frequency": 1}, {"word": "lèvres", "romanization": "levr", "meaning": "嘴唇", "pos": "名词", "color": "#009688", "frequency": 1}, {"word": "léger", "romanization": "lay-zhay", "meaning": "轻盈的；轻柔的", "pos": "形容词", "color": "#7F8C8D", "frequency": 1}, {"word": "même", "romanization": "mem", "meaning": "甚至；连", "pos": "副词", "color": "#E91E63", "frequency": 1}, {"word": "papier", "romanization": "pah-pyay", "meaning": "纸", "pos": "名词", "color": "#4CAF50", "frequency": 1}, {"word": "papillon", "romanization": "pah-pee-yon", "meaning": "蝴蝶", "pos": "名词", "color": "#FF9800", "frequency": 1}, {"word": "pareille", "romanization": "pah-rey", "meaning": "同样的；原样", "pos": "形容词", "color": "#9B59B6", "frequency": 1}, {"word": "plié", "romanization": "plee-yay", "meaning": "折起的", "pos": "形容词", "color": "#FFC107", "frequency": 1}, {"word": "pourquoi", "romanization": "poor-kwa", "meaning": "为什么；为何", "pos": "副词", "color": "#009688", "frequency": 1}, {"word": "pourtant", "romanization": "poor-tahn", "meaning": "然而", "pos": "连词", "color": "#795548", "frequency": 1}, {"word": "pressée", "romanization": "preh-say", "meaning": "匆忙的", "pos": "形容词", "color": "#9C27B0", "frequency": 1}, {"word": "préserver", "romanization": "pray-zer-vay", "meaning": "保留；留住", "pos": "动词", "color": "#F39C12", "frequency": 1}, {"word": "quand", "romanization": "kahn", "meaning": "当……时", "pos": "连词", "color": "#F1C40F", "frequency": 1}, {"word": "que rien", "romanization": "kuh ryahn", "meaning": "什么都不", "pos": "短语", "color": "#E67E22", "frequency": 1}, {"word": "retour", "romanization": "ruh-toor", "meaning": "归来；返回", "pos": "名词", "color": "#27AE60", "frequency": 1}, {"word": "sans savoir", "romanization": "sahn sah-vwar", "meaning": "却不知", "pos": "短语", "color": "#FF9800", "frequency": 1}, {"word": "sauvera", "romanization": "so-vrah", "meaning": "挽救；挽回", "pos": "动词", "color": "#2980B9", "frequency": 1}, {"word": "secret", "romanization": "suh-kreh", "meaning": "秘密", "pos": "名词", "color": "#2196F3", "frequency": 1}, {"word": "sensation", "romanization": "sahn-sah-syon", "meaning": "感觉", "pos": "名词", "color": "#03A9F4", "frequency": 1}, {"word": "soleil", "romanization": "so-lay", "meaning": "太阳", "pos": "名词", "color": "#8E44AD", "frequency": 1}, {"word": "sur mon vélo", "romanization": "soor mon vay-lo", "meaning": "骑着我的单车", "pos": "短语", "color": "#00BCD4", "frequency": 1}, {"word": "tourbillon", "romanization": "toor-bee-yon", "meaning": "漩涡；旋风", "pos": "名词", "color": "#F1C40F", "frequency": 1}, {"word": "tout", "romanization": "too", "meaning": "一切；所有", "pos": "代词", "color": "#7F8C8D", "frequency": 1}, {"word": "une", "romanization": "oon", "meaning": "一阵（量词）", "pos": "量词", "color": "#CDDC39", "frequency": 1}, {"word": "vouloir", "romanization": "voo-lwar", "meaning": "想要", "pos": "动词", "color": "#3498DB", "frequency": 1}, {"word": "vélo", "romanization": "vay-lo", "meaning": "自行车；单车", "pos": "名词", "color": "#E74C3C", "frequency": 1}, {"word": "écharpe", "romanization": "ay-sharp", "meaning": "围巾", "pos": "名词", "color": "#3498DB", "frequency": 1}],
+  annotations: [],
+  structure: {"structure_type": "verse-chorus", "sections": [{"type": "Verse", "number": 1, "line_start": 1, "line_end": 10}, {"type": "Chorus", "number": 1, "line_start": 11, "line_end": 17}, {"type": "Verse", "number": 2, "line_start": 18, "line_end": 27}, {"type": "Chorus", "number": 2, "line_start": 28, "line_end": 34}, {"type": "Outro", "number": 1, "line_start": 35, "line_end": 48}]}
+};
+</script>
+
+<!-- Application shell -->
+<div id="app" class="container"></div>
+
+<!-- Dynamic elements: tooltip, backdrop, dict card -->
+
+<script>
+(function() {
+  'use strict';
+
+  var DATA = window.__ANNOTATION_DATA__;
+  var metadata = DATA.metadata || {};
+  var rows = DATA.rows || [];
+  var vocabulary = DATA.vocabulary || [];
+  var annotations = DATA.annotations || [];
+  var structure = DATA.structure || (metadata.structure || {});
+
+  // ============================================================
+  //  Utility: HTML escape
+  // ============================================================
+  function escapeHTML(str) {
+    if (!str) return '';
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
+  // ============================================================
+  //  Utility: RTL script detection
+  // ============================================================
+  function isRTLScript(scriptName) {
+    var rtl = ['Arabic','Hebrew','Syriac','Thaana',"N'Ko",'Samaritan','Mandaic'];
+    return scriptName && rtl.indexOf(scriptName) !== -1;
+  }
+
+  // ============================================================
+  //  Utility: Script from language code
+  // ============================================================
+  function scriptFromLang(lang) {
+    var m = {
+      'ar':'Arabic','fa':'Arabic','ur':'Arabic','ps':'Arabic',
+      'ku-Arab':'Arabic','ug-Arab':'Arabic','sd':'Arabic','bal':'Arabic',
+      'he':'Hebrew','yi':'Hebrew','lad':'Hebrew',
+      'syr':'Syriac','dv':'Thaana',
+      'zh':'CJK','zh-Hans':'CJK','zh-Hant':'CJK',
+      'ja':'CJK','ko':'CJK',
+      'hi':'Devanagari','mr':'Devanagari','ne':'Devanagari',
+      'sa':'Devanagari','mai':'Devanagari','bho':'Devanagari',
+      'bn':'Bengali','as':'Bengali',
+      'pa-Guru':'Gurmukhi','gu':'Gujarati','or':'Odia',
+      'ta':'Tamil','te':'Telugu','kn':'Kannada',
+      'ml':'Malayalam','si':'Sinhala',
+      'th':'Thai','lo':'Lao','my':'Myanmar','km':'Khmer',
+      'el':'Greek','ka':'Georgian','hy':'Armenian',
+      'ru':'Cyrillic','uk':'Cyrillic','bg':'Cyrillic',
+      'sr':'Cyrillic','be':'Cyrillic','mk':'Cyrillic',
+      'mn-Cyrl':'Cyrillic','kk':'Cyrillic',
+      'am':'Ethiopic','ti':'Ethiopic','gez':'Ethiopic',
+      'bo':'Tibetan','dz':'Tibetan',
+      'mn-Mong':'Mongolian','chr':'Cherokee'
+    };
+    return m[lang] || 'Latin';
+  }
+
+  // ============================================================
+  //  Build group_id lookup from all rows
+  // ============================================================
+  function buildGroupLookup(rows) {
+    var lookup = {};
+    var lineGroups = [];
+    var cur = [];
+    for (var i = 0; i < rows.length; i++) {
+      if (rows[i].type === 'original' && cur.length) {
+        lineGroups.push(cur);
+        cur = [];
+      }
+      cur.push(rows[i]);
+    }
+    if (cur.length) lineGroups.push(cur);
+    if (!lineGroups.length && rows.length) lineGroups = [rows];
+
+    for (var ri = 0; ri < rows.length; ri++) {
+      var row = rows[ri];
+      var segs = row.segments || [];
+      for (var si = 0; si < segs.length; si++) {
+        var seg = segs[si];
+        var gid = seg.group_id;
+        if (!gid) continue;
+        if (!lookup[gid]) lookup[gid] = {};
+        var entry = lookup[gid];
+
+        if (row.type === 'original') entry.original = seg.text || '';
+        else if (row.type === 'romanization') entry.pronunciation = seg.text || '';
+        else if (row.type === 'translation') entry.translation = seg.text || '';
+        else if (row.type === 'gloss') { entry.gloss = seg.text || ''; entry.translation = entry.translation || seg.text || ''; }
+        else if (row.type === 'ipa') entry.ipa = seg.text || '';
+
+        if (seg.pronunciation) entry.pronunciation = seg.pronunciation;
+        if (seg.pos) entry.pos = seg.pos;
+        if (seg.grammar) entry.grammar = seg.grammar;
+        if (seg.phrase) entry.phrase = seg.phrase;
+        if (seg.phrase_meaning) entry.phrase_meaning = seg.phrase_meaning;
+        if (seg.lemma) entry.lemma = seg.lemma;
+        if (seg.meanings) entry.meanings = seg.meanings;
+        if (seg.examples) entry.examples = seg.examples;
+        if (seg.synonyms) entry.synonyms = seg.synonyms;
+        if (seg.frequency_level) entry.frequency_level = seg.frequency_level;
+        if (seg.etymology) entry.etymology = seg.etymology;
+        if (seg.usage_notes) entry.usage_notes = seg.usage_notes;
+        if (seg.collocations) entry.collocations = seg.collocations;
+        if (seg.audio_url) entry.audio_url = seg.audio_url;
+      }
+    }
+
+    // Fill missing script
+    var keys = Object.keys(lookup);
+    for (var k = 0; k < keys.length; k++) {
+      var e = lookup[keys[k]];
+      if (!e.script) {
+        for (var ri2 = 0; ri2 < rows.length; ri2++) {
+          var rSegs = rows[ri2].segments || [];
+          for (var si2 = 0; si2 < rSegs.length; si2++) {
+            if (rSegs[si2].group_id === keys[k]) {
+              e.script = rows[ri2].script || scriptFromLang(rows[ri2].language || '');
+              break;
+            }
+          }
+          if (e.script) break;
+        }
+      }
+      if (!e.translation && e.gloss) e.translation = e.gloss;
+      if (!e.translation && e.original) e.translation = e.original;
+    }
+
+    // Positional fallback
+    var posFallback = {};
+    for (var gi = 0; gi < lineGroups.length; gi++) {
+      var group = lineGroups[gi];
+      for (var ri3 = 0; ri3 < group.length; ri3++) {
+        var gSegs = group[ri3].segments || [];
+        for (var p = 0; p < gSegs.length; p++) {
+          var key = gi + ':' + p;
+          if (!posFallback[key]) posFallback[key] = {};
+          var info = posFallback[key];
+          var s = gSegs[p];
+          var rt = group[ri3].type;
+          if (rt === 'original') info.original = s.text || '';
+          else if (rt === 'romanization') info.pronunciation = s.text || s.pronunciation || info.pronunciation || '';
+          else if (rt === 'translation') info.translation = s.text || info.translation || '';
+          if (s.pos) info.pos = s.pos;
+          if (s.grammar) info.grammar = s.grammar;
+          if (s.pronunciation) info.pronunciation = s.pronunciation;
+          if (s.phrase) info.phrase = s.phrase;
+          if (s.phrase_meaning) info.phrase_meaning = s.phrase_meaning;
+          if (s.lemma) info.lemma = s.lemma;
+          if (s.meanings) info.meanings = s.meanings;
+          if (s.examples) info.examples = s.examples;
+          if (s.synonyms) info.synonyms = s.synonyms;
+          if (s.frequency_level) info.frequency_level = s.frequency_level;
+          if (s.etymology) info.etymology = s.etymology;
+          if (s.usage_notes) info.usage_notes = s.usage_notes;
+          if (s.collocations) info.collocations = s.collocations;
+        }
+      }
+    }
+    lookup.__posFallback = posFallback;
+    lookup.__lineGroups = lineGroups;
+    return lookup;
+  }
+
+  // ============================================================
+  //  Tooltip HTML
+  // ============================================================
+  function buildTooltipHTML(info) {
+    if (!info) return '';
+    var h = '';
+    if (info.phrase) {
+      var pt = escapeHTML(info.phrase);
+      if (info.phrase_meaning) pt += ' — ' + escapeHTML(info.phrase_meaning);
+      h += '<div class="tt-phrase">' + pt + '</div>';
+    }
+    if (info.original) {
+      var dir = isRTLScript(info.script) ? ' dir="rtl"' : '';
+      h += '<div class="tt-word"' + dir + '>' + escapeHTML(info.original) + '</div>';
+    }
+    if (info.pronunciation) {
+      h += '<div class="tt-pronunciation">/' + escapeHTML(info.pronunciation) + '/</div>';
+    }
+    if (info.pos) {
+      h += '<div class="tt-pos">' + escapeHTML(info.pos) + '</div>';
+    }
+    if (info.translation) {
+      h += '<div class="tt-translation">' + escapeHTML(info.translation) + '</div>';
+    }
+    return h;
+  }
+
+  // ============================================================
+  //  Dictionary card HTML
+  // ============================================================
+  function buildDictCardHTML(info) {
+    if (!info) return '';
+    var h = '';
+    var word = escapeHTML(info.original || info.text || '');
+    var pron = escapeHTML(info.pronunciation || '');
+    var pos = escapeHTML(info.pos || '');
+    var lemma = escapeHTML(info.lemma || '');
+    var translation = escapeHTML(info.translation || info.gloss || '');
+    var freq = escapeHTML(info.frequency_level || '');
+    var meanings = info.meanings || [];
+    var examples = info.examples || [];
+    var synonyms = info.synonyms || [];
+    var grammar = escapeHTML(info.grammar || '');
+    var etymology = escapeHTML(info.etymology || '');
+    var usage = escapeHTML(info.usage_notes || '');
+    var collocations = info.collocations || [];
+    var wordDir = isRTLScript(info.script) ? ' dir="rtl"' : '';
+
+    h += '<div class="dict-card-header">';
+    h += '<div class="dc-word"' + wordDir + '>' + word + '</div>';
+    if (pron) {
+      h += '<div class="dc-pronunciation-row"><span class="dc-pronunciation">/' + pron + '/</span></div>';
+    }
+    h += '<div>';
+    if (pos) h += '<span class="dc-pos-badge">' + pos + '</span>';
+    if (freq) h += '<span class="dc-frequency">★ ' + freq + '</span>';
+    h += '</div></div>';
+
+    h += '<div class="dict-card-body">';
+    if (translation) {
+      h += '<div class="dc-section"><div class="dc-section-title">Meaning in context</div>';
+      h += '<div class="dc-meaning-current">' + translation + '</div></div>';
+    }
+    if (lemma) {
+      h += '<div class="dc-section"><div class="dc-section-title">Lemma / Root</div>';
+      h += '<div class="dc-lemma">' + lemma + '</div></div>';
+    }
+    if (meanings.length) {
+      h += '<div class="dc-section"><div class="dc-section-title">All Meanings</div><ol class="dc-meaning-list">';
+      for (var mi = 0; mi < meanings.length; mi++) {
+        h += '<li><span class="dc-meaning-num">' + (mi+1) + '.</span> ' + escapeHTML(String(meanings[mi])) + '</li>';
+      }
+      h += '</ol></div>';
+    }
+    if (examples.length) {
+      h += '<div class="dc-section"><div class="dc-section-title">Examples</div>';
+      for (var ei = 0; ei < examples.length; ei++) {
+        var ex = examples[ei];
+        if (typeof ex === 'object' && ex.text) {
+          h += '<div class="dc-example">' + escapeHTML(ex.text);
+          if (ex.translation) h += '<span class="dc-example-trans">' + escapeHTML(ex.translation) + '</span>';
+          h += '</div>';
+        } else {
+          h += '<div class="dc-example">' + escapeHTML(String(ex)) + '</div>';
+        }
+      }
+      h += '</div>';
+    }
+    if (synonyms.length) {
+      h += '<div class="dc-section"><div class="dc-section-title">Synonyms & Related</div><div class="dc-synonyms">';
+      for (var si2 = 0; si2 < synonyms.length; si2++) {
+        h += '<span class="dc-syn-tag">' + escapeHTML(String(synonyms[si2])) + '</span>';
+      }
+      h += '</div></div>';
+    }
+    if (grammar) {
+      h += '<div class="dc-section"><div class="dc-section-title">Grammar Note</div><div>' + grammar + '</div></div>';
+    }
+    if (etymology) {
+      h += '<div class="dc-section"><div class="dc-section-title">Etymology</div>';
+      h += '<div class="dc-etymology">' + etymology + '</div></div>';
+    }
+    if (usage) {
+      h += '<div class="dc-section"><div class="dc-section-title">Usage Notes</div>';
+      h += '<div class="dc-usage">' + usage + '</div></div>';
+    }
+    if (collocations.length) {
+      h += '<div class="dc-section"><div class="dc-section-title">Common Collocations</div><div class="dc-collocations">';
+      for (var ci = 0; ci < collocations.length; ci++) {
+        h += '<span class="dc-col-tag">' + escapeHTML(String(collocations[ci])) + '</span>';
+      }
+      h += '</div></div>';
+    }
+    if (info.phrase) {
+      h += '<div class="dc-section"><div class="dc-section-title">Fixed Expression</div><div>' + escapeHTML(info.phrase);
+      if (info.phrase_meaning) h += ' — ' + escapeHTML(info.phrase_meaning);
+      h += '</div></div>';
+    }
+    h += '</div>';
+    return h;
+  }
+
+  // ============================================================
+  //  Group rows into line groups (original anchors)
+  // ============================================================
+  function groupRowsIntoLines(rows) {
+    var lineGroups = [];
+    var cur = [];
+    for (var i = 0; i < rows.length; i++) {
+      if (rows[i].type === 'original' && cur.length) {
+        lineGroups.push(cur);
+        cur = [];
+      }
+      cur.push(rows[i]);
+    }
+    if (cur.length) lineGroups.push(cur);
+    if (!lineGroups.length && rows.length) lineGroups = [rows];
+    return lineGroups;
+  }
+
+  // ============================================================
+  //  Section map from structure
+  // ============================================================
+  function buildSectionMap(structure) {
+    var map = {};
+    var sections = structure.sections || [];
+    for (var si = 0; si < sections.length; si++) {
+      var sec = sections[si];
+      var label = (sec.type || '').charAt(0).toUpperCase() + (sec.type || '').slice(1);
+      if (sec.number) label += ' ' + sec.number;
+      var lines = sec.lines;
+      if (!lines && sec.line_start !== undefined && sec.line_end !== undefined) {
+        lines = [];
+        for (var ln = sec.line_start; ln <= sec.line_end; ln++) lines.push(ln);
+      }
+      if (lines) {
+        for (var li = 0; li < lines.length; li++) {
+          map[lines[li]] = label;
+        }
+      }
+    }
+    return map;
+  }
+
+  // ============================================================
+  //  Extract clean line pairs for reading view
+  //  (original text + translation text, concatenated from segments)
+  // ============================================================
+  function extractReadingPairs(lineGroups) {
+    var pairs = [];
+    for (var gi = 0; gi < lineGroups.length; gi++) {
+      var group = lineGroups[gi];
+      var original = '';
+      var translation = '';
+      var freeTranslation = '';
+      for (var ri = 0; ri < group.length; ri++) {
+        var row = group[ri];
+        var text = '';
+        var segs = row.segments || [];
+        for (var si = 0; si < segs.length; si++) {
+          text += segs[si].text || '';
+        }
+        if (row.type === 'original') {
+          original = text;
+          freeTranslation = row.free_translation || '';
+        } else if (row.type === 'translation') {
+          translation = text;
+        }
+      }
+      if (original || freeTranslation || translation) {
+        pairs.push({ original: original, translation: freeTranslation || translation });
+      }
+    }
+    return pairs;
+  }
+
+  // ============================================================
+  //  APP SHELL: Build entire UI
+  // ============================================================
+  var app = document.getElementById('app');
+
+  // ---- Title ----
+  var titleEl = document.createElement('h1');
+  titleEl.className = 'doc-title';
+  titleEl.textContent = metadata.title || 'Annotated Lyrics';
+  app.appendChild(titleEl);
+
+  // ---- Meta line ----
+  var metaParts = [];
+  if (metadata.source_language) metaParts.push('Source: ' + metadata.source_language);
+  if (metadata.target_language) metaParts.push('Target: ' + metadata.target_language);
+  if (metaParts.length) {
+    var metaEl = document.createElement('p');
+    metaEl.className = 'doc-meta';
+    metaEl.textContent = metaParts.join(' · ');
+    app.appendChild(metaEl);
+  }
+
+  // ---- Tab Navigation ----
+  var tabNav = document.createElement('nav');
+  tabNav.className = 'tab-nav';
+  tabNav.setAttribute('role', 'tablist');
+  tabNav.setAttribute('aria-label', 'View modes');
+
+  var tabs = [
+    { id: 'annotated', icon: '📝', label: 'Annotated' },
+    { id: 'reading',   icon: '📖', label: 'Reading' },
+    { id: 'vocabulary', icon: '📚', label: 'Vocabulary' }
+  ];
+
+  var tabBtns = {};
+  for (var ti = 0; ti < tabs.length; ti++) {
+    var t = tabs[ti];
+    var btn = document.createElement('button');
+    btn.className = 'tab-btn' + (ti === 0 ? ' active' : '');
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', ti === 0 ? 'true' : 'false');
+    btn.setAttribute('data-tab', t.id);
+    btn.textContent = t.icon + ' ' + t.label;
+    btn.addEventListener('click', switchTab);
+    tabNav.appendChild(btn);
+    tabBtns[t.id] = btn;
+  }
+  app.appendChild(tabNav);
+
+  // ---- Tab Content Containers ----
+  var tabAnnotated = document.createElement('div');
+  tabAnnotated.id = 'tab-annotated';
+  tabAnnotated.className = 'tab-content active';
+
+  var tabReading = document.createElement('div');
+  tabReading.id = 'tab-reading';
+  tabReading.className = 'tab-content';
+
+  var tabVocabulary = document.createElement('div');
+  tabVocabulary.id = 'tab-vocabulary';
+  tabVocabulary.className = 'tab-content';
+
+  app.appendChild(tabAnnotated);
+  app.appendChild(tabReading);
+  app.appendChild(tabVocabulary);
+
+  // ---- Pre-compute shared data ----
+  var lineGroups = groupRowsIntoLines(rows);
+  var sectionMap = buildSectionMap(structure);
+  var groupLookup = buildGroupLookup(rows);
+  var posFallback = groupLookup.__posFallback || {};
+
+  // Annotation confidence map
+  var annotationMap = {};
+  for (var ai = 0; ai < annotations.length; ai++) {
+    if (annotations[ai].group_id) {
+      annotationMap[annotations[ai].group_id] = annotations[ai];
+    }
+  }
+
+  // ============================================================
+  //  TAB 1: ANNOTATED VIEW — Strict row-per-line
+  // ============================================================
+  var currentSection = null;
+  var sectionBlock = null;
+
+  for (var gi = 0; gi < lineGroups.length; gi++) {
+    var group = lineGroups[gi];
+    var lineNum = gi + 1;
+    var sectionName = sectionMap[lineNum];
+
+    // Section transitions
+    if (sectionName !== currentSection) {
+      if (sectionBlock) tabAnnotated.appendChild(sectionBlock);
+      currentSection = sectionName;
+      if (sectionName) {
+        sectionBlock = document.createElement('div');
+        sectionBlock.className = 'section-block';
+        var labelEl = document.createElement('div');
+        labelEl.className = 'section-label';
+        labelEl.textContent = sectionName;
+        sectionBlock.appendChild(labelEl);
+      } else {
+        sectionBlock = null;
+      }
+    }
+
+    var lineGroupEl = document.createElement('div');
+    lineGroupEl.className = 'line-group';
+    lineGroupEl.setAttribute('data-line', lineNum);
+
+    for (var ri = 0; ri < group.length; ri++) {
+      var row = group[ri];
+      var segs = row.segments || [];
+      if (!segs.length) continue;
+
+      var rowType = row.type || 'translation';
+      var direction = row.direction || 'ltr';
+      var language = row.language || '';
+      var script = row.script || scriptFromLang(language);
+      var enableTooltips = rowType === 'original' || rowType === 'romanization';
+
+      var rowEl = document.createElement('div');
+      rowEl.className = 'row ' + rowType;
+      if (direction === 'rtl') rowEl.setAttribute('dir', 'rtl');
+      if (language) rowEl.setAttribute('lang', language);
+
+      for (var si3 = 0; si3 < segs.length; si3++) {
+        var seg = segs[si3];
+        var text = seg.text || '';
+        var color = seg.color || '#FFFFFF';
+        var gid = seg.group_id || '';
+
+        var segEl = document.createElement('span');
+        segEl.className = 'seg';
+        segEl.style.color = color;
+        segEl.textContent = text;
+
+        // Tooltip data
+        var info = null;
+        if (gid) info = groupLookup[gid] || null;
+        if (!info || !Object.keys(info).length) {
+          var pfKey = gi + ':' + si3;
+          if (posFallback[pfKey]) info = posFallback[pfKey];
+        }
+        if (info) {
+          ['phrase','phrase_meaning','lemma','meanings','examples','synonyms',
+           'frequency_level','audio_url','etymology','usage_notes','collocations'].forEach(function(k) {
+            if (seg[k]) info[k] = seg[k];
+          });
+          if (!info.script) info.script = script;
+          segEl.setAttribute('data-tooltip', JSON.stringify(info));
+          if (enableTooltips) segEl.classList.add('has-tooltip');
+        }
+
+        // Low confidence marker
+        if (gid && annotationMap[gid]) {
+          var conf = annotationMap[gid].confidence;
+          if (conf !== undefined && conf < 0.85) {
+            segEl.classList.add('low-confidence');
+          }
+        }
+
+        if (segEl.classList.contains('has-tooltip')) {
+          segEl.setAttribute('tabindex', '0');
+        }
+
+        rowEl.appendChild(segEl);
+      }
+
+      lineGroupEl.appendChild(rowEl);
+    }
+
+    var target = sectionBlock || tabAnnotated;
+    target.appendChild(lineGroupEl);
+  }
+
+  // Close any remaining section block
+  if (sectionBlock && sectionBlock.parentNode !== tabAnnotated) {
+    tabAnnotated.appendChild(sectionBlock);
+  }
+
+  // ---- Annotations section (inside annotated tab) ----
+  var lowConf = annotations.filter(function(a) { return (a.confidence || 1) < 0.9; });
+  if (lowConf.length) {
+    var sumDiv = document.createElement('div');
+    sumDiv.className = 'summary-section';
+    sumDiv.innerHTML = '<h2>Annotations</h2>';
+    for (var ai2 = 0; ai2 < lowConf.length; ai2++) {
+      var ann = lowConf[ai2];
+      var icon = (ann.confidence || 1) < 0.7 ? '⚠' : 'ℹ';
+      var annDiv = document.createElement('div');
+      annDiv.className = 'annotation-note';
+      annDiv.textContent = icon + ' ' + (ann.note || '') + ' (confidence: ' + Math.round((ann.confidence || 0) * 100) + '%)';
+      sumDiv.appendChild(annDiv);
+    }
+    tabAnnotated.appendChild(sumDiv);
+  }
+
+  // ============================================================
+  //  TAB 2: READING VIEW — Two-column side-by-side
+  // ============================================================
+  var readingLayout = document.createElement('div');
+  readingLayout.className = 'reading-layout';
+
+  // Column headers
+  var srcHeader = document.createElement('div');
+  srcHeader.className = 'reading-column-header';
+  srcHeader.textContent = metadata.source_language ? 'Original (' + metadata.source_language + ')' : 'Original';
+  readingLayout.appendChild(srcHeader);
+
+  var tgtHeader = document.createElement('div');
+  tgtHeader.className = 'reading-column-header';
+  tgtHeader.textContent = metadata.target_language ? 'Translation (' + metadata.target_language + ')' : 'Translation';
+  readingLayout.appendChild(tgtHeader);
+
+  // Build reading pairs from line groups
+  var readingPairs = extractReadingPairs(lineGroups);
+
+  for (var pi = 0; pi < readingPairs.length; pi++) {
+    var pair = readingPairs[pi];
+    var lineNum2 = pi + 1;
+    var secLabel = sectionMap[lineNum2];
+
+    // Section label spanning both columns
+    if (secLabel) {
+      var secDiv = document.createElement('div');
+      secDiv.className = 'reading-section-label';
+      secDiv.textContent = secLabel;
+      readingLayout.appendChild(secDiv);
+    }
+
+    // Original column
+    var origLine = document.createElement('div');
+    origLine.className = 'reading-line original-text';
+    origLine.textContent = pair.original;
+    readingLayout.appendChild(origLine);
+
+    // Translation column
+    var transLine = document.createElement('div');
+    transLine.className = 'reading-line translation-text';
+    var tgtLang = metadata.target_language || '';
+    if (tgtLang) transLine.setAttribute('lang', tgtLang);
+    transLine.textContent = pair.translation;
+    readingLayout.appendChild(transLine);
+  }
+
+  tabReading.appendChild(readingLayout);
+
+  // ============================================================
+  //  TAB 3: VOCABULARY VIEW — Word Card Grid
+  // ============================================================
+  if (vocabulary && vocabulary.length) {
+    // ---- Controls: search + sort ----
+    var controlsDiv = document.createElement('div');
+    controlsDiv.className = 'vocab-controls';
+
+    var searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.className = 'vocab-search';
+    searchInput.placeholder = '🔍 Filter words…';
+    controlsDiv.appendChild(searchInput);
+
+    var sortAlphaBtn = document.createElement('button');
+    sortAlphaBtn.className = 'vocab-sort-btn';
+    sortAlphaBtn.textContent = 'A–Z';
+    sortAlphaBtn.setAttribute('data-sort', 'alpha');
+    controlsDiv.appendChild(sortAlphaBtn);
+
+    var sortFreqBtn = document.createElement('button');
+    sortFreqBtn.className = 'vocab-sort-btn active-sort';
+    sortFreqBtn.textContent = 'Frequency';
+    sortFreqBtn.setAttribute('data-sort', 'freq');
+    controlsDiv.appendChild(sortFreqBtn);
+
+    tabVocabulary.appendChild(controlsDiv);
+
+    // ---- Card Grid ----
+    var cardGrid = document.createElement('div');
+    cardGrid.className = 'vocab-card-grid';
+    cardGrid.id = 'vocab-card-grid';
+    tabVocabulary.appendChild(cardGrid);
+
+    // ---- Render cards ----
+    var currentSort = 'freq';
+    var currentFilter = '';
+
+    function renderVocabCards() {
+      cardGrid.innerHTML = '';
+
+      // Filter
+      var filtered = vocabulary.filter(function(v) {
+        if (!currentFilter) return true;
+        var q = currentFilter.toLowerCase();
+        return (v.word || '').toLowerCase().indexOf(q) !== -1 ||
+               (v.romanization || '').toLowerCase().indexOf(q) !== -1 ||
+               (v.meaning || '').toLowerCase().indexOf(q) !== -1;
+      });
+
+      // Sort
+      if (currentSort === 'alpha') {
+        filtered.sort(function(a, b) { return (a.word || '').localeCompare(b.word || ''); });
+      } else {
+        filtered.sort(function(a, b) { return (b.frequency || 0) - (a.frequency || 0); });
+      }
+
+      if (!filtered.length) {
+        var emptyDiv = document.createElement('div');
+        emptyDiv.className = 'vocab-empty';
+        emptyDiv.textContent = currentFilter ? 'No matching words found.' : 'No vocabulary data available.';
+        cardGrid.appendChild(emptyDiv);
+        return;
+      }
+
+      for (var vi = 0; vi < filtered.length; vi++) {
+        var v = filtered[vi];
+        var card = document.createElement('div');
+        card.className = 'word-card';
+
+        // Color accent bar
+        if (v.color) {
+          var bar = document.createElement('div');
+          bar.className = 'wc-color-bar';
+          bar.style.background = v.color;
+          card.appendChild(bar);
+        }
+
+        // Word
+        var wordDiv = document.createElement('div');
+        wordDiv.className = 'wc-word';
+        wordDiv.style.color = v.color || 'var(--text-primary)';
+        // Detect RTL
+        var vScript = scriptFromLang(metadata.source_language || '');
+        if (isRTLScript(vScript)) wordDiv.setAttribute('dir', 'rtl');
+        wordDiv.textContent = v.word || '';
+        card.appendChild(wordDiv);
+
+        // Pronunciation
+        if (v.romanization) {
+          var pronDiv = document.createElement('div');
+          pronDiv.className = 'wc-pronunciation';
+          pronDiv.textContent = v.romanization;
+          card.appendChild(pronDiv);
+        }
+
+        // Meaning
+        if (v.meaning) {
+          var meanDiv = document.createElement('div');
+          meanDiv.className = 'wc-meaning';
+          meanDiv.textContent = v.meaning;
+          card.appendChild(meanDiv);
+        }
+
+        // Footer: POS + Frequency
+        var footer = document.createElement('div');
+        footer.className = 'wc-footer';
+
+        if (v.pos) {
+          var posSpan = document.createElement('span');
+          posSpan.className = 'wc-pos';
+          posSpan.textContent = v.pos;
+          footer.appendChild(posSpan);
+        }
+
+        var freqSpan = document.createElement('span');
+        freqSpan.className = 'wc-freq';
+        var stars = '';
+        var f = v.frequency || 1;
+        for (var si4 = 0; si4 < Math.min(f, 5); si4++) stars += '★';
+        for (var si5 = f; si5 < 5 && si5 < 5; si5++) stars += '☆';
+        freqSpan.textContent = stars || '★';
+        freqSpan.title = 'Frequency: ' + f;
+        footer.appendChild(freqSpan);
+
+        card.appendChild(footer);
+
+        // Expanded details
+        var details = document.createElement('div');
+        details.className = 'wc-details';
+
+        if (v.lemma) {
+          details.appendChild(detailRow('Lemma', v.lemma));
+        }
+        if (v.meanings && v.meanings.length) {
+          var mList = '<ul style="padding-inline-start:16px;margin:0">';
+          for (var mi2 = 0; mi2 < v.meanings.length; mi2++) {
+            mList += '<li>' + escapeHTML(String(v.meanings[mi2])) + '</li>';
+          }
+          mList += '</ul>';
+          var mDiv = document.createElement('div');
+          mDiv.className = 'wc-detail-row';
+          mDiv.innerHTML = '<div class="wc-detail-label">All Meanings</div><div class="wc-detail-value">' + mList + '</div>';
+          details.appendChild(mDiv);
+        }
+        if (v.etymology) {
+          details.appendChild(detailRow('Etymology', v.etymology));
+        }
+        if (v.usage_notes) {
+          details.appendChild(detailRow('Usage', v.usage_notes));
+        }
+
+        card.appendChild(details);
+
+        // Click to expand/collapse
+        card.addEventListener('click', function(c) {
+          return function() { c.classList.toggle('expanded'); };
+        }(card));
+
+        cardGrid.appendChild(card);
+      }
+    }
+
+    function detailRow(label, value) {
+      var div = document.createElement('div');
+      div.className = 'wc-detail-row';
+      div.innerHTML = '<div class="wc-detail-label">' + escapeHTML(label) + '</div><div class="wc-detail-value">' + escapeHTML(String(value)) + '</div>';
+      return div;
+    }
+
+    renderVocabCards();
+
+    // Sort buttons
+    sortAlphaBtn.addEventListener('click', function() {
+      currentSort = 'alpha';
+      sortAlphaBtn.classList.add('active-sort');
+      sortFreqBtn.classList.remove('active-sort');
+      renderVocabCards();
+    });
+    sortFreqBtn.addEventListener('click', function() {
+      currentSort = 'freq';
+      sortFreqBtn.classList.add('active-sort');
+      sortAlphaBtn.classList.remove('active-sort');
+      renderVocabCards();
+    });
+
+    // Search
+    searchInput.addEventListener('input', function() {
+      currentFilter = searchInput.value;
+      renderVocabCards();
+    });
+
+  } else {
+    // No vocabulary data
+    var emptyDiv = document.createElement('div');
+    emptyDiv.className = 'vocab-empty';
+    emptyDiv.textContent = 'No vocabulary data available. Enable advanced mode to generate a word list.';
+    tabVocabulary.appendChild(emptyDiv);
+  }
+
+  // ============================================================
+  //  TAB SWITCHING
+  // ============================================================
+  function switchTab(e) {
+    var tabId = e.currentTarget.getAttribute('data-tab');
+
+    // Update buttons
+    Object.keys(tabBtns).forEach(function(k) {
+      tabBtns[k].classList.remove('active');
+      tabBtns[k].setAttribute('aria-selected', 'false');
+    });
+    tabBtns[tabId].classList.add('active');
+    tabBtns[tabId].setAttribute('aria-selected', 'true');
+
+    // Update content
+    tabAnnotated.classList.remove('active');
+    tabReading.classList.remove('active');
+    tabVocabulary.classList.remove('active');
+
+    if (tabId === 'annotated') tabAnnotated.classList.add('active');
+    else if (tabId === 'reading') tabReading.classList.add('active');
+    else if (tabId === 'vocabulary') tabVocabulary.classList.add('active');
+
+    // Close dict card on tab switch
+    if (activeWordSeg) closeDictCard();
+    hideTooltip(true);
+  }
+
+  // ============================================================
+  //  TOOLTIP ENGINE
+  // ============================================================
+  var tooltip = document.createElement('div');
+  tooltip.className = 'tooltip-popup';
+  tooltip.setAttribute('aria-hidden', 'true');
+  tooltip.setAttribute('role', 'tooltip');
+  document.body.appendChild(tooltip);
+
+  var hoverTarget = null;
+  var hoverTimer = null;
+  var tooltipVisible = false;
+
+  function positionTooltip(segEl) {
+    var segRect = segEl.getBoundingClientRect();
+    var tipW = tooltip.offsetWidth;
+    var tipH = tooltip.offsetHeight;
+    var gap = 10;
+    var left = segRect.left + segRect.width / 2 - tipW / 2;
+    var top = segRect.top - tipH - gap;
+
+    if (top < gap) top = segRect.bottom + gap;
+    if (top + tipH > window.innerHeight - gap) top = window.innerHeight - tipH - gap;
+    if (top < gap) top = gap;
+    if (left < gap) left = gap;
+    if (left + tipW > window.innerWidth - gap) left = window.innerWidth - tipW - gap;
+
+    tooltip.style.left = left + 'px';
+    tooltip.style.top = top + 'px';
+  }
+
+  function showTooltipNow(segEl) {
+    var raw = segEl.getAttribute('data-tooltip');
+    if (!raw) return;
+    try {
+      var info = JSON.parse(raw);
+      var html = buildTooltipHTML(info);
+      if (!html) return;
+      tooltip.innerHTML = html;
+      tooltip.classList.add('visible');
+      tooltip.setAttribute('aria-hidden', 'false');
+      tooltipVisible = true;
+      positionTooltip(segEl);
+    } catch(e) {}
+  }
+
+  function showTooltip(segEl) {
+    if (hoverTarget === segEl && tooltipVisible) return;
+    hideTooltip(true);
+    hoverTarget = segEl;
+    hoverTimer = setTimeout(function() {
+      if (hoverTarget === segEl) showTooltipNow(segEl);
+    }, 200);
+  }
+
+  function hideTooltip(immediate) {
+    if (hoverTimer) { clearTimeout(hoverTimer); hoverTimer = null; }
+    if (immediate) {
+      tooltip.classList.remove('visible');
+      tooltip.setAttribute('aria-hidden', 'true');
+      tooltipVisible = false;
+      hoverTarget = null;
+    } else {
+      setTimeout(function() {
+        if (hoverTarget && !tooltip.matches(':hover')) {
+          tooltip.classList.remove('visible');
+          tooltip.setAttribute('aria-hidden', 'true');
+          tooltipVisible = false;
+          hoverTarget = null;
+        }
+      }, 100);
+    }
+  }
+
+  // ============================================================
+  //  DICTIONARY CARD ENGINE
+  // ============================================================
+  var backdrop = document.createElement('div');
+  backdrop.className = 'dict-card-backdrop';
+  backdrop.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(backdrop);
+
+  var dictCard = document.createElement('div');
+  dictCard.className = 'dict-card';
+  dictCard.setAttribute('aria-hidden', 'true');
+  dictCard.setAttribute('role', 'dialog');
+  dictCard.setAttribute('aria-label', 'Word detail');
+  document.body.appendChild(dictCard);
+
+  var closeBtn = document.createElement('button');
+  closeBtn.className = 'dict-card-close';
+  closeBtn.innerHTML = '&times;';
+  closeBtn.setAttribute('aria-label', 'Close');
+  dictCard.appendChild(closeBtn);
+
+  var activeWordSeg = null;
+
+  function positionDictCard(segEl) {
+    var segRect = segEl.getBoundingClientRect();
+    var cardW = dictCard.offsetWidth || 360;
+    var cardH = dictCard.offsetHeight || 300;
+    var gap = 12;
+    var left = segRect.left + segRect.width / 2 - cardW / 2;
+    if (left < gap) left = gap;
+    if (left + cardW > window.innerWidth - gap) left = window.innerWidth - cardW - gap;
+
+    var top = segRect.bottom + gap;
+    if (top + cardH > window.innerHeight - gap) {
+      top = segRect.top - cardH - gap;
+    }
+    if (top < gap) top = gap;
+    if (top + cardH > window.innerHeight - gap) {
+      top = window.innerHeight - cardH - gap;
+    }
+
+    if (window.innerWidth <= 640) {
+      dictCard.style.left = '8px';
+      dictCard.style.top = 'auto';
+      dictCard.style.bottom = '0';
+    } else {
+      dictCard.style.left = left + 'px';
+      dictCard.style.top = top + 'px';
+      dictCard.style.bottom = 'auto';
+    }
+  }
+
+  function openDictCard(segEl) {
+    hideTooltip(true);
+    var raw = segEl.getAttribute('data-tooltip');
+    if (!raw) return;
+    try {
+      var info = JSON.parse(raw);
+      if (!info.original && segEl.textContent) info.original = segEl.textContent.trim();
+      var html = buildDictCardHTML(info);
+
+      dictCard.innerHTML = '';
+      dictCard.appendChild(closeBtn);
+      var wrapper = document.createElement('div');
+      wrapper.innerHTML = html;
+      dictCard.appendChild(wrapper);
+
+      dictCard.classList.add('visible');
+      dictCard.setAttribute('aria-hidden', 'false');
+      backdrop.classList.add('visible');
+      backdrop.setAttribute('aria-hidden', 'false');
+
+      if (activeWordSeg) activeWordSeg.classList.remove('active-word');
+      activeWordSeg = segEl;
+      segEl.classList.add('active-word');
+
+      positionDictCard(segEl);
+      dictCard.focus();
+    } catch(e) {}
+  }
+
+  function closeDictCard() {
+    dictCard.classList.remove('visible');
+    dictCard.setAttribute('aria-hidden', 'true');
+    backdrop.classList.remove('visible');
+    backdrop.setAttribute('aria-hidden', 'true');
+    if (activeWordSeg) {
+      activeWordSeg.classList.remove('active-word');
+      activeWordSeg = null;
+    }
+  }
+
+  closeBtn.addEventListener('click', function(e) { e.stopPropagation(); closeDictCard(); });
+  backdrop.addEventListener('click', closeDictCard);
+
+  // ============================================================
+  //  EVENT BINDING
+  // ============================================================
+  var longPressTimer = null;
+  var longPressFired = false;
+  var touchStartPos = null;
+
+  function resetLongPress() {
+    if (longPressTimer) { clearTimeout(longPressTimer); longPressTimer = null; }
+    longPressFired = false;
+    touchStartPos = null;
+  }
+
+  document.addEventListener('mouseover', function(e) {
+    var seg = e.target.closest('.seg.has-tooltip');
+    if (seg) showTooltip(seg);
+  });
+
+  document.addEventListener('mouseout', function(e) {
+    var seg = e.target.closest('.seg.has-tooltip');
+    if (seg) hideTooltip(false);
+  });
+
+  document.addEventListener('click', function(e) {
+    var seg = e.target.closest('.seg.has-tooltip');
+    if (seg) {
+      if (longPressFired) { resetLongPress(); return; }
+      e.stopPropagation();
+      if (activeWordSeg === seg) {
+        closeDictCard();
+      } else {
+        openDictCard(seg);
+      }
+      return;
+    }
+    if (!e.target.closest('.dict-card')) {
+      if (activeWordSeg) closeDictCard();
+    }
+    if (!e.target.closest('.seg.has-tooltip')) {
+      hideTooltip(true);
+    }
+  });
+
+  // Touch: long-press
+  document.addEventListener('touchstart', function(e) {
+    var seg = e.target.closest('.seg.has-tooltip');
+    if (!seg) return;
+    resetLongPress();
+    touchStartPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    longPressTimer = setTimeout(function() {
+      longPressFired = true;
+      showTooltipNow(seg);
+      if (navigator.vibrate) navigator.vibrate(15);
+    }, 500);
+  }, { passive: false });
+
+  document.addEventListener('touchend', function(e) {
+    if (longPressFired) e.preventDefault();
+    if (longPressTimer && !longPressFired) { clearTimeout(longPressTimer); longPressTimer = null; }
+  });
+
+  document.addEventListener('touchmove', function(e) {
+    if (touchStartPos && longPressTimer) {
+      var dx = e.touches[0].clientX - touchStartPos.x;
+      var dy = e.touches[0].clientY - touchStartPos.y;
+      if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
+        clearTimeout(longPressTimer);
+        longPressTimer = null;
+      }
+    }
+  });
+
+  window.addEventListener('scroll', function() { hideTooltip(true); }, { passive: true });
+
+
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      if (activeWordSeg) closeDictCard();
+      else hideTooltip(true);
+    }
+  });
+
+  window.addEventListener('resize', function() {
+    if (activeWordSeg) positionDictCard(activeWordSeg);
+  });
+
+  tooltip.addEventListener('mouseenter', function() {
+    if (hoverTimer) { clearTimeout(hoverTimer); hoverTimer = null; }
+  });
+  tooltip.addEventListener('mouseleave', function() { hideTooltip(true); });
+
+  // ============================================================
+})();
+</script>
+</body>
+</html>
